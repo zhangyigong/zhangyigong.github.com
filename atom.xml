@@ -4,7 +4,7 @@
   <subtitle><![CDATA[眯着眼睛安静地思考世界]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-01-13T14:49:49.403Z</updated>
+  <updated>2015-01-13T14:52:00.324Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <link href="http://zhangyigong.github.com/2015/01/13/blog-with-githubpages-and-hexo/"/>
     <id>http://zhangyigong.github.com/2015/01/13/blog-with-githubpages-and-hexo/</id>
     <published>2015-01-13T14:27:57.000Z</published>
-    <updated>2015-01-13T14:49:10.000Z</updated>
-    <content type="html"><![CDATA[<p>![利用github pages 和Hexo 搭建独立博客]（<a href="http://zhang1g.qiniudn.com/blog1.jpg）" target="_blank" rel="external">http://zhang1g.qiniudn.com/blog1.jpg）</a></p>
+    <updated>2015-01-13T14:51:50.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/blog1.jpg" alt="利用github pages 和Hexo 搭建独立博客"></p>
 <h2 id="前言">前言</h2>
 <p>一直想搭建一个自己的独立博客，后来发现了Hexo 这个逼格极高的程序猿方式，而且比起github pages 官方推荐的Jekyll 操作要简便的多，因此就使用github pages 服务和Hexo 搭建起了现在这个博客。</p>
 <p>我希望能够写一篇尽可能详细的博客搭建教程，给后来者一个明确的指引，以便像我一样的小白可以参考。在搭建博客的过程中我摘录了其他人的一些教程，感谢这些作者们，在教程的最后我也会列出相关的链接。</p>
@@ -30,7 +30,7 @@
 
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>![利用github pages 和Hexo 搭建独立博客]（<a href="http://zhang1g.qiniudn.com/blog1.jpg）" target="_blank" rel="external">http://zhang1g.qiniudn.com/blog1.jpg）</a></p>
+    <![CDATA[<p><img src="http://zhang1g.qiniudn.com/blog1.jpg" alt="利用github pages 和Hexo 搭建独立博客"></p>
 <h2 id="前言">前言</h2>
 <p>一直想搭建一个自己的独立博客，后来发现了Hexo 这个逼格极高的程序猿方式，而且比起github pages 官方推荐的Jekyll 操作要简便的多，因此就使用github pages 服务和Hexo 搭建起了现在这个博客。</p>
 <p>我希望能够写一篇尽可能详细的博客搭建教程，给后来者一个明确的指引，以便像我一样的小白可以参考。在搭建博客的过程中我摘录了其他人的一些教程，感谢这些作者们，在教程的最后我也会列出相关的链接。</p>
