@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[张一弓的Blog]]></title>
-  <subtitle><![CDATA[眯着眼睛安静地思考世界]]></subtitle>
+  <subtitle><![CDATA[眯着眼睛安静思考世界的攻城狮]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-01-14T08:49:01.792Z</updated>
+  <updated>2015-01-14T09:21:06.306Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://zhangyigong.github.com/2015/01/13/blog-with-githubpages-and-hexo/"/>
     <id>http://zhangyigong.github.com/2015/01/13/blog-with-githubpages-and-hexo/</id>
     <published>2015-01-13T14:27:57.000Z</published>
-    <updated>2015-01-14T08:48:46.000Z</updated>
+    <updated>2015-01-14T09:00:47.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/blog1.jpg" alt="使用Github Pages 和Hexo 搭建独立博客"></p>
 <h2 id="前言">前言</h2>
 <p>一直想搭建一个自己的独立博客，后来发现了Hexo 这个逼格极高的方式，而且比起Github Pages 官方推荐的Jekyll 操作要简便的多，因此就使用Github Pages 服务和Hexo 搭建了现在这个博客。</p>
@@ -208,6 +208,9 @@
 <p>同样也在 <code>yilia\layout\_partial\</code> 这个目录下面的 <code>after_foot.ejs</code> 中引入新建的文件 <code>mathjax.ejs</code></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="variable">%-</span> partial(<span class="string">'mathjax'</span>) <span class="variable">%&gt;</span></div></pre></td></tr></table></figure>
 
+<hr>
+<p>至此，博客搭建的过程就全部完成了。</p>
+<p>如果不喜欢Github 提供的二级域名，也可以在Godaddy 上申请适合自己的域名，之后进行用DNSpod 进行域名绑定即可，关于这部分内容在之后的博客中会和大家分享。</p>
 <h2 id="参考文献">参考文献</h2>
 <ol>
 <li><p><a href="http://cnfeat.com/2014/05/10/2014-05-11-how-to-build-a-blog/" target="_blank" rel="external">如何搭建一个独立博客——简明Github Pages与Hexo教程</a></p>
