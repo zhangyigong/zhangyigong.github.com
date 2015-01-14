@@ -4,7 +4,7 @@
   <subtitle><![CDATA[眯着眼睛安静地思考世界]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-01-13T14:58:09.758Z</updated>
+  <updated>2015-01-14T02:16:23.404Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[利用github pages 和Hexo 搭建独立博客系列 (一)]]></title>
+    <title><![CDATA[使用Github Pages 和Hexo 搭建独立博客系列 (一)]]></title>
     <link href="http://zhangyigong.github.com/2015/01/13/blog-with-githubpages-and-hexo/"/>
     <id>http://zhangyigong.github.com/2015/01/13/blog-with-githubpages-and-hexo/</id>
     <published>2015-01-13T14:27:57.000Z</published>
-    <updated>2015-01-13T14:51:50.000Z</updated>
+    <updated>2015-01-14T02:16:07.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/blog1.jpg" alt="利用github pages 和Hexo 搭建独立博客"></p>
 <h2 id="前言">前言</h2>
 <p>一直想搭建一个自己的独立博客，后来发现了Hexo 这个逼格极高的程序猿方式，而且比起github pages 官方推荐的Jekyll 操作要简便的多，因此就使用github pages 服务和Hexo 搭建起了现在这个博客。</p>
@@ -52,8 +52,8 @@
     <link href="http://zhangyigong.github.com/2015/01/13/markdown-grammar/"/>
     <id>http://zhangyigong.github.com/2015/01/13/markdown-grammar/</id>
     <published>2015-01-13T11:26:16.000Z</published>
-    <updated>2015-01-13T14:32:48.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/markdown-example.jpg" alt="使用Markdown 语法编辑博客内容"></p>
+    <updated>2015-01-14T02:15:37.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/markdown-example4.jpg" alt="使用Markdown 语法编辑博客内容"></p>
 <h2 id="什么是_Markdown">什么是 Markdown</h2>
 <p>Markdown 是一种方便记忆、书写的纯文本标记语言，我们可以使用这些标记符号以最小的输入代价生成极富表现力的文档：譬如您正在阅读的这篇博客。</p>
 <p>不同于其它 <em>所见即所得</em> 的编辑器：你只需使用键盘专注于书写文本内容，就可以生成印刷级的排版格式，省却在键盘和工具栏之间来回切换，调整内容和格式的麻烦。</p>
@@ -73,7 +73,7 @@
 <h3 id="书写一个复杂的公式">书写一个复杂的公式</h3>
 <p>$$e^{\pi i}+1=?$$</p>
 <h3 id="高亮一段代码">高亮一段代码</h3>
-<p>比如下面是一段python代码</p>
+<p>比如下面是一段python 代码</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="decorator">@requires_authorization</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="comment"># A comment</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'hello world'</span></div></pre></td></tr></table></figure>
 
 <h3 id="绘制表格">绘制表格</h3>
@@ -200,7 +200,7 @@
 
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="http://zhang1g.qiniudn.com/markdown-example.jpg" alt="使用Markdown 语法编辑博客内容"></p>
+    <![CDATA[<p><img src="http://zhang1g.qiniudn.com/markdown-example4.jpg" alt="使用Markdown 语法编辑博客内容"></p>
 <h2 id="什么是_Markdown">什么是 Markdown</h2>
 <p>Markdown 是一种方便记忆、书写的纯文本标记语言，我们可以使用这些标记符号以最小的输入代价生成极富表现力的文档：譬如您正在阅读的这篇博客。</p>
 <p>不同于其它 <em>所见即所得</em> 的编辑器：你只需使用键盘专注于书写文本内容，就可以生成印刷级的排版格式，省却在键盘和工具栏之间来回切换，调整内容和格式的麻烦。</p>
