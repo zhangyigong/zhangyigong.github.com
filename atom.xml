@@ -4,7 +4,7 @@
   <subtitle><![CDATA[眯着眼睛安静思考世界的攻城狮]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-01-14T09:31:05.453Z</updated>
+  <updated>2015-01-14T09:36:24.331Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -254,7 +254,7 @@
     <link href="http://zhangyigong.github.com/2015/01/13/markdown-grammar/"/>
     <id>http://zhangyigong.github.com/2015/01/13/markdown-grammar/</id>
     <published>2015-01-13T11:26:16.000Z</published>
-    <updated>2015-01-14T05:21:00.000Z</updated>
+    <updated>2015-01-14T09:35:05.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/markdown-example4.jpg" alt="使用Markdown 语法编辑博客内容"></p>
 <h2 id="什么是_Markdown">什么是 Markdown</h2>
 <p>Markdown 是一种方便记忆、书写的纯文本标记语言，我们可以使用这些标记符号以最小的输入代价生成极富表现力的文档：譬如您正在阅读的这篇博客。</p>
@@ -308,7 +308,7 @@
 <h2 id="Markdown_的语法规则">Markdown 的语法规则</h2>
 <p>Markdown 语法简洁明了，易于掌握，所以用它来写作是件既效率又舒服的事情。我们所熟知的和一些大型CMS，如Joomla!、Drupal 等都能很好的支持Markdown。</p>
 <p>Markdown 不是想要取代 HTML，甚至也没有要和它相近，它的语法种类很少，只对应HTML  标记的一小部分。Markdown 的构想不是要使得HTML 文档更容易书写。在我看来， HTML 已经很容易写了。</p>
-<p>Markdown 的理念是，能让文档更容易读、写和随意改。HTML 是一种发布的格式，Markdown 是一种书写的格式。就这样，Markdown 的格式语法只涵盖纯文本可以涵盖的范围。下面列出了一些简单语法，详细的语法可以参考<img src="http://www.ituring.com.cn/article/775" alt="图灵社区">或者<img src="http://wowubuntu.com/markdown/" alt="Markdown 语法说明 (简体中文版)"></p>
+<p>Markdown 的理念是，能让文档更容易读、写和随意改。HTML 是一种发布的格式，Markdown 是一种书写的格式。就这样，Markdown 的格式语法只涵盖纯文本可以涵盖的范围。下面列出了一些简单语法，详细的语法可以参考<a href="http://www.ituring.com.cn/article/775" target="_blank" rel="external">图灵社区</a>或者<a href="http://wowubuntu.com/markdown/" target="_blank" rel="external">Markdown 语法说明 (简体中文版)</a></p>
 <h3 id="1-_斜体和粗体">1. 斜体和粗体</h3>
 <p>使用 <em> 和 *</em> 表示斜体和粗体。</p>
 <p>示例：</p>
