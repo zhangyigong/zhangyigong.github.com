@@ -3,17 +3,40 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives | 张一弓的Blog</title>
+  <title>使用servlet 生成验证码 | 张一弓的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="学习总结 思考感悟 知识管理">
-<meta property="og:type" content="website">
-<meta property="og:title" content="张一弓的Blog">
-<meta property="og:url" content="http://zhangyigong.github.com/archives/">
+  <meta name="description" content="为什么要使用验证码
+输入验证码是一个很麻烦的一个过程，很多用户都不喜欢，但是验证码却总是存在于各类的网站和Web 应用中，比如
+
+回复帖子的时候
+申请账号的时候
+用户登录的时候…
+
+为什么要使用验证码呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用servlet 生成验证码">
+<meta property="og:url" content="http://zhangyigong.github.com/2015/01/16/verification-code-generated-by-java-servlet/">
 <meta property="og:site_name" content="张一弓的Blog">
-<meta property="og:description" content="学习总结 思考感悟 知识管理">
+<meta property="og:description" content="为什么要使用验证码
+输入验证码是一个很麻烦的一个过程，很多用户都不喜欢，但是验证码却总是存在于各类的网站和Web 应用中，比如
+
+回复帖子的时候
+申请账号的时候
+用户登录的时候…
+
+为什么要使用验证码呢？">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/verification-code.png">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/verification-code2.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张一弓的Blog">
-<meta name="twitter:description" content="学习总结 思考感悟 知识管理">
+<meta name="twitter:title" content="使用servlet 生成验证码">
+<meta name="twitter:description" content="为什么要使用验证码
+输入验证码是一个很麻烦的一个过程，很多用户都不喜欢，但是验证码却总是存在于各类的网站和Web 应用中，比如
+
+回复帖子的时候
+申请账号的时候
+用户登录的时候…
+
+为什么要使用验证码呢？">
 
   
     <link rel="alternative" href="/atom.xml" title="张一弓的Blog" type="application/atom+xml">
@@ -201,98 +224,120 @@
 		</header>				
 	</div>
 </nav>
-      
+      <article id="post-verification-code-generated-by-java-servlet" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/01/16/verification-code-generated-by-java-servlet/" class="archive-article-date">
+    <div class="article-meta">
+      <a href="/2015/01/16/verification-code-generated-by-java-servlet/" class="article-date">
   	<time datetime="2015-01-15T16:45:07.000Z" itemprop="datePublished">Jan 16</time>
 </a>
-	      	<br>
-	      	
-	    	
+      
+      
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li></ul>
 
-    	</div>
-    	
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/01/16/verification-code-generated-by-java-servlet/">使用servlet 生成验证码</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用servlet 生成验证码
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://zhang1g.qiniudn.com/verification-code.png" alt="使用servlet 生成验证码"></p>
+<h2 id="为什么要使用验证码">为什么要使用验证码</h2>
+<p>输入验证码是一个很麻烦的一个过程，很多用户都不喜欢，但是验证码却总是存在于各类的网站和Web 应用中，比如</p>
+<ul>
+<li>回复帖子的时候</li>
+<li>申请账号的时候</li>
+<li>用户登录的时候<br>…</li>
+</ul>
+<p>为什么要使用验证码呢？</p>
+<a id="more"></a>
+
+<p>因为计算机可以模拟人的行为对网站进行一系列的操作，如果不使用验证码，将会导致一些可怕的事情发生</p>
+<ul>
+<li>对特定用户不断登录破解密码</li>
+<li>对某个网站不断创建无效账户</li>
+<li>对某个网站提交垃圾数据</li>
+<li>对网站投票进行刷票<br>…</li>
+</ul>
+<p>有验证码的登录过程如下</p>
+<p><img src="http://zhang1g.qiniudn.com/verification-code2.png" alt="有验证码的登录过程"></p>
+<p>那么，我们使用验证码只有一个原因，就是通过验证码，由用户肉眼识别其中的验证信息，从而区分用户是人还是计算机。</p>
+<p><strong>验证码（CAPTCHA）定义：</strong></p>
+<p><strong>一种区分用户是人还是计算机的公共全自动程序。</strong></p>
+<h2 id="什么是验证码">什么是验证码</h2>
+<h2 id="使用servlet_生成验证码">使用servlet 生成验证码</h2>
+<h2 id="使用开源组件生成验证码">使用开源组件生成验证码</h2>
+<h2 id="验证码的发展">验证码的发展</h2>
+
+      
+    </div>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/01/13/bulid-blog-with-githubpages-and-hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用Github Pages 和Hexo 搭建独立博客</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/01/13/bulid-blog-with-githubpages-and-hexo/" class="archive-article-date">
-  	<time datetime="2015-01-13T14:27:57.000Z" itemprop="datePublished">Jan 13</time>
-</a>
-	      	<br>
-	      	
-	    	
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
 
-    	</div>
-    	
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/01/13/bulid-blog-with-githubpages-and-hexo/">使用Github Pages 和Hexo 搭建独立博客</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/01/13/markdown-grammar/" class="archive-article-date">
-  	<time datetime="2015-01-13T11:26:16.000Z" itemprop="datePublished">Jan 13</time>
-</a>
-	      	<br>
-	      	
-	    	
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/">markdown</a></li></ul>
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-    	</div>
-    	
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/01/13/markdown-grammar/">使用Markdown 语法编辑博客内容</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="verification-code-generated-by-java-servlet" data-title="使用servlet 生成验证码" data-url="http://zhangyigong.github.com/2015/01/16/verification-code-generated-by-java-servlet/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zhangyigonggithub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
       <footer id="footer">
   <div class="outer">
