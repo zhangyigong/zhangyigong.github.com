@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>使用servlet 和开源组件生成验证码 | 张一弓的Blog</title>
+  <title>使用Servlet 和开源组件生成验证码 | 张一弓的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="为什么要使用验证码
 输入验证码是一个很麻烦的一个过程，很多用户都不喜欢，但是验证码却总是存在于各类的网站和Web 应用中，比如
@@ -14,7 +14,7 @@
 
 为什么要使用验证码呢？">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用servlet 和开源组件生成验证码">
+<meta property="og:title" content="使用Servlet 和开源组件生成验证码">
 <meta property="og:url" content="http://zhangyigong.github.com/2015/01/16/verification-code-generated-by-java-servlet/">
 <meta property="og:site_name" content="张一弓的Blog">
 <meta property="og:description" content="为什么要使用验证码
@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://zhang1g.qiniudn.com/verification-code2.png">
 <meta property="og:image" content="http://zhang1g.qiniudn.com/verification-code3.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用servlet 和开源组件生成验证码">
+<meta name="twitter:title" content="使用Servlet 和开源组件生成验证码">
 <meta name="twitter:description" content="为什么要使用验证码
 输入验证码是一个很麻烦的一个过程，很多用户都不喜欢，但是验证码却总是存在于各类的网站和Web 应用中，比如
 
@@ -246,7 +246,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      使用servlet 和开源组件生成验证码
+      使用Servlet 和开源组件生成验证码
     </h1>
   
 
@@ -276,8 +276,10 @@
 <p>有验证码的登录过程如下</p>
 <p><img src="http://zhang1g.qiniudn.com/verification-code2.png" alt="有验证码的登录过程"></p>
 <p>那么，我们使用验证码只有一个原因，就是通过验证码，由用户肉眼识别其中的验证信息，从而区分用户是人还是计算机。</p>
-<p>验证码<strong>定义</strong>：</p>
-<p><strong>一种区分用户是人还是计算机的公共全自动程序。</strong></p>
+<p>验证码定义：</p>
+<blockquote>
+<p>一种区分用户是人还是计算机的公共全自动程序。</p>
+</blockquote>
 <h2 id="使用servlet_生成验证码概述">使用servlet 生成验证码概述</h2>
 <p>我们知道，网页中的验证码包含两部分：</p>
 <ol>
@@ -288,18 +290,10 @@
 </ol>
 <p>那么验证码的图片是如何获取的？</p>
 <p>我们没有必要事先准备大量的验证码图片，可以使用Servlet 在初次显示验证码或者刷新验证码时实时生成。下面是一个包含验证码的网页源码的一部分</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input <span class="variable">type=</span><span class="string">"text"</span> <span class="variable">id=</span><span class="string">"verifyCode"</span> <span class="variable">name=</span><span class="string">"verifyCode"</span> <span class="variable">size=</span><span class="string">"6"</span>/&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;input type=<span class="string">"text"</span> id=<span class="string">"verifyCode"</span> name=<span class="string">"verifyCode"</span> size=<span class="string">"6"</span>/&gt;</div><div class="line"><span class="keyword">...</span></div><div class="line">&lt;img alt=<span class="string">"验证码"</span> id=<span class="string">"safecode"</span> src=<span class="string">"&lt;%=request.getContextPath()%&gt;/servlet/ImageServlet"</span>/&gt;</div><div class="line"><span class="keyword">...</span></div></pre></td></tr></table></figure>
 
-
-
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;img alt=<span class="string">"验证码"</span> id=<span class="string">"safecode"</span> src=<span class="string">"&lt;%=request.getContextPath()%&gt;/servlet/ImageServlet"</span>/&gt;</div><div class="line"><span class="keyword">...</span></div></pre></td></tr></table></figure>
-
-<p>整个过程中需要自定义类</p>
-<p><strong>ImageServlet</strong> — 生成验证码</p>
-<p><strong>LogionServlet</strong> — 校验验证码是否正确</p>
-<ul>
-<li>ImageServlet 类</li>
-</ul>
+<p>整个过程中需要两个自定义类，其中<strong>ImageServlet</strong> 用来生成验证码，<strong>LogionServlet</strong> 用来校验验证码是否正确。</p>
+<p><strong>ImageServlet 类</strong></p>
 <p>使用ImageServlet 生成图片需要用到的类包括</p>
 <ul>
 <li>BufferedImage 图像数据缓冲区</li>
@@ -323,9 +317,7 @@
 <li><p>使用ImageIO 输出图片</p>
 </li>
 </ol>
-<ul>
-<li>LoginServlet</li>
-</ul>
+<p><strong>LoginServlet 类</strong></p>
 <p>使用LoginServlet 校验验证码是否正确需要以下几个步骤</p>
 <ol>
 <li><p>获取页面上用户输入的验证码</p>
@@ -381,7 +373,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="verification-code-generated-by-java-servlet" data-title="使用servlet 和开源组件生成验证码" data-url="http://zhangyigong.github.com/2015/01/16/verification-code-generated-by-java-servlet/"></div>
+	<div class="ds-thread" data-thread-key="verification-code-generated-by-java-servlet" data-title="使用Servlet 和开源组件生成验证码" data-url="http://zhangyigong.github.com/2015/01/16/verification-code-generated-by-java-servlet/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
