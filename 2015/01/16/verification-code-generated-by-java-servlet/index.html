@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>使用Servlet 和开源组件生成验证码 | 张一弓的Blog</title>
+  <title>漫谈验证码（一） 使用Servlet 生成验证码 | 张一弓的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="为什么要使用验证码
 输入验证码是一个很麻烦的一个过程，很多用户都不喜欢，但是验证码却总是存在于各类的网站和Web 应用中，比如
@@ -14,7 +14,7 @@
 
 为什么要使用验证码呢？">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Servlet 和开源组件生成验证码">
+<meta property="og:title" content="漫谈验证码（一） 使用Servlet 生成验证码">
 <meta property="og:url" content="http://zhangyigong.github.com/2015/01/16/verification-code-generated-by-java-servlet/">
 <meta property="og:site_name" content="张一弓的Blog">
 <meta property="og:description" content="为什么要使用验证码
@@ -28,8 +28,10 @@
 <meta property="og:image" content="http://zhang1g.qiniudn.com/verification-code.png">
 <meta property="og:image" content="http://zhang1g.qiniudn.com/verification-code2.png">
 <meta property="og:image" content="http://zhang1g.qiniudn.com/verification-code3.png">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/servlet-verifycode1.PNG">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/servlet-verifycode-success.PNG">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Servlet 和开源组件生成验证码">
+<meta name="twitter:title" content="漫谈验证码（一） 使用Servlet 生成验证码">
 <meta name="twitter:description" content="为什么要使用验证码
 输入验证码是一个很麻烦的一个过程，很多用户都不喜欢，但是验证码却总是存在于各类的网站和Web 应用中，比如
 
@@ -246,7 +248,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      使用Servlet 和开源组件生成验证码
+      漫谈验证码（一） 使用Servlet 生成验证码
     </h1>
   
 
@@ -280,7 +282,7 @@
 <blockquote>
 <p>一种区分用户是人还是计算机的公共全自动程序。</p>
 </blockquote>
-<h2 id="使用servlet_生成验证码概述">使用servlet 生成验证码概述</h2>
+<h2 id="使用Servlet_生成验证码概述">使用Servlet 生成验证码概述</h2>
 <p>我们知道，网页中的验证码包含两部分：</p>
 <ol>
 <li><p>输入框</p>
@@ -332,8 +334,48 @@
 <p>使用ImageServlet 和LoginServlet 实现验证码生成和校验的流程如下</p>
 <p><img src="http://zhang1g.qiniudn.com/verification-code3.png" alt="实现验证码生成和校验的流程"></p>
 <h2 id="使用servlet_生成验证码代码实现">使用servlet 生成验证码代码实现</h2>
-<h2 id="使用开源组件生成验证码">使用开源组件生成验证码</h2>
-<h2 id="验证码的发展">验证码的发展</h2>
+<p><strong>新建Java Web 工程</strong></p>
+<p>将新建的工程命名为<code>ServletVerificationCode</code>，在项目名称上点击右键属性，将工程的编码格式改为UTF-8。</p>
+<p>在src 目录下新建一个名为 <code>com.zhang1g.test</code> 的包，在包下新建类 <code>ImageServlet</code> 和 <code>LoginServlet</code>，这两个类都继承HttpServlet 抽象类。</p>
+<p>编辑WEB-INF 目录下的index.jsp 文件，pageEncoding 改为UTF-8，在body 中增加一个form 表单，其中包含一个img 标签用来显示验证码，一个文本输入框用来输入验证码以及一个提交按钮。具体代码如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;form <span class="variable">action=</span><span class="string">"&lt;%=request.getContextPath()%&gt;/servlet/LoginServlet"</span> <span class="variable">method=</span><span class="string">"post"</span>&gt;</div><div class="line">	&lt;br&gt; </div><div class="line">	&lt;img <span class="variable">alt=</span><span class="string">"验证码"</span> <span class="variable">id=</span><span class="string">"index_image_verify_code"</span></div><div class="line">			<span class="variable">src=</span><span class="string">"&lt;%=request.getContextPath()%&gt;/servlet/ImageServlet"</span>&gt; </div><div class="line">	&lt;br&gt;</div><div class="line">	&lt;input <span class="variable">type=</span><span class="string">"text"</span> <span class="variable">name=</span><span class="string">"index_userinput_verifycode"</span></div><div class="line">			<span class="variable">id=</span><span class="string">"index_userinput_verifycode"</span> <span class="variable">size=</span><span class="string">"6"</span> /&gt; </div><div class="line">	&lt;a <span class="variable">href=</span><span class="string">"#"</span>&gt;看不清楚&lt;/a&gt; </div><div class="line">	&lt;br&gt; &lt;br&gt; </div><div class="line">	&lt;input <span class="variable">type=</span><span class="string">"submit"</span> <span class="variable">value=</span><span class="string">"提交"</span>&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
+
+<p>其中 <code>&lt;%=request.getContextPath()%&gt;</code> 表示项目工程的路径，form 表单的action 和img 的src 属性向后台的Servlet 请求数据，一个是post 请求，一个是get 请求，分别对应两个Servlet实现类：LoginServlet 和ImageServlet。</p>
+<p><strong>在web.xml 中配置Servlet</strong></p>
+<p>web.xml 在WEB-INF 的lib 目录下，针对上述两个Servlet进行配置，分别添加 <code>&lt;servlet&gt;&lt;/servlet&gt;</code> 和 <code>&lt;servlet-mapping&gt;&lt;/servlet-mapping&gt;</code> 项。具体配置如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">servlet</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">servlet-name</span>&gt;</span>ImageServlet<span class="tag">&lt;/<span class="title">servlet-name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">servlet-class</span>&gt;</span>com.zhang1g.test.ImageServlet<span class="tag">&lt;/<span class="title">servlet-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">servlet</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="title">servlet</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">servlet-name</span>&gt;</span>LoginServlet<span class="tag">&lt;/<span class="title">servlet-name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">servlet-class</span>&gt;</span>com.zhang1g.test.LoginServlet<span class="tag">&lt;/<span class="title">servlet-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">servlet</span>&gt;</span> </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="title">servlet-mapping</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">servlet-name</span>&gt;</span>ImageServlet<span class="tag">&lt;/<span class="title">servlet-name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">url-pattern</span>&gt;</span>/servlet/ImageServlet<span class="tag">&lt;/<span class="title">url-pattern</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">servlet-mapping</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">servlet-mapping</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">servlet-name</span>&gt;</span>LoginServlet<span class="tag">&lt;/<span class="title">servlet-name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">url-pattern</span>&gt;</span>/servlet/LoginServlet<span class="tag">&lt;/<span class="title">url-pattern</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">servlet-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p><strong>ImageServlet具体实现</strong></p>
+<p>在类中自定义实现父类的doGet 方法，将生成的验证码放入session 中，并绘制验证码图片添加到response 输出流中。具体代码如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>{</div><div class="line"></div><div class="line">	<span class="annotation">@Override</span></div><div class="line">	<span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span>(HttpServletRequest req, HttpServletResponse resp)</div><div class="line">			<span class="keyword">throws</span> ServletException, IOException {</div><div class="line">		BufferedImage bufferedVerifyCodeImage = <span class="keyword">new</span> BufferedImage(<span class="number">75</span>, <span class="number">22</span>, BufferedImage.TYPE_INT_RGB);</div><div class="line">		Graphics graphics = bufferedVerifyCodeImage.getGraphics();</div><div class="line">		</div><div class="line">		Color backgroundColor = <span class="keyword">new</span> Color(<span class="number">200</span>,<span class="number">150</span>,<span class="number">255</span>);</div><div class="line">		graphics.setColor(backgroundColor);</div><div class="line">		graphics.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">75</span>, <span class="number">22</span>);</div><div class="line">		</div><div class="line">		<span class="keyword">char</span>[] verifyCodeCollection = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"</span>.toCharArray();</div><div class="line">		Random random = <span class="keyword">new</span> Random();</div><div class="line">		<span class="keyword">int</span> len = verifyCodeCollection.length;</div><div class="line">		StringBuffer sb = <span class="keyword">new</span> StringBuffer();</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">4</span> ; i++) {</div><div class="line">			<span class="keyword">int</span> index = random.nextInt(len);</div><div class="line">			graphics.setColor(<span class="keyword">new</span> Color(random.nextInt(<span class="number">88</span>),random.nextInt(<span class="number">188</span>),random.nextInt(<span class="number">255</span>)));</div><div class="line">			graphics.drawString(verifyCodeCollection[index]+<span class="string">""</span>, (i*<span class="number">15</span>)+<span class="number">3</span>, <span class="number">18</span>);</div><div class="line">			</div><div class="line">			sb.append(verifyCodeCollection[index]);</div><div class="line">		}</div><div class="line">		</div><div class="line">		req.getSession().setAttribute(<span class="string">"picVerifyCode"</span>, sb.toString());</div><div class="line">		ImageIO.write(bufferedVerifyCodeImage, <span class="string">"JPG"</span>, resp.getOutputStream());</div><div class="line">	}</div><div class="line">	</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p><strong>LoginServlet具体实现</strong></p>
+<p>在类中通过request 获取用户输入的验证码信息，并与session 中的验证码进行比较，如果一致则跳转到success 页面，如果不一致则跳转到fail 页面。具体实现如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>{</div><div class="line"></div><div class="line">	<span class="annotation">@Override</span></div><div class="line">	<span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span>(HttpServletRequest req, HttpServletResponse resp)</div><div class="line">			<span class="keyword">throws</span> ServletException, IOException {		</div><div class="line">		String picVerifyCode = (String)req.getSession().getAttribute(<span class="string">"picVerifyCode"</span>);</div><div class="line">		String userInputVerifyCode = req.getParameter(<span class="string">"index_userinput_verifycode"</span>);</div><div class="line">			</div><div class="line">		<span class="keyword">if</span> (userInputVerifyCode.toUpperCase().equals(picVerifyCode)) {</div><div class="line">			RequestDispatcher view = req.getRequestDispatcher(<span class="string">"/success.jsp"</span>);</div><div class="line">			view.forward(req, resp);</div><div class="line">		} <span class="keyword">else</span> {</div><div class="line">			RequestDispatcher view = req.getRequestDispatcher(<span class="string">"/fail.jsp"</span>);</div><div class="line">			view.forward(req, resp);</div><div class="line">		}</div><div class="line">	}</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p><strong>编辑验证成功和失败页面</strong></p>
+<p>在WEB-INFO 下新建success.jsp 和fail.jsp 两个页面，pageEncoding 改为UTF-8，这两个页面的内容基本一致。</p>
+<p><code>success.jsp</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;head&gt;</div><div class="line">  &lt;title&gt;check <span class="literal">result</span>&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line"></div><div class="line">&lt;body&gt;</div><div class="line">	&lt;c:<span class="keyword">out</span> value=<span class="string">"图片上的验证码信息为：${sessionScope.picVerifyCode}"</span> default=<span class="string">""</span> /&gt;</div><div class="line">	&lt;br&gt;</div><div class="line">	&lt;c:<span class="keyword">out</span> value=<span class="string">"输入的验证码信息为：${param.index_userinput_verifycode}"</span> default=<span class="string">""</span> /&gt;</div><div class="line">	&lt;br&gt;&lt;br&gt;</div><div class="line">	验证码输入正确！</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
+
+<p><code>fail.jsp</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>验证码校验结果<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">c:out</span> <span class="attribute">value</span>=<span class="value">"图片上的验证码信息为：${sessionScope.picVerifyCode}"</span> <span class="attribute">default</span>=<span class="value">""</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">br</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">c:out</span> <span class="attribute">value</span>=<span class="value">"输入的验证码信息为：${param.index_userinput_verifycode}"</span> <span class="attribute">default</span>=<span class="value">""</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">br</span>&gt;</span><span class="tag">&lt;<span class="title">br</span>&gt;</span></div><div class="line">	验证码输入错误！</div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p><strong>添加刷新验证码功能</strong></p>
+<p>在首页index.jsp 中，为了防止显示的验证码不是很清楚，添加了 <code>看不清楚</code> 超链接，重新向后台的ImageServlet 发出请求，显示新的验证码图片。</p>
+<p>更改 <code>&lt;a href=&quot;#&quot;&gt;看不清楚&lt;/a&gt;</code> 为</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"javascript:reloadVerifyCode()"</span>&gt;</span>看不清楚<span class="tag">&lt;/<span class="title">a</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>在<head></head> 中添加重新加载验证码图片的js 代码，并实现reloadVerifyCode 方法</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">reloadVerifyCode</span><span class="params">()</span> </span>{</div><div class="line">		<span class="keyword">var</span> time = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</div><div class="line">		<span class="built_in">document</span>.getElementById(<span class="string">"index_image_verify_code"</span>).src = </div><div class="line">			<span class="string">"&lt;%=request.getContextPath()%&gt;/servlet/ImageServlet?d="</span> + time;</div><div class="line">	}</div><div class="line"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>其中的src 除了ImageServlet 对应的URL 链接外，另外添加了time 变量，用来解决由于浏览器缓存导致的验证码图片无法刷新的问题。</p>
+<p><strong>在Tomcat 中运行项目工程</strong></p>
+<p>在eclipse 中配置好Tomcat 服务器，并将项目运行在配置好的Tomcat 中，打开浏览器，输入 <code>http://localhost:8080/ServletVerificationCode/</code> 即可在浏览其中看到如下效果</p>
+<p><img src="http://zhang1g.qiniudn.com/servlet-verifycode1.PNG" alt="Servlet 生成验证码效果"></p>
+<p>输入正确的验证码后，点击提交按钮，可以看到</p>
+<p><img src="http://zhang1g.qiniudn.com/servlet-verifycode-success.PNG" alt="Servlet 生成验证码效果"></p>
+<p>至此使用Servlet 生成验证码的工作就全部完成了。</p>
 
       
     </div>
@@ -373,7 +415,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="verification-code-generated-by-java-servlet" data-title="使用Servlet 和开源组件生成验证码" data-url="http://zhangyigong.github.com/2015/01/16/verification-code-generated-by-java-servlet/"></div>
+	<div class="ds-thread" data-thread-key="verification-code-generated-by-java-servlet" data-title="漫谈验证码（一） 使用Servlet 生成验证码" data-url="http://zhangyigong.github.com/2015/01/16/verification-code-generated-by-java-servlet/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
