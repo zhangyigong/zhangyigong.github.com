@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>验证码漫谈（二） 使用开源组件生成验证码 | 张一弓的Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="开源组件简介
+在漫谈验证码（一） 使用Servlet 生成验证码一文中，我们介绍了使用Servlet 生成验证码的方法。但是生成的验证码图片比较简单，使用图像识别的方法还是很容易破解，因此我们在实际应用中希望能够生成比较复杂的验证码图片，比如汉字、算式等，并且添加一些干扰。
+使用一些相关的开源组件可以很容易的实现上述功能。常见的开源组件包括Kaptcha、jCaptcha 和Simplecapt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="验证码漫谈（二） 使用开源组件生成验证码">
+<meta property="og:url" content="http://zhangyigong.github.com/2015/01/17/verification-code-generate-by -opensource-component/">
+<meta property="og:site_name" content="张一弓的Blog">
+<meta property="og:description" content="开源组件简介
+在漫谈验证码（一） 使用Servlet 生成验证码一文中，我们介绍了使用Servlet 生成验证码的方法。但是生成的验证码图片比较简单，使用图像识别的方法还是很容易破解，因此我们在实际应用中希望能够生成比较复杂的验证码图片，比如汉字、算式等，并且添加一些干扰。
+使用一些相关的开源组件可以很容易的实现上述功能。常见的开源组件包括Kaptcha、jCaptcha 和Simplecapt">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/kaptcha-verify-code1.gif">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/kaptcha-verify-code2.PNG">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="验证码漫谈（二） 使用开源组件生成验证码">
+<meta name="twitter:description" content="开源组件简介
+在漫谈验证码（一） 使用Servlet 生成验证码一文中，我们介绍了使用Servlet 生成验证码的方法。但是生成的验证码图片比较简单，使用图像识别的方法还是很容易破解，因此我们在实际应用中希望能够生成比较复杂的验证码图片，比如汉字、算式等，并且添加一些干扰。
+使用一些相关的开源组件可以很容易的实现上述功能。常见的开源组件包括Kaptcha、jCaptcha 和Simplecapt">
+
+  
+    <link rel="alternative" href="/atom.xml" title="张一弓的Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/shizi_favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  
+
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<div class="profilepic">
+			<img src="http://zhang1g.qiniudn.com/shizi.jpg">
+		</div>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lionel</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">眯着眼睛安静思考世界的攻城狮</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">-博客主页-</a></li>
+				        
+							<li><a href="/archives">-所有文章-</a></li>
+				        
+							<li><a href="/tags/读书">-读书心得-</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/zhangyigong" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/2865465100" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud">
+						<a href="/tags/blog/" style="font-size: 20.00px;">blog</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/java/" style="font-size: 20.00px;">java</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/opensource/" style="font-size: 10.00px;">opensource</a><a href="/tags/web/" style="font-size: 20.00px;">web</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://coderq.com/">码农圈</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.paomianba.com/">泡面吧</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.tuicool.com/">推酷网</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.w3cschool.cc/">W3CSCHOOL</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.liaoxuefeng.com/">廖雪峰的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.52ml.net/">我爱机器学习</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.readfar.com/">读远电子书下载</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.36kr.com/">36氪</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.vmovier.com/">V电影</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://dianying.fm/">电影FM</a>
+			        
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					华南理工大学13级研究生，一只倒腾 web 开发的程序猿，希望通过这个博客来记录和分享学习和生活中的点点滴滴。
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay"></div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="http://zhang1g.qiniudn.com/shizi.jpg">
+			</div>
+
+			<hgroup>
+			  <h1 class="header-author"><a href="/">Lionel</a></h1>
+			</hgroup>
+			
+			<p class="header-subtitle">眯着眼睛安静思考世界的攻城狮</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">-博客主页-</a></li>
+		        
+					<li><a href="/archives">-所有文章-</a></li>
+		        
+					<li><a href="/tags/读书">-读书心得-</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/zhangyigong" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/2865465100" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <article id="post-verification-code-generate-by -opensource-component" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/01/17/verification-code-generate-by -opensource-component/" class="article-date">
+  	<time datetime="2015-01-17T08:53:28.000Z" itemprop="datePublished">Jan 17</time>
+</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opensource/">opensource</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li></ul>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      验证码漫谈（二） 使用开源组件生成验证码
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://zhang1g.qiniudn.com/kaptcha-verify-code1.gif" alt="使用开源组件生成验证码"></p>
+<h2 id="开源组件简介">开源组件简介</h2>
+<p>在<a href="http://zhangyigong.github.io/2015/01/16/verification-code-generated-by-java-servlet/" target="_blank" rel="external">漫谈验证码（一） 使用Servlet 生成验证码</a>一文中，我们介绍了使用Servlet 生成验证码的方法。但是生成的验证码图片比较简单，使用图像识别的方法还是很容易破解，因此我们在实际应用中希望能够生成比较复杂的验证码图片，比如汉字、算式等，并且添加一些干扰。</p>
+<p>使用一些相关的开源组件可以很容易的实现上述功能。常见的开源组件包括Kaptcha、jCaptcha 和Simplecaptcha。</p>
+<a id="more"></a>
+
+<p>SimpleCaptcha 是很棒的项目，但是，SimpleCaptcha 似乎没有被维护和更新，在JDK1.5 和Servlet 输出的HTTP 头部情况下还存在一些问题，有一堆的错误报告。 近几年，SimpleCaptcha 的论坛没有任何的消息，也没有新的版本或任何改变。 </p>
+<p>jCaptcha 是很多Java 开发者使用的验证码组件，但是默认的配置相对有点恶心，它是一个很棒的项目，但绝对不是一个快速解决方案，更像是一个库。在网站上，它默认输出的样式不是太难分辨就是不够好，也相当的慢。</p>
+<p>肯定的是，你需要花很多的时间来熟悉它的API。但事实是，我愿意是一个简单的jar 包文件，轻松地导入我的项目，然后在web.xml 添加几行代码即可。 </p>
+<p>因此，这里推荐一个非常简单的验证码组件：<strong>Kaptcha</strong>。 </p>
+<p>Kaptcha 很容易安装使用，并且默认输出验证码。默认产生的验证码和放在这篇博客最前面的验证码图片很相似。如果你想改变输出的样式，可以通过配置一组选项，就可以输出自定义的变形样式。</p>
+<p>接下来我们将使用Kaptcha 开源组件来生成不同格式的复杂的验证码图片。</p>
+<h2 id="Kaptcha_组件生成复杂验证码">Kaptcha 组件生成复杂验证码</h2>
+<p>在Web 项目中使用Kaptcha 组件非常简便，只需要以下几个步骤即可，其中最复杂的是配置相应的web.xml 文件。</p>
+<ol>
+<li>下载Kaptcha-2.x.jar</li>
+<li>将jar 包导入项目</li>
+<li>编写页面</li>
+<li>配置web.xml </li>
+<li>启动项目</li>
+</ol>
+<p>在配置web.xml 时，添加Kaptcha 组件对应的Servlet 配置项是必须的，Kaptcha 组件的其他配置项也都是在web.xml 中进行，稍后会进行介绍。最核心的配置如下所示</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">servlet</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">servlet-name</span>&gt;</span>Kaptcha<span class="tag">&lt;/<span class="title">servlet-name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">servlet-class</span>&gt;</span></div><div class="line">		com.google.code.kaptcha.servlet.KaptchaServlet</div><div class="line">	<span class="tag">&lt;/<span class="title">servlet-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">servlet</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>下面我们就逐步开始使用Kaptcha 来生成不同类型的复杂验证码图片，包括字母数字混合、汉字、算式等，并增加不同类型的干扰效果。</p>
+<p><strong>默认生成的验证码</strong></p>
+<p>新建一个名为KaptchaVerifyCode 的Java Web 项目，右键点击项目工程，在属性中修改项目的默认编码格式为UTF-8。</p>
+<p>在<a href="http://code.google.com/p/kaptcha/downloads/list" target="_blank" rel="external">官网</a>下载Kaptcha 组件的jar 包，或者在百度云搜索下载，我下载使用的是<a href="http://pan.baidu.com/share/link?shareid=161907&amp;uk=3927561956" target="_blank" rel="external">kaptcha-2.3.2.jar</a>。</p>
+<p>将jar 包导入到项目的WEB-INFO/lib 目录下，并添加JSTL 支持（将jstl.jar 和standard.jar 也添加到项目的WEB-INFO/lib 目录中，并在JSP 页面中添加语句 <code>&lt;%@ taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot; %&gt;</code> ）。</p>
+<p>在web.xml 中配置Kaptcha 组件相关的servlet 和servlet-mapping，具体如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">servlet</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">servlet-name</span>&gt;</span>Kaptcha<span class="tag">&lt;/<span class="title">servlet-name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">servlet-class</span>&gt;</span></div><div class="line">		com.google.code.kaptcha.servlet.KaptchaServlet</div><div class="line">	<span class="tag">&lt;/<span class="title">servlet-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">servlet</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="title">servlet-mapping</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">servlet-name</span>&gt;</span>Kaptcha<span class="tag">&lt;/<span class="title">servlet-name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="title">url-pattern</span>&gt;</span>/KaptchaVerifyCode.jpg<span class="tag">&lt;/<span class="title">url-pattern</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">servlet-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>在index.jsp 页面中添加验证码图片显示的HTML 代码如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">img</span> <span class="attribute">alt</span>=<span class="value">"验证码"</span> <span class="attribute">src</span>=<span class="value">"KaptchaVerifyCode.jpg"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>开启tomcat 服务器，在浏览器中输入 <code>http://localhost:8080/KaptchaVerifyCode/</code> 即可看到Kaptcha 组件默认生成的验证码图片。</p>
+<p><img src="http://zhang1g.qiniudn.com/kaptcha-verify-code2.PNG" alt="Kaptcha 组件生成验证码默认效果"></p>
+
+      
+    </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/01/16/verification-code-generated-by-java-servlet/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">漫谈验证码（一） 使用Servlet 生成验证码</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="verification-code-generate-by -opensource-component" data-title="验证码漫谈（二） 使用开源组件生成验证码" data-url="http://zhangyigong.github.com/2015/01/17/verification-code-generate-by -opensource-component/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zhangyigonggithub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 张一弓  2015 
+    	</div>
+      	<div class="footer-right">
+      		Email：zhang_1g@163.com
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+  <script src="/js/main.js" type="text/javascript"></script>
+
+
+  </div>
+</body>
+</html>
