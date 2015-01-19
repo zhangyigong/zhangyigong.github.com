@@ -4,7 +4,7 @@
   <subtitle><![CDATA[眯着眼睛安静思考世界的攻城狮]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-01-19T11:41:55.663Z</updated>
+  <updated>2015-01-19T11:50:59.447Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://zhangyigong.github.com/2015/01/17/verification-code-generate-by%20-opensource-component/"/>
     <id>http://zhangyigong.github.com/2015/01/17/verification-code-generate-by -opensource-component/</id>
     <published>2015-01-17T08:53:28.000Z</published>
-    <updated>2015-01-19T11:33:57.000Z</updated>
+    <updated>2015-01-19T11:50:51.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/kaptcha-verify-code1.gif" alt="使用开源组件生成验证码"></p>
 <h2 id="开源组件简介">开源组件简介</h2>
 <p>在<a href="http://zhangyigong.github.io/2015/01/16/verification-code-generated-by-java-servlet/" target="_blank" rel="external">漫谈验证码（一） 使用Servlet 生成验证码</a>一文中，我们介绍了使用Servlet 生成验证码的方法。但是生成的验证码图片比较简单，使用图像识别的方法还是很容易破解，因此我们在实际应用中希望能够生成比较复杂的验证码图片，比如汉字、算式等，并且添加一些干扰。</p>
