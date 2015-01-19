@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>漫谈验证码（三） 验证码的奇思妙用 | 张一弓的Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="验证码的起源
+在刚开始有Internet 的时候，是没有验证码这种东西的，但是这导致了杯具的发生，垃圾评论和垃圾邮件可以轻松通过任何一个网站的注册程序，通过各种方式轰炸人民群众的眼球。
+最先想要解决这一问题的是雅虎，作为互联网时代早期最重要的免费邮件提供商，他们一方面要解决用户们每天遇到的数以百计的垃圾邮件轰炸，另一方面，他们自己的免费邮箱，恰恰又是垃圾邮件的最爱，因为耗费无数资源所阻止的垃圾邮">
+<meta property="og:type" content="article">
+<meta property="og:title" content="漫谈验证码（三） 验证码的奇思妙用">
+<meta property="og:url" content="http://zhangyigong.github.com/2015/01/19/wonderful-use-of-verification-code/">
+<meta property="og:site_name" content="张一弓的Blog">
+<meta property="og:description" content="验证码的起源
+在刚开始有Internet 的时候，是没有验证码这种东西的，但是这导致了杯具的发生，垃圾评论和垃圾邮件可以轻松通过任何一个网站的注册程序，通过各种方式轰炸人民群众的眼球。
+最先想要解决这一问题的是雅虎，作为互联网时代早期最重要的免费邮件提供商，他们一方面要解决用户们每天遇到的数以百计的垃圾邮件轰炸，另一方面，他们自己的免费邮箱，恰恰又是垃圾邮件的最爱，因为耗费无数资源所阻止的垃圾邮">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/wondeerful-use-of-verify-code.jpg">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/Luis-von-Ahn.jpeg">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/doubble-verify-code.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="漫谈验证码（三） 验证码的奇思妙用">
+<meta name="twitter:description" content="验证码的起源
+在刚开始有Internet 的时候，是没有验证码这种东西的，但是这导致了杯具的发生，垃圾评论和垃圾邮件可以轻松通过任何一个网站的注册程序，通过各种方式轰炸人民群众的眼球。
+最先想要解决这一问题的是雅虎，作为互联网时代早期最重要的免费邮件提供商，他们一方面要解决用户们每天遇到的数以百计的垃圾邮件轰炸，另一方面，他们自己的免费邮箱，恰恰又是垃圾邮件的最爱，因为耗费无数资源所阻止的垃圾邮">
+
+  
+    <link rel="alternative" href="/atom.xml" title="张一弓的Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/shizi_favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  
+
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<div class="profilepic">
+			<img src="http://zhang1g.qiniudn.com/shizi.jpg">
+		</div>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lionel</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">眯着眼睛安静思考世界的攻城狮</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">-博客主页-</a></li>
+				        
+							<li><a href="/archives">-所有文章-</a></li>
+				        
+							<li><a href="/tags/读书">-读书心得-</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/zhangyigong" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/2865465100" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud">
+						<a href="/tags/blog/" style="font-size: 20.00px;">blog</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/java/" style="font-size: 20.00px;">java</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/opensource/" style="font-size: 10.00px;">opensource</a><a href="/tags/web/" style="font-size: 20.00px;">web</a><a href="/tags/感悟杂谈/" style="font-size: 10.00px;">感悟杂谈</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://coderq.com/">码农圈</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.paomianba.com/">泡面吧</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.tuicool.com/">推酷网</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.w3cschool.cc/">W3CSCHOOL</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.liaoxuefeng.com/">廖雪峰的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.52ml.net/">我爱机器学习</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.readfar.com/">读远电子书下载</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.36kr.com/">36氪</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.vmovier.com/">V电影</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://dianying.fm/">电影FM</a>
+			        
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					华南理工大学13级研究生，一只倒腾 web 开发的程序猿，希望通过这个博客来记录和分享学习和生活中的点点滴滴。
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay"></div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="http://zhang1g.qiniudn.com/shizi.jpg">
+			</div>
+
+			<hgroup>
+			  <h1 class="header-author"><a href="/">Lionel</a></h1>
+			</hgroup>
+			
+			<p class="header-subtitle">眯着眼睛安静思考世界的攻城狮</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">-博客主页-</a></li>
+		        
+					<li><a href="/archives">-所有文章-</a></li>
+		        
+					<li><a href="/tags/读书">-读书心得-</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/zhangyigong" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/2865465100" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <article id="post-wonderful-use-of-verification-code" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/01/19/wonderful-use-of-verification-code/" class="article-date">
+  	<time datetime="2015-01-19T12:13:43.000Z" itemprop="datePublished">Jan 19</time>
+</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/感悟杂谈/">感悟杂谈</a></li></ul>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      漫谈验证码（三） 验证码的奇思妙用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://zhang1g.qiniudn.com/wondeerful-use-of-verify-code.jpg" alt="验证码的奇思妙用"></p>
+<h2 id="验证码的起源">验证码的起源</h2>
+<p>在刚开始有Internet 的时候，是没有验证码这种东西的，但是这导致了杯具的发生，垃圾评论和垃圾邮件可以轻松通过任何一个网站的注册程序，通过各种方式轰炸人民群众的眼球。</p>
+<p>最先想要解决这一问题的是<strong>雅虎</strong>，作为互联网时代早期最重要的免费邮件提供商，他们一方面要解决用户们每天遇到的数以百计的垃圾邮件轰炸，另一方面，他们自己的免费邮箱，恰恰又是垃圾邮件的最爱，因为耗费无数资源所阻止的垃圾邮件，都来自于自己的服务器。这让雅虎开始认真考虑如何解决人机辨识问题。</p>
+<a id="more"></a>
+
+<p>于是他们找到了一位当时刚刚21岁的天才Luis von Ahn。 而Luis Von Ahn 给出的方案，就是这个让人民群众微微皱眉，但是让计算机耸肩挠头的验证码。</p>
+<p><img src="http://zhang1g.qiniudn.com/Luis-von-Ahn.jpeg" alt="验证码的发明人Luis von Ahn"></p>
+<p>当时计算机辨识技术还很落后，对于经过扭曲、污染的文字，无法辨识。而人类却可以轻松认出这些文字。</p>
+<p>这是一个简单而巧妙的设计，计算机先是产生一个随机的字符串，然后用程序把这个字符串的图像进行随机的污染，扭曲，再显示给显示器前的人或者机器。凡是能够辨识这些字符的，即为人类。</p>
+<h2 id="验证码的发展">验证码的发展</h2>
+<p>当全世界数以十亿计的人每天都会浪费几秒钟的时间参与辨认文字这一简单活动的时候，你是否有想过，这其中浪费的人脑智力是否能得到更好的应用呢？</p>
+<p>Luis Von Ahn 也在思考这个问题，他最终的设计是：<strong>让人们用这些脑力解决一些计算机无法解决的图书数字化</strong>。</p>
+<p>在计算机时代以前，印刷术已经存在了数百年，但这些印刷术所产生的书本和报纸等等，对于计算机来说都是模拟信号，仅以图像的形式存在，而非以数字化的形式存在。但是，早期的印刷术并不精确，文字大小不一，形象有差别。而且因为印刷品年代久远，拥有各种细微的缺损和污染。这对人眼来说不是什么大问题，但对计算机来说就麻烦了。</p>
+<p>目前在google、yahoo、youtube 等各个网站都能看到的双capcha，一个是需要辨认的文档图像，一个是计算机生成的capcha。</p>
+<p><img src="http://zhang1g.qiniudn.com/doubble-verify-code.jpg" alt="双验证码的广泛使用"></p>
+<p>2002年，luis Von Ahn 开始让验证码引用各种无法被计算机辨识的文字图像，目前，已经有上万网站采用他的新一代Capcha，每天帮助辨识数以百万计的古老文档。</p>
+<p>但是这里有一个问题，对于最初的验证码来说，计算机实际上是知道答案的。而Luis 希望人们辨识的文字，计算机是不知道答案的，那如何能验证返回的答案到底是不是真的呢？</p>
+<p>解决这个问题的方法依然体现了Luis 一贯的简洁和优美，他让人们每次辨识两个，而非一个Capcha，其中一个来自于计算机随机生成的字符串，而另一个则是从文档中选取的计算机不认识的字符图像。只要人们对前一个字符串给出的答案是正确的，那么就判定，人们对后一个Capcha 的辨识是正确的。</p>
+<p>用这一方法，luis 的Capcha2.0 已经帮助完成了整个纽约时报130 年的报纸存档数字化——这一本可能花费无数时间和资源的工程，在几个月之内就由各位网友们完成了。</p>
+<h2 id="验证码的奇思妙用">验证码的奇思妙用</h2>
+<p>现在，我们仍然能看到有很多和验证码相关的奇思妙用。其中有些是用来创业的，另一些则试图为社会谋福祉。创业者们将广告融入到验证码中，尽管方式不同，但基本原理都是通过用户关注和输入广告上的特殊文字进行宣传。为社会谋福祉的形式则不尽相同，最著名的就是我们之前提到的用来识别英文古籍扫描件的reCAPTCHA 服务。</p>
+<p>无论哪种目的、哪种方式，将分散的人类识别普通验证码的劳动加以整合利用是一件对人类有益的事。有人对于验证码应用提出了如下几点设想：</p>
+<p><strong>单问题调查问卷</strong></p>
+<p>以问卷中一个问题有2个选项为例，可以通过在两个选项中都随机选择一部分文字作为用户需要输入的验证关键字，用户输入哪个选项的都可以，这种选择就代表了其对相应选项的选择。</p>
+<p><strong>识别手工填写的单据中的单据号</strong></p>
+<p>目前还有很多组织在使用手工填写的单据，然而如何管理这些单据却成了一个大问题，特别是在单据数量十分巨大时，查找一张旧单据可能耗费很大功夫。</p>
+<p>这时候人们会自然而然地想到用计算机来管理，然而计算机必须得知道单据的单据号才能对其进行有效的管理和检索，因此识别手写单据号成为了阻碍这一进程的大问题。因此可以效仿reCAPTCHA 的服务方式，借助网民的力量来识别大量计算机难以识别的单据号。</p>
+<p>不知道关于验证码，大家还有什么其他的想法呢？</p>
+
+      
+    </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/01/17/verification-code-generate-by-opensource-component/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">漫谈验证码（二） 使用开源组件生成验证码</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="wonderful-use-of-verification-code" data-title="漫谈验证码（三） 验证码的奇思妙用" data-url="http://zhangyigong.github.com/2015/01/19/wonderful-use-of-verification-code/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zhangyigonggithub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 张一弓  2015 
+    	</div>
+      	<div class="footer-right">
+      		Email：zhang_1g@163.com
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+  <script src="/js/main.js" type="text/javascript"></script>
+
+
+  </div>
+</body>
+</html>
