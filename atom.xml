@@ -4,7 +4,7 @@
   <subtitle><![CDATA[眯着眼睛安静思考世界的攻城狮]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-01-19T14:41:12.631Z</updated>
+  <updated>2015-01-20T05:28:47.447Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -15,12 +15,43 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[使用Github Pages 搭建独立博客的后续过程]]></title>
+    <link href="http://zhangyigong.github.com/2015/01/20/follow-up-process-of-bulid-blog/"/>
+    <id>http://zhangyigong.github.com/2015/01/20/follow-up-process-of-bulid-blog/</id>
+    <published>2015-01-20T04:47:08.000Z</published>
+    <updated>2015-01-20T05:28:12.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/godaddy-logo.jpg" alt="使用Github Pages 搭建独立博客的后续过程"></p>
+<h2 id="内容回顾">内容回顾</h2>
+<p>在<a href="http://zhangyigong.github.io/2015/01/13/bulid-blog-with-githubpages-and-hexo/" target="_blank" rel="external">使用Github Pages 和Hexo 搭建独立博客</a>一文中，我们逐步讲解了如何搭建一个自己的独立博客，包括环境的安装和配置，博客主题的选择和修改，添加RSS 订阅和第三方系统等等。</p>
+<p>关于之前的内容，还有一篇很不错的文章<a href="http://blog.fens.me/hexo-blog-github/" target="_blank" rel="external">Hexo在github上构建免费的Web应用</a>，说的比较齐全，评论里面也有一些常见问题的解决方法，这里就不一一列举了。</p>
+<p>但是到目前为止，要成为一个真正意义上的独立博客，我们还有一些工作需要做，下面就是关于后续工作的一些记录。</p>
+<a id="more"></a>
+
+<h2 id="域名申请">域名申请</h2>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://zhang1g.qiniudn.com/godaddy-logo.jpg" alt="使用Github Pages 搭建独立博客的后续过程"></p>
+<h2 id="内容回顾">内容回顾</h2>
+<p>在<a href="http://zhangyigong.github.io/2015/01/13/bulid-blog-with-githubpages-and-hexo/" target="_blank" rel="external">使用Github Pages 和Hexo 搭建独立博客</a>一文中，我们逐步讲解了如何搭建一个自己的独立博客，包括环境的安装和配置，博客主题的选择和修改，添加RSS 订阅和第三方系统等等。</p>
+<p>关于之前的内容，还有一篇很不错的文章<a href="http://blog.fens.me/hexo-blog-github/" target="_blank" rel="external">Hexo在github上构建免费的Web应用</a>，说的比较齐全，评论里面也有一些常见问题的解决方法，这里就不一一列举了。</p>
+<p>但是到目前为止，要成为一个真正意义上的独立博客，我们还有一些工作需要做，下面就是关于后续工作的一些记录。</p>
+]]>
+    
+    </summary>
+    
+      <category term="blog" scheme="http://zhangyigong.github.com/tags/blog/"/>
+    
+      <category term="github" scheme="http://zhangyigong.github.com/tags/github/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[漫谈验证码（三） 验证码的奇思妙用]]></title>
     <link href="http://zhangyigong.github.com/2015/01/19/wonderful-use-of-verification-code/"/>
     <id>http://zhangyigong.github.com/2015/01/19/wonderful-use-of-verification-code/</id>
     <published>2015-01-19T12:13:43.000Z</published>
-    <updated>2015-01-19T13:23:11.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/wondeerful-use-of-verify-code.jpg" alt="验证码的奇思妙用"></p>
+    <updated>2015-01-20T04:49:30.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/verify-code-thinking.png" alt="验证码的奇思妙用"></p>
 <h2 id="验证码的起源">验证码的起源</h2>
 <p>在刚开始有Internet 的时候，是没有验证码这种东西的，但是这导致了杯具的发生，垃圾评论和垃圾邮件可以轻松通过任何一个网站的注册程序，通过各种方式轰炸人民群众的眼球。</p>
 <p>最先想要解决这一问题的是<strong>雅虎</strong>，作为互联网时代早期最重要的免费邮件提供商，他们一方面要解决用户们每天遇到的数以百计的垃圾邮件轰炸，另一方面，他们自己的免费邮箱，恰恰又是垃圾邮件的最爱，因为耗费无数资源所阻止的垃圾邮件，都来自于自己的服务器。这让雅虎开始认真考虑如何解决人机辨识问题。</p>
@@ -48,10 +79,24 @@
 <p><strong>识别手工填写的单据中的单据号</strong></p>
 <p>目前还有很多组织在使用手工填写的单据，然而如何管理这些单据却成了一个大问题，特别是在单据数量十分巨大时，查找一张旧单据可能耗费很大功夫。</p>
 <p>这时候人们会自然而然地想到用计算机来管理，然而计算机必须得知道单据的单据号才能对其进行有效的管理和检索，因此识别手写单据号成为了阻碍这一进程的大问题。因此可以效仿reCAPTCHA 的服务方式，借助网民的力量来识别大量计算机难以识别的单据号。</p>
+<p><strong>“网络打码”工</strong></p>
+<p>有一些人把验证码通过某些技术转移到一个自制的打码软件上，一个闲着无聊的网络打码工，就下载这个小程序； 这边机器自动注册，出来的验证码，就由这些打码工不停的输入弹出的验证码，然后传输到自动注册机器，完成验证，注册（购买）成功。这也是手工破解验证码常见的一种方式。</p>
+<p><img src="http://zhang1g.qiniudn.com/verify-code-person.jpg" alt="人工打码破解验证码工具"></p>
+<p><strong>利用验证码进行广告盈利</strong></p>
+<p>随着验证码的发展，验证码也带来了更多的可能性，比如通过广告盈利的机遇，下面这则验证码示范了利用验证码展示广告。但遗憾的是由于其不具有规模性，仍受到穷举攻击的威胁。</p>
+<p><img src="http://zhang1g.qiniudn.com/verify-code-ad.png" alt="广告验证码"></p>
 <p>不知道关于验证码，大家还有什么其他的想法呢？</p>
+<h2 id="验证码的未来">验证码的未来</h2>
+<p>较早前就有报道指出， Google 正在测试一种新的验证码技术，这种验证码技术不像传统验证码系统要求输入文字，而是要求用户将图形旋转到正确的方向。</p>
+<p>比较常见的还有另外一种基于图像的验证码，如下所示</p>
+<p><img src="http://zhang1g.qiniudn.com/verify-code-picture.jpg" alt="基于图像的验证码"></p>
+<p>当然，验证码还可以走的更远，假如用户有视力障碍，他应该可以选择通过聆听验证码音频的方式完成验证，等等。</p>
+<p>关于验证码还有一些有意思的内容，大家可以参考文章<a href="http://www.36kr.com/p/119746.html" target="_blank" rel="external">请证明你是人：验证码输入的游戏化</a>,以及另外一篇<a href="http://www.36kr.com/p/95295.html" target="_blank" rel="external">继古籍文字后，Google利用reCAPTCHA验证码技术识别Google街景的街道地址和名称</a>。</p>
+<h2 id="总结">总结</h2>
+<p>验证码技术是一种计算机技术发展下的矛盾产物，人类渴望计算机能够通过自动化的过程完成更多的任务，却同样要防止计算机被利用在破坏与恶意的用途当中。随着人工智能领域的研究成果越来越先进，计算机将变得越来越通情达理，不知道是不是会有一天计算机能够通过验证码验证，那时候我们又该如何区分人类和计算机呢？</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="http://zhang1g.qiniudn.com/wondeerful-use-of-verify-code.jpg" alt="验证码的奇思妙用"></p>
+    <![CDATA[<p><img src="http://zhang1g.qiniudn.com/verify-code-thinking.png" alt="验证码的奇思妙用"></p>
 <h2 id="验证码的起源">验证码的起源</h2>
 <p>在刚开始有Internet 的时候，是没有验证码这种东西的，但是这导致了杯具的发生，垃圾评论和垃圾邮件可以轻松通过任何一个网站的注册程序，通过各种方式轰炸人民群众的眼球。</p>
 <p>最先想要解决这一问题的是<strong>雅虎</strong>，作为互联网时代早期最重要的免费邮件提供商，他们一方面要解决用户们每天遇到的数以百计的垃圾邮件轰炸，另一方面，他们自己的免费邮箱，恰恰又是垃圾邮件的最爱，因为耗费无数资源所阻止的垃圾邮件，都来自于自己的服务器。这让雅虎开始认真考虑如何解决人机辨识问题。</p>
@@ -68,7 +113,7 @@
     <link href="http://zhangyigong.github.com/2015/01/17/verification-code-generate-by-opensource-component/"/>
     <id>http://zhangyigong.github.com/2015/01/17/verification-code-generate-by-opensource-component/</id>
     <published>2015-01-17T08:53:28.000Z</published>
-    <updated>2015-01-19T11:50:51.000Z</updated>
+    <updated>2015-01-20T04:41:32.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/kaptcha-verify-code1.gif" alt="使用开源组件生成验证码"></p>
 <h2 id="开源组件简介">开源组件简介</h2>
 <p>在<a href="http://zhangyigong.github.io/2015/01/16/verification-code-generated-by-java-servlet/" target="_blank" rel="external">漫谈验证码（一） 使用Servlet 生成验证码</a>一文中，我们介绍了使用Servlet 生成验证码的方法。但是生成的验证码图片比较简单，使用图像识别的方法还是很容易破解，因此我们在实际应用中希望能够生成比较复杂的验证码图片，比如汉字、算式等，并且添加一些干扰。</p>
