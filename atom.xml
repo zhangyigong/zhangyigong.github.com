@@ -4,7 +4,7 @@
   <subtitle><![CDATA[眯着眼睛安静思考世界的攻城狮]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-01-26T09:39:37.574Z</updated>
+  <updated>2015-01-26T13:23:28.429Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://zhangyigong.github.com/2015/01/20/follow-up-process-of-bulid-blog/"/>
     <id>http://zhangyigong.github.com/2015/01/20/follow-up-process-of-bulid-blog/</id>
     <published>2015-01-20T04:47:08.000Z</published>
-    <updated>2015-01-26T09:39:19.000Z</updated>
+    <updated>2015-01-26T13:22:44.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/blog2.jpg" alt="使用Github Pages 搭建独立博客的后续过程"></p>
 <h2 id="内容回顾">内容回顾</h2>
 <p>在<a href="http://zhangyigong.github.io/2015/01/13/bulid-blog-with-githubpages-and-hexo/" target="_blank" rel="external">使用Github Pages 和Hexo 搭建独立博客</a>一文中，我们逐步讲解了如何搭建一个自己的独立博客，包括环境的安装和配置，博客主题的选择和修改，添加RSS 订阅和第三方系统等等。</p>
@@ -72,7 +72,7 @@
 <p>在生成站点地图之后，我们需要把网站提交到百度进行收录。我们需要以下工具</p>
 <ul>
 <li>百度账号</li>
-<li>加入百度站长平台</li>
+<li>百度站长平台</li>
 </ul>
 <p>用百度账号登陆<a href="http://zhanzhang.baidu.com/site/index" target="_blank" rel="external">百度站长平台</a>，并添加站点，站点的URL 就是我们申请的域名，添加成功后需要验证网站</p>
 <p><img src="http://zhang1g.qiniudn.com/verify-blogsite.PNG" alt="百度站长工具验证网站"></p>
@@ -83,11 +83,9 @@
 <h2 id="搭建博客时出现的一点小问题">搭建博客时出现的一点小问题</h2>
 <p>在使用Github Pages 搭建完成博客之后，有一段时间使用 <code>hexo d</code> 将博客内容更新到Github 上，但是访问博客一直显示的是旧的内容，我很奇怪，后来查看了注册邮箱，发现收到了Github 发送的标题为 <code>Page build failure</code> 的邮件，内容如下</p>
 <p><img src="http://zhang1g.qiniudn.com/page-bulid-failure-email.PNG" alt="Page bulid failure邮件内容"></p>
-<p>大意是说页面站点指向了一个过时的IP 地址，关于这部分可以按照邮件提供的链接地址查看详细信息。</p>
+<p>大意是说页面站点指向了一个过时的IP 地址，关于这部分可以按照邮件提供的链接地址查看详细信息。后来在DNSPod 上修改了A 记录对应的IP 地址，之后就一切正常了，目前Github Pages 提供的IP 地址是 <code>192.30.252.153</code>。下面是邮件中给出的两个链接。</p>
 <p><a href="https://github.com/blog/1917-github-pages-legacy-ip-deprecation" target="_blank" rel="external">GitHub Pages Legacy IP Deprecation</a></p>
 <p><a href="https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/" target="_blank" rel="external">Setting up a custom domain with GitHub Pages</a></p>
-<p>后来在DNSPod 上修改了A 记录对应的IP 地址，之后就一切正常了，目前Github Pages 提供的IP 地址是 <code>192.30.252.153</code>。</p>
-<p>可以参考文章<a href="http://seanlook.com/2014/11/08/github-mail-warning-dns/" target="_blank" rel="external">完全解决Github Pages邮件两次warning（DNS解析问题）</a>，其中也提到了上述问题。</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p><img src="http://zhang1g.qiniudn.com/blog2.jpg" alt="使用Github Pages 搭建独立博客的后续过程"></p>
