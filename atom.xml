@@ -4,7 +4,7 @@
   <subtitle><![CDATA[眯着眼睛安静思考世界的攻城狮]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-01-26T08:31:36.066Z</updated>
+  <updated>2015-01-26T09:39:37.574Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://zhangyigong.github.com/2015/01/20/follow-up-process-of-bulid-blog/"/>
     <id>http://zhangyigong.github.com/2015/01/20/follow-up-process-of-bulid-blog/</id>
     <published>2015-01-20T04:47:08.000Z</published>
-    <updated>2015-01-26T08:16:16.000Z</updated>
+    <updated>2015-01-26T09:39:19.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/blog2.jpg" alt="使用Github Pages 搭建独立博客的后续过程"></p>
 <h2 id="内容回顾">内容回顾</h2>
 <p>在<a href="http://zhangyigong.github.io/2015/01/13/bulid-blog-with-githubpages-and-hexo/" target="_blank" rel="external">使用Github Pages 和Hexo 搭建独立博客</a>一文中，我们逐步讲解了如何搭建一个自己的独立博客，包括环境的安装和配置，博客主题的选择和修改，添加RSS 订阅和第三方系统等等。</p>
@@ -42,18 +42,12 @@
 <p><strong>修改Godday 的Nameservers</strong></p>
 <p>首先需要在Godday 官网上修改DNS 地址，更改Godaddy 的Nameservers 为DNSpod 的NameServers。</p>
 <ol>
-<li><p>到Godaddy 首页登录，输入用户名和密码，然后点击 <code>Login In</code> 登录</p>
-</li>
-<li><p>登录成功之后，点击右面的 <code>My Account</code> 进入到Godaddy 的账户概述页面</p>
-</li>
-<li><p>点击右面的 <code>Domain Manager</code> 进入到Godaddy 的域名管理界面</p>
-</li>
-<li><p>点击需要进行管理操作的域名进入单个域名的管理界面，点击上部的 <code>Nameservers</code> ,出现下拉菜单，然后选择 <code>Set Nameservers</code> 来管理Name Server 记录</p>
-</li>
-<li><p>选择 <code>I have specific nameservers for my domains</code> , 在这里可以把我们在其它域名解析服务提供商提供的NS地址，如DNSPod。填好之后点击”OK”继续</p>
-</li>
-<li><p>到此修改NS记录就已经成功了，现在就可以到第三方的界面去管理DNS记录了，比如添加A记录等等。</p>
-</li>
+<li>到Godaddy 首页登录，输入用户名和密码，然后点击 <code>Login In</code> 登录</li>
+<li>登录成功之后，点击右面的 <code>My Account</code> 进入到Godaddy 的账户概述页面</li>
+<li>点击右面的 <code>Domain Manager</code> 进入到Godaddy 的域名管理界面</li>
+<li>点击需要进行管理操作的域名进入单个域名的管理界面，点击上部的 <code>Nameservers</code> ,出现下拉菜单，然后选择 <code>Set Nameservers</code> 来管理Name Server 记录</li>
+<li>选择 <code>I have specific nameservers for my domains</code> , 在这里可以把我们在其它域名解析服务提供商提供的NS地址，如DNSPod。填好之后点击”OK”继续</li>
+<li>到此修改NS记录就已经成功了，现在就可以到第三方的界面去管理DNS记录了，比如添加A记录等等。</li>
 </ol>
 <p><img src="http://zhang1g.qiniudn.com/update-dns-servers.png" alt="修改Godday 的Nameservers"></p>
 <p><strong>使用DNSPod 进行域名解析</strong></p>
@@ -73,7 +67,27 @@
 <p>之后打开Git Bash，输入下面的命令安装插件即可。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="operator"><span class="keyword">install</span> hexo-generator-sitemap</span></div></pre></td></tr></table></figure>
 
-<p>经过上述工作之后，</p>
+<p>经过上述工作，站点地图就已经生成了，我们可以执行命令 <code>hexo g</code> 和 <code>hexo s</code> 并在浏览器中输入 <code>http://localhost:4000/sitemap.xml</code> 来进行测试。</p>
+<p>在下一次发布更新到Github 上时，相应的站点地图也会更新。</p>
+<p>在生成站点地图之后，我们需要把网站提交到百度进行收录。我们需要以下工具</p>
+<ul>
+<li>百度账号</li>
+<li>加入百度站长平台</li>
+</ul>
+<p>用百度账号登陆<a href="http://zhanzhang.baidu.com/site/index" target="_blank" rel="external">百度站长平台</a>，并添加站点，站点的URL 就是我们申请的域名，添加成功后需要验证网站</p>
+<p><img src="http://zhang1g.qiniudn.com/verify-blogsite.PNG" alt="百度站长工具验证网站"></p>
+<p>这里我们选择 <code>文件验证</code> 方式，将下载的文件放到 <code>HexoBlog</code> 下的 <code>public</code> 文件夹内，打开Git Bash 执行命令 <code>hexo d</code>，更新Github 上的内容，稍等片刻就能通过浏览器访问验证文件的内容，此时点击完成验证即可。</p>
+<p>添加网站之后选择 <code>网站分析</code> 下的 <code>抓取诊断</code>，输入URL，进行诊断</p>
+<p><img src="http://zhang1g.qiniudn.com/zhuaqu-zhenduan.PNG" alt="百度站长工具抓取诊断"></p>
+<p>诊断没有问题之后选择 <code>数据提交</code> 下的 <code>URL提交</code> ，输入域名，点击提交按钮，一段时间之后，我们的博客就能够被百度搜索到了。</p>
+<h2 id="搭建博客时出现的一点小问题">搭建博客时出现的一点小问题</h2>
+<p>在使用Github Pages 搭建完成博客之后，有一段时间使用 <code>hexo d</code> 将博客内容更新到Github 上，但是访问博客一直显示的是旧的内容，我很奇怪，后来查看了注册邮箱，发现收到了Github 发送的标题为 <code>Page build failure</code> 的邮件，内容如下</p>
+<p><img src="http://zhang1g.qiniudn.com/page-bulid-failure-email.PNG" alt="Page bulid failure邮件内容"></p>
+<p>大意是说页面站点指向了一个过时的IP 地址，关于这部分可以按照邮件提供的链接地址查看详细信息。</p>
+<p><a href="https://github.com/blog/1917-github-pages-legacy-ip-deprecation" target="_blank" rel="external">GitHub Pages Legacy IP Deprecation</a></p>
+<p><a href="https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/" target="_blank" rel="external">Setting up a custom domain with GitHub Pages</a></p>
+<p>后来在DNSPod 上修改了A 记录对应的IP 地址，之后就一切正常了，目前Github Pages 提供的IP 地址是 <code>192.30.252.153</code>。</p>
+<p>可以参考文章<a href="http://seanlook.com/2014/11/08/github-mail-warning-dns/" target="_blank" rel="external">完全解决Github Pages邮件两次warning（DNS解析问题）</a>，其中也提到了上述问题。</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p><img src="http://zhang1g.qiniudn.com/blog2.jpg" alt="使用Github Pages 搭建独立博客的后续过程"></p>
