@@ -17,7 +17,10 @@
 在使用Github Pages 和Hexo 搭建独立博客一文中，我们逐步讲解了如何搭建一个自己的独立博客，包括环境的安装和配置，博客主题的选择和修改，添加RSS 订阅和第三方系统等等。
 关于之前的内容，还有一篇很不错的文章Hexo在github上构建免费的Web应用，说的比较齐全，评论里面也有一些常见问题的解决方法，这里就不一一列举了。
 但是到目前为止，要成为一个真正意义上的独立博客，">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/blog2.jpg">
 <meta property="og:image" content="http://zhang1g.qiniudn.com/godaddy-logo.jpg">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/update-dns-servers.png">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/dnspod-set.PNG">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Github Pages 搭建独立博客的后续过程">
 <meta name="twitter:description" content="内容回顾
@@ -240,7 +243,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://zhang1g.qiniudn.com/godaddy-logo.jpg" alt="使用Github Pages 搭建独立博客的后续过程"></p>
+        <p><img src="http://zhang1g.qiniudn.com/blog2.jpg" alt="使用Github Pages 搭建独立博客的后续过程"></p>
 <h2 id="内容回顾">内容回顾</h2>
 <p>在<a href="http://zhangyigong.github.io/2015/01/13/bulid-blog-with-githubpages-and-hexo/" target="_blank" rel="external">使用Github Pages 和Hexo 搭建独立博客</a>一文中，我们逐步讲解了如何搭建一个自己的独立博客，包括环境的安装和配置，博客主题的选择和修改，添加RSS 订阅和第三方系统等等。</p>
 <p>关于之前的内容，还有一篇很不错的文章<a href="http://blog.fens.me/hexo-blog-github/" target="_blank" rel="external">Hexo在github上构建免费的Web应用</a>，说的比较齐全，评论里面也有一些常见问题的解决方法，这里就不一一列举了。</p>
@@ -248,6 +251,52 @@
 <a id="more"></a>
 
 <h2 id="域名申请">域名申请</h2>
+<p>在很多地方都可以购买域名，比如说<a href="https://www.namecheap.com/" target="_blank" rel="external">NAMECHEAP</a> 还有<a href="http://www.namesilo.com/" target="_blank" rel="external">NAMESILO</a>，我是从<a href="https://www.godaddy.com/" target="_blank" rel="external">GODADDY</a> 上购买的这个域名，主要是因为它支持支付宝支付，支付比较方便。</p>
+<p><img src="http://zhang1g.qiniudn.com/godaddy-logo.jpg" alt="从Godday 上购买域名"></p>
+<p>网上有很多在Godday 上购买域名的教程，但是随着Godday 网站的改版，有一些教程已经不适用了，这里我列出一些针对新版的购买教程。</p>
+<p><a href="http://www.admin5.com/article/20131014/527495.shtml" target="_blank" rel="external">2013年10月新版godaddy域名注册图文教程</a></p>
+<p><a href="http://xianhuo.org/godaddy-yumingzhuce-xinban.html" target="_blank" rel="external">GODADDY域名注册教程 新版</a></p>
+<p>另外，在购买域名时可以使用优惠码，能省掉一些钱，优惠码在网上搜有很多，想要的可以自己找一下。使用优惠码后没有优惠或者没有出现支付宝支付的选项，可以尝试清除浏览器cookies 再进行尝试。付款之后记得在自己的注册邮箱中查看激活邮件，并点击激活链接激活域名。</p>
+<h2 id="域名解析">域名解析</h2>
+<p>申请域名后，域名解析的工作可以登陆Godday 官网并进行操作，但是由于Godday 没有中文站，所以操作起来会有一些不方便。具体的Godday 域名解析教程可以参考</p>
+<p><a href="http://jingyan.baidu.com/article/47a29f243a511bc014239920.html" target="_blank" rel="external">2013新版godaddy域名解析教程</a></p>
+<p><a href="http://godaddy.idcspy.com/dns" target="_blank" rel="external">2014年最新Godaddy域名解析教程</a></p>
+<p>我使用的是<a href="https://www.dnspod.cn/" target="_blank" rel="external">DNSPod</a> 进行的域名解析，要比在Godday 官网上稍微简单一些，下面是具体的操作步骤。</p>
+<p><strong>修改Godday 的Nameservers</strong></p>
+<p>首先需要在Godday 官网上修改DNS 地址，更改Godaddy 的Nameservers 为DNSpod 的NameServers。</p>
+<ol>
+<li><p>到Godaddy 首页登录，输入用户名和密码，然后点击 <code>Login In</code> 登录</p>
+</li>
+<li><p>登录成功之后，点击右面的 <code>My Account</code> 进入到Godaddy 的账户概述页面</p>
+</li>
+<li><p>点击右面的 <code>Domain Manager</code> 进入到Godaddy 的域名管理界面</p>
+</li>
+<li><p>点击需要进行管理操作的域名进入单个域名的管理界面，点击上部的 <code>Nameservers</code> ,出现下拉菜单，然后选择 <code>Set Nameservers</code> 来管理Name Server 记录</p>
+</li>
+<li><p>选择 <code>I have specific nameservers for my domains</code> , 在这里可以把我们在其它域名解析服务提供商提供的NS地址，如DNSPod。填好之后点击”OK”继续</p>
+</li>
+<li><p>到此修改NS记录就已经成功了，现在就可以到第三方的界面去管理DNS记录了，比如添加A记录等等。</p>
+</li>
+</ol>
+<p><img src="http://zhang1g.qiniudn.com/update-dns-servers.png" alt="修改Godday 的Nameservers"></p>
+<p><strong>使用DNSPod 进行域名解析</strong></p>
+<p>修改完毕之后，登录DNSPod，导入新申请的域名，修改A 记录，指向Github Pages 服务对应的主机IP。修改www CNAME 对应的记录是为Github 注册的仓库，也就是之前我们访问博客所使用的Github 二级域名。设置成功后如下所示</p>
+<p><img src="http://zhang1g.qiniudn.com/dnspod-set.PNG" alt="使用DNSpod 进行域名绑定"></p>
+<p>如博客不能登录，或者博客更新发布不成功，有可能是Github 更改了空间服务的IP 地址，记得及时到在GitHub Pages 查看最新的IP。关于这一点详细内容，在文章的最后我会提到。</p>
+<p>关于使用DNSPod 的其他内容可以参考<a href="https://support.dnspod.cn/Kb/showarticle/tsid/42/" target="_blank" rel="external">DNSPod提供的官方帮助文档</a>，其中包含了一些常见的问题。</p>
+<p><strong>在Github Pages 中设置CNAME</strong></p>
+<p>在Repository的根目录下面，新建一个名为CNAME 的文本文件，里面写入要绑定的域名，比如 <code>zhang1g.info</code> 。对应到我们搭建的个人博客，就是 <code>HexoBlog</code> 文件夹下的 <code>source</code> 文件夹。</p>
+<p>添加之后，使用hexo 命令将博客系统重新发布到Github 上，就可以使用新注册的域名访问自己的博客了。</p>
+<h2 id="添加站点地图">添加站点地图</h2>
+<p>到目前为止，我们的博客还没有被别人访问产生流量，接下来我们需要添加网站的站点地图，并把网站提交到百度收录，这样才能够通过搜索引擎搜到我们的博客。</p>
+<p>使用Hexo 添加站点地图非常简单，在 <code>HexoBlog</code> 文件夹下，找到 <code>_config.yml</code> 文件，在其中添加内容</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="label">theme:</span> yilia</div><div class="line"><span class="label">exclude_generator:</span></div><div class="line"><span class="label">plugins:</span></div><div class="line">- hexo-generator-feed</div><div class="line">- hexo-generator-sitemap</div><div class="line"></div><div class="line"><span class="preprocessor">#sitemap</span></div><div class="line"><span class="label">sitemap:</span></div><div class="line">  path: sitemap.xml</div></pre></td></tr></table></figure>
+
+<p>我们曾经使用同样的方法添加过RSS 插件。</p>
+<p>之后打开Git Bash，输入下面的命令安装插件即可。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="operator"><span class="keyword">install</span> hexo-generator-sitemap</span></div></pre></td></tr></table></figure>
+
+<p>经过上述工作之后，</p>
 
       
     </div>
