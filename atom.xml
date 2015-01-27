@@ -4,7 +4,7 @@
   <subtitle><![CDATA[眯着眼睛安静思考世界的攻城狮]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-01-27T08:14:34.450Z</updated>
+  <updated>2015-01-27T08:17:15.472Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[SQL基础（二）SQL 查询基础]]></title>
+    <title><![CDATA[SQL 基础（二）SQL 查询基础]]></title>
     <link href="http://zhangyigong.github.com/2015/01/27/sql-query-base-learn/"/>
     <id>http://zhangyigong.github.com/2015/01/27/sql-query-base-learn/</id>
     <published>2015-01-27T07:42:22.000Z</published>
-    <updated>2015-01-27T08:06:11.000Z</updated>
+    <updated>2015-01-27T08:16:57.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/sql-base-learn2.jpg" alt="《SQL 基础教程》图书封面"></p>
 <h2 id="前言">前言</h2>
 ]]></content>
@@ -38,14 +38,14 @@
   </entry>
   
   <entry>
-    <title><![CDATA[SQL基础教程（番外篇）：解决Mysql的中文乱码问题]]></title>
+    <title><![CDATA[SQL 基础教程（番外篇）解决Mysql 的中文乱码问题]]></title>
     <link href="http://zhangyigong.github.com/2015/01/27/solve-mysql-messy-code/"/>
     <id>http://zhangyigong.github.com/2015/01/27/solve-mysql-messy-code/</id>
     <published>2015-01-27T07:17:15.000Z</published>
-    <updated>2015-01-27T08:03:20.000Z</updated>
+    <updated>2015-01-27T08:16:56.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/solve-mysql-messy-code.jpeg" alt="解决Mysql的中文乱码问题"></p>
 <h2 id="前言">前言</h2>
-<p>在<a href="http://zhangyigong.github.com/2015/01/27/database-and-sql/" target="_blank" rel="external">SQL基础（一） 数据库和SQL</a>一文中，最后我们使用Mysql 在向表中插入汉字时出现了乱码。在实际工作中，乱码问题也时常发生，令人头痛。</p>
+<p>在<a href="http://zhangyigong.github.com/2015/01/27/database-and-sql/" target="_blank" rel="external">SQL 基础（一） 数据库和SQL</a>一文中，最后我们使用Mysql 在向表中插入汉字时出现了乱码。在实际工作中，乱码问题也时常发生，令人头痛。</p>
 <p>这里我希望通过这篇博客来捋清楚使用Mysql 时产生乱码问题的前因后果，以及相应的解决方法。</p>
 <a id="more"></a>
 
@@ -53,7 +53,7 @@
     <summary type="html">
     <![CDATA[<p><img src="http://zhang1g.qiniudn.com/solve-mysql-messy-code.jpeg" alt="解决Mysql的中文乱码问题"></p>
 <h2 id="前言">前言</h2>
-<p>在<a href="http://zhangyigong.github.com/2015/01/27/database-and-sql/" target="_blank" rel="external">SQL基础（一） 数据库和SQL</a>一文中，最后我们使用Mysql 在向表中插入汉字时出现了乱码。在实际工作中，乱码问题也时常发生，令人头痛。</p>
+<p>在<a href="http://zhangyigong.github.com/2015/01/27/database-and-sql/" target="_blank" rel="external">SQL 基础（一） 数据库和SQL</a>一文中，最后我们使用Mysql 在向表中插入汉字时出现了乱码。在实际工作中，乱码问题也时常发生，令人头痛。</p>
 <p>这里我希望通过这篇博客来捋清楚使用Mysql 时产生乱码问题的前因后果，以及相应的解决方法。</p>
 ]]>
     
@@ -72,7 +72,7 @@
     <link href="http://zhangyigong.github.com/2015/01/27/database-and-sql/"/>
     <id>http://zhangyigong.github.com/2015/01/27/database-and-sql/</id>
     <published>2015-01-27T02:11:48.000Z</published>
-    <updated>2015-01-27T08:13:23.000Z</updated>
+    <updated>2015-01-27T08:16:03.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/sql-base-learn2.jpg" alt="《SQL 基础教程》图书封面"></p>
 <h2 id="前言">前言</h2>
 <p>总是感觉之前学的数据库相关的知识很零散，不够系统，加之好久没有看关于SQL 的知识，不免有点生疏了，于是想找一本合适的教材回顾一下。后来找到了一本可以堪称是零基础入门的SQL 书籍，这里给大家推荐一下：</p>
@@ -290,7 +290,7 @@
 <p><img src="http://zhang1g.qiniudn.com/insert-data-to-table-shop.PNG" alt="向表Product 中插入数据"></p>
 <p>插入数据后我们通过Mysql Administrator 之类的带界面的Mysql 客户端查看我们的结果，很可惜地发现插入的汉字显示为乱码</p>
 <p><img src="http://zhang1g.qiniudn.com/inser-data-to-shop-error-code.PNG" alt="插入的汉字显示为乱码"></p>
-<p>这里我们先不做处理，在该系列博客的番外篇<a href="http://zhangyigong.github.com/2015/01/27/solve-mysql-messy-code" target="_blank" rel="external">SQL基础教程（番外篇）解决Mysql的中文乱码问题</a>中，我们会详细讲述Mysql 产生中文乱码的前因后果以及解决方法。</p>
+<p>这里我们先不做处理，在该系列博客的番外篇<a href="http://zhangyigong.github.com/2015/01/27/solve-mysql-messy-code" target="_blank" rel="external">SQL基础教程（番外篇）解决Mysql 的中文乱码问题</a>中，我们会详细讲述Mysql 产生中文乱码的前因后果以及解决方法。</p>
 <h2 id="总结">总结</h2>
 <p>这一片博客中我们简单介绍了一下为什么要使用数据库来管理数据，根据SQL 语句的类型将SQL 语句分为 DDL、DML、DCL 三类，并且对除了SQL 查询以外的其他语法做了简单的介绍，包括</p>
 <ul>
