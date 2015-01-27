@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SQL基础（一） 数据库和SQL | 张一弓的Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言
+总是感觉之前学的数据库相关的知识很零散，不够系统，加之好久没有看关于SQL 的知识，不免有点生疏了，于是想找一本合适的教材回顾一下。后来找到了一本可以堪称是零基础入门的SQL 书籍，这里给大家推荐一下：
+《SQL 基础教程》 【日】MICK 著    孙淼 罗勇 译 
+书中的SQL 都是基于标准SQL 2003编写，并且关于几个常用的RDBMS 在使用SQL 时的区别叙述的很详细，行文也很">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL基础（一） 数据库和SQL">
+<meta property="og:url" content="http://zhangyigong.github.com/2015/01/27/database-and-sql/">
+<meta property="og:site_name" content="张一弓的Blog">
+<meta property="og:description" content="前言
+总是感觉之前学的数据库相关的知识很零散，不够系统，加之好久没有看关于SQL 的知识，不免有点生疏了，于是想找一本合适的教材回顾一下。后来找到了一本可以堪称是零基础入门的SQL 书籍，这里给大家推荐一下：
+《SQL 基础教程》 【日】MICK 著    孙淼 罗勇 译 
+书中的SQL 都是基于标准SQL 2003编写，并且关于几个常用的RDBMS 在使用SQL 时的区别叙述的很详细，行文也很">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/sql-base-learn.jpg">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/net-start-mysql.PNG">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/create-table-shop.PNG">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/insert-data-to-table-shop.PNG">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/inser-data-to-shop-error-code.PNG">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL基础（一） 数据库和SQL">
+<meta name="twitter:description" content="前言
+总是感觉之前学的数据库相关的知识很零散，不够系统，加之好久没有看关于SQL 的知识，不免有点生疏了，于是想找一本合适的教材回顾一下。后来找到了一本可以堪称是零基础入门的SQL 书籍，这里给大家推荐一下：
+《SQL 基础教程》 【日】MICK 著    孙淼 罗勇 译 
+书中的SQL 都是基于标准SQL 2003编写，并且关于几个常用的RDBMS 在使用SQL 时的区别叙述的很详细，行文也很">
+
+  
+    <link rel="alternative" href="/atom.xml" title="张一弓的Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/shizi_favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  
+
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<div class="profilepic">
+			<img src="http://zhang1g.qiniudn.com/shizi.jpg">
+		</div>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lionel</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">眯着眼睛安静思考世界的攻城狮</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">-博客主页-</a></li>
+				        
+							<li><a href="/archives">-所有文章-</a></li>
+				        
+							<li><a href="/tags/读书">-读书心得-</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/zhangyigong" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/2865465100" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud">
+						<a href="/tags/blog/" style="font-size: 20.00px;">blog</a><a href="/tags/github/" style="font-size: 15.00px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/java/" style="font-size: 15.00px;">java</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/mysql/" style="font-size: 10.00px;">mysql</a><a href="/tags/opensource/" style="font-size: 10.00px;">opensource</a><a href="/tags/sql/" style="font-size: 15.00px;">sql</a><a href="/tags/web/" style="font-size: 15.00px;">web</a><a href="/tags/感悟杂谈/" style="font-size: 10.00px;">感悟杂谈</a><a href="/tags/数据库/" style="font-size: 10.00px;">数据库</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://coderq.com/">码农圈</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.paomianba.com/">泡面吧</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.tuicool.com/">推酷网</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.w3cschool.cc/">W3CSCHOOL</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.liaoxuefeng.com/">廖雪峰的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.52ml.net/">我爱机器学习</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.readfar.com/">读远电子书下载</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.36kr.com/">36氪</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.vmovier.com/">V电影</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://dianying.fm/">电影FM</a>
+			        
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					张一弓，华南理工大学13级研究生，一只倒腾 web 开发的程序猿，希望通过这个博客来记录和分享学习和生活中的点点滴滴。
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay"></div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="http://zhang1g.qiniudn.com/shizi.jpg">
+			</div>
+
+			<hgroup>
+			  <h1 class="header-author"><a href="/">Lionel</a></h1>
+			</hgroup>
+			
+			<p class="header-subtitle">眯着眼睛安静思考世界的攻城狮</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">-博客主页-</a></li>
+		        
+					<li><a href="/archives">-所有文章-</a></li>
+		        
+					<li><a href="/tags/读书">-读书心得-</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/zhangyigong" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/2865465100" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <article id="post-database-and-sql" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/01/27/database-and-sql/" class="article-date">
+  	<time datetime="2015-01-27T02:11:48.000Z" itemprop="datePublished">Jan 27</time>
+</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/">sql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书/">读书</a></li></ul>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SQL基础（一） 数据库和SQL
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://zhang1g.qiniudn.com/sql-base-learn.jpg" alt="《SQL 基础教程》图书封面"></p>
+<h2 id="前言">前言</h2>
+<p>总是感觉之前学的数据库相关的知识很零散，不够系统，加之好久没有看关于SQL 的知识，不免有点生疏了，于是想找一本合适的教材回顾一下。后来找到了一本可以堪称是零基础入门的SQL 书籍，这里给大家推荐一下：</p>
+<p>《SQL 基础教程》 【日】MICK 著    孙淼 罗勇 译 </p>
+<p>书中的SQL 都是基于标准SQL 2003编写，并且关于几个常用的RDBMS 在使用SQL 时的区别叙述的很详细，行文也很流畅，只是书中的命名都是按日文来的，不过影响不是很大。书中使用的RDBMS 是PostgreSQL，但是由于在实际中我使用Mysql 较多，所以我会主要侧重于Mysql 的相关部分。</p>
+<p>下面就开始我们的SQL 之旅了。</p>
+<a id="more"></a>
+
+<h1 id="_数据库是什么">　数据库是什么</h1>
+<p>很多人可能会觉得我们在使用计算机管理数据的时候，使用文本文件或者Excel 之类的电子表格软件不就可以了吗？为什么非要使用DBMS 这样专门的系统来管理数据呢？</p>
+<p>因为使用文本文件或者Excel 如下的缺点</p>
+<ul>
+<li>无法多人共享数据，即使文件放在连接网络的计算机上，并设置了网络共享，也存在某个用户打开文件的时候其他用户无法编辑的情况。</li>
+<li>无法提供操作大量数据所需的格式</li>
+<li>实现读写自动化需要一定的编程能力</li>
+<li>无法应对文件误删、硬盘故障等突发事件</li>
+</ul>
+<p>而DBMS 能够克服这些不足，实现多个用户简单安全地操作大量数据。</p>
+<p><strong>DBMS 和RDBMS</strong></p>
+<p>DBMS（数据库管理系统） 通过数据的保存格式进行划分，有以下5 钟类型</p>
+<ol>
+<li>层次型数据库<br>2，关系型数据库</li>
+<li>面向对象数据库</li>
+<li>XML 数据库</li>
+<li>键值存储系统（NOSQL 数据库）</li>
+</ol>
+<p>这里我们介绍的主要是RDBMS（关系数据库管理系统），不过目前随着web2.0 的快速发展，也出现了很多优秀的NOSQL 数据库，有机会再分享相关的内容。</p>
+<p>RDBMS 一般采用C/S 架构，由客户端和服务器组成，客户端向服务器发送SQL 语句，服务器进行处理，并按照语句的内容返回请求的数据，或者对存储在数据库中的内容进行更新。</p>
+<p>其中数据以二维表的形式存储在数据库服务器中，而<strong>返回的结果也是二维表的形式</strong>。另外，关系数据库必须<strong>以行（记录）为单位进行数据的读写操作</strong>。为了防止重要数据被窃取和篡改，RDBMS 只允许数据库的注册用户操作数据库，而注册用户最好设定密码。</p>
+<p>常见的RDBMS 有：</p>
+<ul>
+<li>Oracle Database</li>
+<li>SQL Server</li>
+<li>DB2</li>
+<li>PostgreSQL</li>
+<li>MySQL</li>
+</ul>
+<h1 id="SQL_概要">SQL 概要</h1>
+<p>一言以蔽之，SQL 是为了操作数据库而开发的语言。但是随着数据库的发展，出现了<strong>标准的SQL</strong> 和<strong>特定的SQL</strong>，标准的SQL 可以在不同的RDBMS 上执行，而特定的SQL 只能执行在特定的RDBMS 上执行。</p>
+<p><strong>SQL 语句及其种类</strong></p>
+<p>SQL 使用关键字、表名、列名组合成一条SQL 语句，根据指令种类的不同，可以分为以下3类</p>
+<ul>
+<li>DDL（数据定义语言）</li>
+<li>DML（数据操作语言）</li>
+<li>DCL（数据控制语言）</li>
+</ul>
+<p>DDL 用来创建或者删除数据库或者数据库中的表对象等，它包含以下几种指令</p>
+<p>CREATE：创建数据库和表等对象<br>DROP：    删除数据库和表等对象<br>ALTER：    修改数据库和表等对象的结构</p>
+<p>DML 用来查询或者变更表中的记录，它包含以下几种指令</p>
+<p>SELECT：查询表中的数据<br>INSERT：向表中插入数据<br>UPDATE：变更表中的数据<br>DELETE：删除表中的数据</p>
+<p>DCL 用来确认或者取消对数据库中的数据进行的变更。除此之外，还可以对用户权限进行设定，它包含以下几种指令</p>
+<p>COMMIT：    确认对数据库中的数据进行变更<br>ROLLBACK：    取消对数据库中的数据进行的变更<br>GRANT：        赋予用户操作权限<br>REVOKE：    取消用户操作权限</p>
+<p>上述类型的SQL 语句中，我们使用最多的是DML 类型的语句，SQL 语句都要以半角符号的分号 <code>;</code> 作为结束。</p>
+<p>而在书写SQL 语句的过程中需要注意，SQL <strong>不区分关键字、表名、列名的大小写</strong>，但是插入到表中的数据是区分大小写的。</p>
+<p>另外，SQL 语句中常数的书写方式是固定的，字符串常量要用单引号括起来，比如 <code>&#39;abc&#39;</code> ，日期类型的常量也要用单引号括起来，比如 <code>&#39;2015-01-27&#39;</code>，但是数字的常量直接书写即可，不需要任何标记。</p>
+<h2 id="表的创建">表的创建</h2>
+<p>我们以创建下面所示的商品表为例来创建所需的数据库表，这个表可以看做是某个小商店销售商品的一览表。</p>
+<table>
+<thead>
+<tr>
+<th>商品编号</th>
+<th style="text-align:right">商品名称</th>
+<th style="text-align:right">商品分类</th>
+<th style="text-align:right">销售单价</th>
+<th style="text-align:right">进货单价</th>
+<th style="text-align:center">登记日期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0001</td>
+<td style="text-align:right">T恤衫</td>
+<td style="text-align:right">衣服</td>
+<td style="text-align:right">1000</td>
+<td style="text-align:right">500</td>
+<td style="text-align:center">2009-09-20</td>
+</tr>
+<tr>
+<td>0002</td>
+<td style="text-align:right">打孔器</td>
+<td style="text-align:right">办公用品</td>
+<td style="text-align:right">500</td>
+<td style="text-align:right">320</td>
+<td style="text-align:center">2009-09-11</td>
+</tr>
+<tr>
+<td>0003</td>
+<td style="text-align:right">运动T恤</td>
+<td style="text-align:right">衣服</td>
+<td style="text-align:right">4000</td>
+<td style="text-align:right">2800</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>0004</td>
+<td style="text-align:right">猜到</td>
+<td style="text-align:right">厨房用品</td>
+<td style="text-align:right">3000</td>
+<td style="text-align:right">2800</td>
+<td style="text-align:center">2009-09-20</td>
+</tr>
+<tr>
+<td>0005</td>
+<td style="text-align:right">高压锅</td>
+<td style="text-align:right">厨房用品</td>
+<td style="text-align:right">6800</td>
+<td style="text-align:right">5000</td>
+<td style="text-align:center">2009-01-15</td>
+</tr>
+<tr>
+<td>0006</td>
+<td style="text-align:right">叉子</td>
+<td style="text-align:right">厨房用品</td>
+<td style="text-align:right">500</td>
+<td style="text-align:right"></td>
+<td style="text-align:center">2009-09-20</td>
+</tr>
+<tr>
+<td>0007</td>
+<td style="text-align:right">擦菜板</td>
+<td style="text-align:right">厨房用品</td>
+<td style="text-align:right">880</td>
+<td style="text-align:right">790</td>
+<td style="text-align:center">2008-04-28</td>
+</tr>
+<tr>
+<td>0008</td>
+<td style="text-align:right">圆珠笔</td>
+<td style="text-align:right">办公用品</td>
+<td style="text-align:right">100</td>
+<td style="text-align:right"></td>
+<td style="text-align:center">2009-11-11</td>
+</tr>
+</tbody>
+</table>
+<p>在创建表之前，需要先创建数据库，创建数据库需要使用 <code>CREATE DATABASE &lt;数据库名称&gt;</code> 语句，这里我们把数据库命名为 <code>shop</code>,则代码清单如下所示</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> shop;</span></div></pre></td></tr></table></figure>
+
+<p>在创建数据库之后，就可以在其中创建表了，创建表的CREATE TABLE 语句的语法格式如下所示</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE &lt;表名&gt;</div><div class="line">(&lt;列名<span class="number">1</span>&gt; &lt;数据类型&gt; &lt;该列所需约束&gt;,</div><div class="line">&lt;列名<span class="number">2</span>&gt; &lt;数据类型&gt; &lt;该列所需约束&gt;,</div><div class="line">&lt;列名<span class="number">3</span>&gt; &lt;数据类型&gt; &lt;该列所需约束&gt;,</div><div class="line">&lt;列名<span class="number">4</span>&gt; &lt;数据类型&gt; &lt;该列所需约束&gt;,</div><div class="line"><span class="keyword">...</span></div><div class="line">&lt;该表的约束<span class="number">1</span>&gt; &lt;该表的约束<span class="number">2</span>&gt;,<span class="keyword">...</span></div><div class="line">);</div></pre></td></tr></table></figure>
+
+<p>其中语句的主体要用半角符号的括弧括住，每一列可以添加约束，最后是表的约束。</p>
+<p>上面的商品表的创建语句如下所示</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Product (</span></div><div class="line"> product_id  		<span class="built_in">CHAR</span>(<span class="number">4</span>)  		<span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"> product_name 		<span class="built_in">VARCHAR</span>(<span class="number">100</span>) 	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"> product_category 	<span class="built_in">VARCHAR</span>(<span class="number">32</span>)		<span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"> selling_price		<span class="built_in">INTEGER</span>,</div><div class="line"> purchase_price		<span class="built_in">INTEGER</span>,</div><div class="line"> purchase_date		<span class="built_in">DATE</span>,</div><div class="line"> <span class="keyword">PRIMARY</span> <span class="keyword">KEY</span>(product_id)</div><div class="line">);</div></pre></td></tr></table></figure>
+
+<p>需要注意，我们只能使用半角的英文字母、数字、下划线（_）作为数据库、表和列的名称，其中出现的标点符号也要一律使用半角符号，否则会出错。</p>
+<p>关于数据类型的指定，这里用到了常用的CHAR、VARCHAR、INTEGER、DATE，关于其它的数据类型在用到的时候我们再细说，此处只要能够区分CHAR 是定长字符串，VARCHAR 是可变长字符串就可以了。另外Oracle 的DATE 类型除了年月日以外，还包括时分秒，这里我们只用到了日期部分。</p>
+<p>最后我们把 <code>product_id</code> 设置为表的主键，即 <code>product_id</code> 中的内容是不能重复的，可以根据该字段（列名）唯一确定一行记录。</p>
+<h2 id="表的删除">表的删除</h2>
+<p>删除表的语句非常简单，只需要一行 <code>DROP TABLE &lt;表名&gt;</code> 就可以了，如果想要删除上面我们创建的表 <code>Product</code>，只需要执行下面的语句</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> Product;</span></div></pre></td></tr></table></figure>
+
+<p>但是我们不推荐删除业务表，因为恢复起来会很麻烦，尤其是存储了大量数据的表！</p>
+<h2 id="表的更新">表的更新</h2>
+<p>表的更新有两种含义，一种指的是表结构的变化，具体来说就是字段的增加、删除和字段名称的修改，另外一种指的是表中数据的增加、删除和修改，下面我们逐一进行介绍（主要以MySQL 为例）。</p>
+<p><strong>表结构的更新</strong> </p>
+<ol>
+<li>在向表中添加一列，即添加一个新的字段时，使用 <code>ALTER TABLE</code> 语句</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> &lt;表名&gt; <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> &lt;列名&gt;;</span></div></pre></td></tr></table></figure>
+
+<ol>
+<li>删除表中的某一列可以使用下面的 <code>ALTER TABLE</code> 语句</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> &lt;表名&gt; <span class="keyword">DROP</span> <span class="keyword">COLUMN</span> &lt;列名&gt;;</span></div></pre></td></tr></table></figure>
+
+<p>删除表中的列和删除表一样，执行之后可以看做是无法恢复的，删除表中的列之后，就只能重新创建字段了。</p>
+<ol>
+<li>当我们想给表中的某一个字段重新命名时，可以使用下面的语句</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> &lt;表名&gt; <span class="keyword">RENAME</span> <span class="keyword">COLUMN</span> &lt;列名<span class="number">1</span>&gt; <span class="keyword">TO</span> &lt;列名<span class="number">2</span>&gt;;</span></div></pre></td></tr></table></figure>
+
+<p>在更新表结构时，Oracle 和SQL Server 有特定的语法需要注意</p>
+<blockquote>
+<p>使用Oracle 和SQL Server 时不用写COLUMN<br>在Oracle 中添加多列时可以使用括弧：ALTER TABLE &lt;表名&gt; ADD (&lt;列名1&gt;,&lt;列名2&gt;,…);</p>
+</blockquote>
+<p><strong>表数据的更新</strong></p>
+<ol>
+<li>向表 <code>Product</code> 中插入数据的代码如下所示</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</span></div><div class="line"></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0001'</span>,<span class="string">'T恤衫'</span>,<span class="string">'衣服'</span>,<span class="number">1000</span>,<span class="number">500</span>,<span class="string">'2009-09-20'</span>);</span></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0002'</span>,<span class="string">'打孔器'</span>,<span class="string">'办公用品'</span>,<span class="number">500</span>,<span class="number">320</span>,<span class="string">'2009-09-11'</span>);</span></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0003'</span>,<span class="string">'运动T恤'</span>,<span class="string">'衣服'</span>,<span class="number">4000</span>,<span class="number">2800</span>,<span class="literal">NULL</span>);</span></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0004'</span>,<span class="string">'菜刀'</span>,<span class="string">'厨房用品'</span>,<span class="number">3000</span>,<span class="number">2800</span>,<span class="string">'2009-09-20'</span>);</span></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0005'</span>,<span class="string">'高压锅'</span>,<span class="string">'厨房用品'</span>,<span class="number">6800</span>,<span class="number">5000</span>,<span class="string">'2009-01-15'</span>);</span></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0006'</span>,<span class="string">'叉子'</span>,<span class="string">'厨房用品'</span>,<span class="number">500</span>,<span class="literal">NULL</span>,<span class="string">'2009-09-20'</span>);</span></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0007'</span>,<span class="string">'擦菜板'</span>,<span class="string">'厨房用品'</span>,<span class="number">880</span>,<span class="number">790</span>,<span class="string">'2008-04-28'</span>);</span></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0008'</span>,<span class="string">'圆珠笔'</span>,<span class="string">'办公用品'</span>,<span class="number">100</span>,<span class="literal">NULL</span>,<span class="string">'2009-11-11'</span>);</span></div><div class="line"></div><div class="line"><span class="operator"><span class="keyword">COMMIT</span>;</span></div></pre></td></tr></table></figure>
+
+
+
+<p>使用插入行的指令语句是 <code>INSERT</code>，开头的 <code>START TRANSACTION;</code> 是开始插入行的指令语句，<code>COMMIT;</code> 则是确定行插入的指令语句。</p>
+<p>开始插入行的指令语句中，不同的RDBMS 略有不同</p>
+<blockquote>
+<p>Oracle 和DB2 中，无需使用 START TRANSACTION 语句<br>SQL Server 和 PostgreSQL 则要使用 BEGIN TRANSACTION 语句</p>
+</blockquote>
+<ol>
+<li>修改表中符合要求的记录的值，需要用到SQL 查询，SQL 查询是SQL 语法中最重要的部分，我们之后会详细讲解，这里我们只是列出修改记录值的通用语法规则，复杂的查询语句可能还会用到表别名。</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UPDATE &lt;表名&gt; SET <span class="string">'列名1'</span> = <span class="string">'xxx'</span> WHERE <span class="keyword">...</span>;</div></pre></td></tr></table></figure>
+
+<ol>
+<li>选择性地删除表中的一些记录（行）也会用到SQL 查询，它的语法如下所示</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DELETE * FROM &lt;表名&gt; WHERE <span class="keyword">...</span>;</div></pre></td></tr></table></figure>
+
+<p><strong>表名的变更</strong></p>
+<p>有时候我们在创建一个表并使用一段时间之后，可能会觉得表名不是很合适，需要修改，那么怎么办呢？</p>
+<p>可以使用 <code>RENAME</code> 指令来解决这样的问题，但是不同的数据库使用时略有差异。</p>
+<blockquote>
+<p>Oracle,PostgreSQL : ALTER TABLE Product RENAME TO Item;<br>DB2:                  RENAME TABLE Product TO Item;<br>SQL Server:          sp_rename ‘Product’ , ‘Item’;<br>Mysql:              RENAME TABLE Product TO Item;</p>
+</blockquote>
+<h2 id="实际操作">实际操作</h2>
+<p>针对上面的内容，我们以Windows 下的Mysql5.5 为例进行具体操作，步骤如下</p>
+<ol>
+<li>打开CMD 命令窗口，执行 <code>net start mysql</code> 开启MySQL 服务；</li>
+</ol>
+<p><img src="http://zhang1g.qiniudn.com/net-start-mysql.PNG" alt="开启Mysql 服务"></p>
+<ol>
+<li>打开Mysql 命令行客户端，输入密码，执行下面的指令，注意需要使用 <code>use &lt;数据库名&gt;</code> 来切换数据库。</li>
+</ol>
+<p><img src="http://zhang1g.qiniudn.com/create-table-shop.PNG" alt="创建数据库shop 以及表Product"></p>
+<p><img src="http://zhang1g.qiniudn.com/insert-data-to-table-shop.PNG" alt="向表Product 中插入数据"></p>
+<p>插入数据后我们通过Mysql Administrator 之类的带界面的Mysql 客户端查看我们的结果，很可惜地发现插入的汉字显示为乱码</p>
+<p><img src="http://zhang1g.qiniudn.com/inser-data-to-shop-error-code.PNG" alt="插入的汉字显示为乱码"></p>
+<p>这里我们先不做处理，在该系列博客的番外篇<a href="http://zhangyigong.github.com/2015/01-27/solve-mysql-messy-code" target="_blank" rel="external">SQL基础教程-番外篇：解决Mysql的中文乱码之道</a>中，我们会详细讲述Mysql 产生中文乱码的前因后果以及解决方法。</p>
+<h2 id="总结">总结</h2>
+<p>这一片博客中我们简单介绍了一下为什么要使用数据库来管理数据，根据SQL 语句的类型将SQL 语句分为 DDL、DML、DCL 三类，并且对除了SQL 查询以外的其他语法做了简单的介绍，包括</p>
+<ul>
+<li>数据库和表的建立</li>
+<li>表的删除</li>
+<li>表结构的更新</li>
+<li>表数据的更新</li>
+</ul>
+<p>下一篇我们会介绍SQL 查询相关的基础内容。</p>
+
+      
+    </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/01/27/solve-mysql-messy-code/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          SQL基础教程-番外篇：解决Mysql的中文乱码问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/01/20/follow-up-process-of-bulid-blog/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用Github Pages 搭建独立博客的后续过程</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="database-and-sql" data-title="SQL基础（一） 数据库和SQL" data-url="http://zhangyigong.github.com/2015/01/27/database-and-sql/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zhangyigonggithub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 张一弓  2015 
+    	</div>
+      	<div class="footer-right">
+      		Email：zhang_1g@163.com
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+  <script src="/js/main.js" type="text/javascript"></script>
+
+
+  </div>
+</body>
+</html>
