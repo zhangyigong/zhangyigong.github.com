@@ -17,7 +17,7 @@
 总是感觉之前学的数据库相关的知识很零散，不够系统，加之好久没有看关于SQL 的知识，不免有点生疏了，于是想找一本合适的教材回顾一下。后来找到了一本可以堪称是零基础入门的SQL 书籍，这里给大家推荐一下：
 《SQL 基础教程》 【日】MICK 著    孙淼 罗勇 译 
 书中的SQL 都是基于标准SQL 2003编写，并且关于几个常用的RDBMS 在使用SQL 时的区别叙述的很详细，行文也很">
-<meta property="og:image" content="http://zhang1g.qiniudn.com/sql-base-learn.jpg">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/sql-base-learn2.jpg">
 <meta property="og:image" content="http://zhang1g.qiniudn.com/net-start-mysql.PNG">
 <meta property="og:image" content="http://zhang1g.qiniudn.com/create-table-shop.PNG">
 <meta property="og:image" content="http://zhang1g.qiniudn.com/insert-data-to-table-shop.PNG">
@@ -244,7 +244,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://zhang1g.qiniudn.com/sql-base-learn.jpg" alt="《SQL 基础教程》图书封面"></p>
+        <p><img src="http://zhang1g.qiniudn.com/sql-base-learn2.jpg" alt="《SQL 基础教程》图书封面"></p>
 <h2 id="前言">前言</h2>
 <p>总是感觉之前学的数据库相关的知识很零散，不够系统，加之好久没有看关于SQL 的知识，不免有点生疏了，于是想找一本合适的教材回顾一下。后来找到了一本可以堪称是零基础入门的SQL 书籍，这里给大家推荐一下：</p>
 <p>《SQL 基础教程》 【日】MICK 著    孙淼 罗勇 译 </p>
@@ -404,20 +404,14 @@
 <h2 id="表的更新">表的更新</h2>
 <p>表的更新有两种含义，一种指的是表结构的变化，具体来说就是字段的增加、删除和字段名称的修改，另外一种指的是表中数据的增加、删除和修改，下面我们逐一进行介绍（主要以MySQL 为例）。</p>
 <p><strong>表结构的更新</strong> </p>
-<ol>
-<li>在向表中添加一列，即添加一个新的字段时，使用 <code>ALTER TABLE</code> 语句</li>
-</ol>
+<p>在向表中添加一列，即添加一个新的字段时，使用 <code>ALTER TABLE</code> 语句</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> &lt;表名&gt; <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> &lt;列名&gt;;</span></div></pre></td></tr></table></figure>
 
-<ol>
-<li>删除表中的某一列可以使用下面的 <code>ALTER TABLE</code> 语句</li>
-</ol>
+<p>删除表中的某一列可以使用下面的 <code>ALTER TABLE</code> 语句</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> &lt;表名&gt; <span class="keyword">DROP</span> <span class="keyword">COLUMN</span> &lt;列名&gt;;</span></div></pre></td></tr></table></figure>
 
 <p>删除表中的列和删除表一样，执行之后可以看做是无法恢复的，删除表中的列之后，就只能重新创建字段了。</p>
-<ol>
-<li>当我们想给表中的某一个字段重新命名时，可以使用下面的语句</li>
-</ol>
+<p>当我们想给表中的某一个字段重新命名时，可以使用下面的语句</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> &lt;表名&gt; <span class="keyword">RENAME</span> <span class="keyword">COLUMN</span> &lt;列名<span class="number">1</span>&gt; <span class="keyword">TO</span> &lt;列名<span class="number">2</span>&gt;;</span></div></pre></td></tr></table></figure>
 
 <p>在更新表结构时，Oracle 和SQL Server 有特定的语法需要注意</p>
@@ -428,9 +422,7 @@
 </ul>
 </blockquote>
 <p><strong>表数据的更新</strong></p>
-<ol>
-<li>向表 <code>Product</code> 中插入数据的代码如下所示</li>
-</ol>
+<p>向表 <code>Product</code> 中插入数据的代码如下所示</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</span></div><div class="line"></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0001'</span>,<span class="string">'T恤衫'</span>,<span class="string">'衣服'</span>,<span class="number">1000</span>,<span class="number">500</span>,<span class="string">'2009-09-20'</span>);</span></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0002'</span>,<span class="string">'打孔器'</span>,<span class="string">'办公用品'</span>,<span class="number">500</span>,<span class="number">320</span>,<span class="string">'2009-09-11'</span>);</span></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0003'</span>,<span class="string">'运动T恤'</span>,<span class="string">'衣服'</span>,<span class="number">4000</span>,<span class="number">2800</span>,<span class="literal">NULL</span>);</span></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0004'</span>,<span class="string">'菜刀'</span>,<span class="string">'厨房用品'</span>,<span class="number">3000</span>,<span class="number">2800</span>,<span class="string">'2009-09-20'</span>);</span></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0005'</span>,<span class="string">'高压锅'</span>,<span class="string">'厨房用品'</span>,<span class="number">6800</span>,<span class="number">5000</span>,<span class="string">'2009-01-15'</span>);</span></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0006'</span>,<span class="string">'叉子'</span>,<span class="string">'厨房用品'</span>,<span class="number">500</span>,<span class="literal">NULL</span>,<span class="string">'2009-09-20'</span>);</span></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0007'</span>,<span class="string">'擦菜板'</span>,<span class="string">'厨房用品'</span>,<span class="number">880</span>,<span class="number">790</span>,<span class="string">'2008-04-28'</span>);</span></div><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Product <span class="keyword">VALUES</span> (<span class="string">'0008'</span>,<span class="string">'圆珠笔'</span>,<span class="string">'办公用品'</span>,<span class="number">100</span>,<span class="literal">NULL</span>,<span class="string">'2009-11-11'</span>);</span></div><div class="line"></div><div class="line"><span class="operator"><span class="keyword">COMMIT</span>;</span></div></pre></td></tr></table></figure>
 
 
@@ -443,14 +435,10 @@
 <li><strong>SQL Server 和 PostgreSQL 则要使用 <code>BEGIN TRANSACTION</code> 语句</strong></li>
 </ul>
 </blockquote>
-<ol>
-<li>修改表中符合要求的记录的值，需要用到SQL 查询，SQL 查询是SQL 语法中最重要的部分，我们之后会详细讲解，这里我们只是列出修改记录值的通用语法规则，复杂的查询语句可能还会用到表别名。</li>
-</ol>
+<p>修改表中符合要求的记录的值，需要用到SQL 查询，SQL 查询是SQL 语法中最重要的部分，我们之后会详细讲解，这里我们只是列出修改记录值的通用语法规则，复杂的查询语句可能还会用到表别名。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UPDATE &lt;表名&gt; SET <span class="string">'列名1'</span> = <span class="string">'xxx'</span> WHERE <span class="keyword">...</span>;</div></pre></td></tr></table></figure>
 
-<ol>
-<li>选择性地删除表中的一些记录（行）也会用到SQL 查询，它的语法如下所示</li>
-</ol>
+<p>选择性地删除表中的一些记录（行）也会用到SQL 查询，它的语法如下所示</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DELETE * FROM &lt;表名&gt; WHERE <span class="keyword">...</span>;</div></pre></td></tr></table></figure>
 
 <p><strong>表名的变更</strong></p>
@@ -459,11 +447,9 @@
 <blockquote>
 <ul>
 <li><strong>Oracle,PostgreSQL: <code>ALTER TABLE Product RENAME TO Item;</code></strong></li>
-</ul>
-<ul>
-<li>DB2:                 <code>RENAME TABLE Product TO Item;</code></li>
-<li>SQL Server:               <code>sp_rename &#39;Product&#39; , &#39;Item&#39;;</code></li>
-<li>Mysql:                   <code>RENAME TABLE Product TO Item;</code></li>
+<li><strong>DB2:                 <code>RENAME TABLE Product TO Item;</code></strong></li>
+<li><strong>SQL Server:               <code>sp_rename &#39;Product&#39; , &#39;Item&#39;;</code></strong></li>
+<li><strong>Mysql:                   <code>RENAME TABLE Product TO Item;</code></strong></li>
 </ul>
 </blockquote>
 <h2 id="实际操作">实际操作</h2>
@@ -484,7 +470,7 @@
 <li>表结构的更新</li>
 <li>表数据的更新</li>
 </ul>
-<p>在下一篇<a href="http://zhangyigong.github.com/2015/01/27/sql-query-base-learn/" target="_blank" rel="external">SQL基础教程（二）SQL 查询基础</a>我们会介绍SQL 查询相关的基础内容。</p>
+<p>在下一篇<a href="http://zhangyigong.github.com/2015/01/27/sql-query-base-learn/" target="_blank" rel="external">SQL基础（二）SQL 查询基础</a>我们会介绍SQL 查询相关的基础内容。</p>
 
       
     </div>
