@@ -2,13 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://zhangyigong.github.com/2015/01/27/solve-mysql-messy-code/</loc>
-    <lastmod>2015-01-27T07:29:05.000Z</lastmod>
+    <loc>http://zhangyigong.github.com/2015/01/27/sql-query-base-learn/</loc>
+    <lastmod>2015-01-27T07:43:55.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://zhangyigong.github.com/2015/01/27/database-and-sql/</loc>
-    <lastmod>2015-01-27T07:20:49.000Z</lastmod>
+    <lastmod>2015-01-27T07:39:18.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://zhangyigong.github.com/2015/01/27/solve-mysql-messy-code/</loc>
+    <lastmod>2015-01-27T07:32:28.000Z</lastmod>
   </url>
   
   <url>

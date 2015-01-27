@@ -131,7 +131,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud">
-						<a href="/tags/blog/" style="font-size: 20.00px;">blog</a><a href="/tags/github/" style="font-size: 15.00px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/java/" style="font-size: 15.00px;">java</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/mysql/" style="font-size: 10.00px;">mysql</a><a href="/tags/opensource/" style="font-size: 10.00px;">opensource</a><a href="/tags/sql/" style="font-size: 15.00px;">sql</a><a href="/tags/web/" style="font-size: 15.00px;">web</a><a href="/tags/感悟杂谈/" style="font-size: 10.00px;">感悟杂谈</a><a href="/tags/数据库/" style="font-size: 10.00px;">数据库</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
+						<a href="/tags/blog/" style="font-size: 20.00px;">blog</a><a href="/tags/github/" style="font-size: 15.00px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/java/" style="font-size: 15.00px;">java</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/mysql/" style="font-size: 10.00px;">mysql</a><a href="/tags/opensource/" style="font-size: 10.00px;">opensource</a><a href="/tags/sql/" style="font-size: 20.00px;">sql</a><a href="/tags/web/" style="font-size: 15.00px;">web</a><a href="/tags/感悟杂谈/" style="font-size: 10.00px;">感悟杂谈</a><a href="/tags/数据库/" style="font-size: 20.00px;">数据库</a><a href="/tags/读书/" style="font-size: 15.00px;">读书</a>
 					</div>
 				</section>
 				
@@ -252,9 +252,9 @@
 <p>下面就开始我们的SQL 之旅了。</p>
 <a id="more"></a>
 
-<h1 id="_数据库是什么">　数据库是什么</h1>
+<h2 id="数据库是什么">数据库是什么</h2>
 <p>很多人可能会觉得我们在使用计算机管理数据的时候，使用文本文件或者Excel 之类的电子表格软件不就可以了吗？为什么非要使用DBMS 这样专门的系统来管理数据呢？</p>
-<p>因为使用文本文件或者Excel 如下的缺点</p>
+<p>因为使用文本文件或者Excel 如下的缺点：</p>
 <ul>
 <li>无法多人共享数据，即使文件放在连接网络的计算机上，并设置了网络共享，也存在某个用户打开文件的时候其他用户无法编辑的情况。</li>
 <li>无法提供操作大量数据所需的格式</li>
@@ -265,14 +265,14 @@
 <p><strong>DBMS 和RDBMS</strong></p>
 <p>DBMS（数据库管理系统） 通过数据的保存格式进行划分，有以下5 钟类型</p>
 <ol>
-<li>层次型数据库<br>2，关系型数据库</li>
+<li>层次型数据库</li>
+<li>关系型数据库</li>
 <li>面向对象数据库</li>
 <li>XML 数据库</li>
 <li>键值存储系统（NOSQL 数据库）</li>
 </ol>
 <p>这里我们介绍的主要是RDBMS（关系数据库管理系统），不过目前随着web2.0 的快速发展，也出现了很多优秀的NOSQL 数据库，有机会再分享相关的内容。</p>
-<p>RDBMS 一般采用C/S 架构，由客户端和服务器组成，客户端向服务器发送SQL 语句，服务器进行处理，并按照语句的内容返回请求的数据，或者对存储在数据库中的内容进行更新。</p>
-<p>其中数据以二维表的形式存储在数据库服务器中，而<strong>返回的结果也是二维表的形式</strong>。另外，关系数据库必须<strong>以行（记录）为单位进行数据的读写操作</strong>。为了防止重要数据被窃取和篡改，RDBMS 只允许数据库的注册用户操作数据库，而注册用户最好设定密码。</p>
+<p>RDBMS 一般采用C/S 架构，由客户端和服务器组成，客户端向服务器发送SQL 语句，服务器进行处理，并按照语句的内容返回请求的数据，或者对存储在数据库中的内容进行更新。其中数据以二维表的形式存储在数据库服务器中，而<strong>返回的结果也是二维表的形式</strong>。另外，关系数据库必须<strong>以行（记录）为单位进行数据的读写操作</strong>。为了防止重要数据被窃取和篡改，RDBMS 只允许数据库的注册用户操作数据库，而注册用户最好设定密码。</p>
 <p>常见的RDBMS 有：</p>
 <ul>
 <li>Oracle Database</li>
@@ -281,7 +281,7 @@
 <li>PostgreSQL</li>
 <li>MySQL</li>
 </ul>
-<h1 id="SQL_概要">SQL 概要</h1>
+<h2 id="SQL_概要">SQL 概要</h2>
 <p>一言以蔽之，SQL 是为了操作数据库而开发的语言。但是随着数据库的发展，出现了<strong>标准的SQL</strong> 和<strong>特定的SQL</strong>，标准的SQL 可以在不同的RDBMS 上执行，而特定的SQL 只能执行在特定的RDBMS 上执行。</p>
 <p><strong>SQL 语句及其种类</strong></p>
 <p>SQL 使用关键字、表名、列名组合成一条SQL 语句，根据指令种类的不同，可以分为以下3类</p>
@@ -418,7 +418,10 @@
 
 <p>在更新表结构时，Oracle 和SQL Server 有特定的语法需要注意</p>
 <blockquote>
-<p>使用Oracle 和SQL Server 时不用写COLUMN<br>在Oracle 中添加多列时可以使用括弧：ALTER TABLE &lt;表名&gt; ADD (&lt;列名1&gt;,&lt;列名2&gt;,…);</p>
+<ul>
+<li>使用Oracle 和SQL Server 时不用写COLUMN</li>
+<li>在Oracle 中添加多列时可以使用括弧：ALTER TABLE &lt;表名&gt; ADD (&lt;列名1&gt;,&lt;列名2&gt;,…);</li>
+</ul>
 </blockquote>
 <p><strong>表数据的更新</strong></p>
 <ol>
@@ -431,7 +434,10 @@
 <p>使用插入行的指令语句是 <code>INSERT</code>，开头的 <code>START TRANSACTION;</code> 是开始插入行的指令语句，<code>COMMIT;</code> 则是确定行插入的指令语句。</p>
 <p>开始插入行的指令语句中，不同的RDBMS 略有不同</p>
 <blockquote>
-<p>Oracle 和DB2 中，无需使用 START TRANSACTION 语句<br>SQL Server 和 PostgreSQL 则要使用 BEGIN TRANSACTION 语句</p>
+<ul>
+<li>Oracle 和DB2 中，无需使用 START TRANSACTION 语句</li>
+<li>SQL Server 和 PostgreSQL 则要使用 BEGIN TRANSACTION 语句</li>
+</ul>
 </blockquote>
 <ol>
 <li>修改表中符合要求的记录的值，需要用到SQL 查询，SQL 查询是SQL 语法中最重要的部分，我们之后会详细讲解，这里我们只是列出修改记录值的通用语法规则，复杂的查询语句可能还会用到表别名。</li>
@@ -447,22 +453,27 @@
 <p>有时候我们在创建一个表并使用一段时间之后，可能会觉得表名不是很合适，需要修改，那么怎么办呢？</p>
 <p>可以使用 <code>RENAME</code> 指令来解决这样的问题，但是不同的数据库使用时略有差异。</p>
 <blockquote>
-<p>Oracle,PostgreSQL : ALTER TABLE Product RENAME TO Item;<br>DB2:                  RENAME TABLE Product TO Item;<br>SQL Server:          sp_rename ‘Product’ , ‘Item’;<br>Mysql:              RENAME TABLE Product TO Item;</p>
+<ul>
+<li>Oracle,PostgreSQL : ALTER TABLE Product RENAME TO Item;</li>
+<li>DB2:                  RENAME TABLE Product TO Item;</li>
+<li>SQL Server:          sp_rename ‘Product’ , ‘Item’;</li>
+<li>Mysql:              RENAME TABLE Product TO Item;</li>
+</ul>
 </blockquote>
 <h2 id="实际操作">实际操作</h2>
 <p>针对上面的内容，我们以Windows 下的Mysql5.5 为例进行具体操作，步骤如下</p>
-<ol>
+<ul>
 <li>打开CMD 命令窗口，执行 <code>net start mysql</code> 开启MySQL 服务；</li>
-</ol>
+</ul>
 <p><img src="http://zhang1g.qiniudn.com/net-start-mysql.PNG" alt="开启Mysql 服务"></p>
-<ol>
-<li>打开Mysql 命令行客户端，输入密码，执行下面的指令，注意需要使用 <code>use &lt;数据库名&gt;</code> 来切换数据库。</li>
-</ol>
+<ul>
+<li>打开Mysql 命令行客户端，输入密码，执行下面的指令，注意需要使用 <code>use &lt;数据库名&gt;;</code> 来切换数据库。</li>
+</ul>
 <p><img src="http://zhang1g.qiniudn.com/create-table-shop.PNG" alt="创建数据库shop 以及表Product"></p>
 <p><img src="http://zhang1g.qiniudn.com/insert-data-to-table-shop.PNG" alt="向表Product 中插入数据"></p>
 <p>插入数据后我们通过Mysql Administrator 之类的带界面的Mysql 客户端查看我们的结果，很可惜地发现插入的汉字显示为乱码</p>
 <p><img src="http://zhang1g.qiniudn.com/inser-data-to-shop-error-code.PNG" alt="插入的汉字显示为乱码"></p>
-<p>这里我们先不做处理，在该系列博客的番外篇<a href="http://zhangyigong.github.com/2015/01-27/solve-mysql-messy-code" target="_blank" rel="external">SQL基础教程-番外篇：解决Mysql的中文乱码之道</a>中，我们会详细讲述Mysql 产生中文乱码的前因后果以及解决方法。</p>
+<p>这里我们先不做处理，在该系列博客的番外篇<a href="http://zhangyigong.github.com/2015/01-27/solve-mysql-messy-code" target="_blank" rel="external">SQL基础教程-番外篇：解决Mysql的中文乱码问题</a>中，我们会详细讲述Mysql 产生中文乱码的前因后果以及解决方法。</p>
 <h2 id="总结">总结</h2>
 <p>这一片博客中我们简单介绍了一下为什么要使用数据库来管理数据，根据SQL 语句的类型将SQL 语句分为 DDL、DML、DCL 三类，并且对除了SQL 查询以外的其他语法做了简单的介绍，包括</p>
 <ul>
@@ -484,7 +495,7 @@
       <strong class="article-nav-caption">&lt;</strong>
       <div class="article-nav-title">
         
-          SQL基础教程-番外篇：解决Mysql的中文乱码问题
+          SQL基础教程（番外篇）：解决Mysql的中文乱码问题
         
       </div>
     </a>
