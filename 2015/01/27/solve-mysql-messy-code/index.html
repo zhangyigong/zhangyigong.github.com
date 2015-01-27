@@ -7,20 +7,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="前言
 在SQL 基础（一） 数据库和SQL一文中，最后我们使用Mysql 在向表中插入汉字时出现了乱码。在实际工作中，乱码问题也时常发生，令人头痛。
-这里我希望通过这篇博客来捋清楚使用Mysql 时产生乱码问题的前因后果，以及相应的解决方法。">
+比如在Mysql 数据库插入一条带有中文的数据形如 
+1INSERT INTO Employee VALUES(null,'张三','male','1995-10-08','2015-01-12','Sales',2000,'是个好员工！');">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL 基础教程（番外篇）解决Mysql 的中文乱码问题">
 <meta property="og:url" content="http://zhangyigong.github.com/2015/01/27/solve-mysql-messy-code/">
 <meta property="og:site_name" content="张一弓的Blog">
 <meta property="og:description" content="前言
 在SQL 基础（一） 数据库和SQL一文中，最后我们使用Mysql 在向表中插入汉字时出现了乱码。在实际工作中，乱码问题也时常发生，令人头痛。
-这里我希望通过这篇博客来捋清楚使用Mysql 时产生乱码问题的前因后果，以及相应的解决方法。">
+比如在Mysql 数据库插入一条带有中文的数据形如 
+1INSERT INTO Employee VALUES(null,'张三','male','1995-10-08','2015-01-12','Sales',2000,'是个好员工！');">
 <meta property="og:image" content="http://zhang1g.qiniudn.com/solve-mysql-messy-code.jpeg">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/show_character_set_variables.PNG">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/statuus.PNG">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/show-create-table-name.PNG">
+<meta property="og:image" content="http://zhang1g.qiniudn.com/select-no-error-code.PNG">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL 基础教程（番外篇）解决Mysql 的中文乱码问题">
 <meta name="twitter:description" content="前言
 在SQL 基础（一） 数据库和SQL一文中，最后我们使用Mysql 在向表中插入汉字时出现了乱码。在实际工作中，乱码问题也时常发生，令人头痛。
-这里我希望通过这篇博客来捋清楚使用Mysql 时产生乱码问题的前因后果，以及相应的解决方法。">
+比如在Mysql 数据库插入一条带有中文的数据形如 
+1INSERT INTO Employee VALUES(null,'张三','male','1995-10-08','2015-01-12','Sales',2000,'是个好员工！');">
 
   
     <link rel="alternative" href="/atom.xml" title="张一弓的Blog" type="application/atom+xml">
@@ -159,7 +166,7 @@
 				
 				<section class="switch-part switch-part4">
 				
-					张一弓，华南理工大学13级研究生，一只倒腾 web 开发的程序猿，希望通过这个博客来记录和分享学习和生活中的点点滴滴。
+					华南理工大学13级研究生，一只倒腾 web 开发的程序猿，希望通过这个博客来记录和分享学习和生活中的点点滴滴。
 				</section>
 				
 			</div>
@@ -240,9 +247,113 @@
         <p><img src="http://zhang1g.qiniudn.com/solve-mysql-messy-code.jpeg" alt="解决Mysql的中文乱码问题"></p>
 <h2 id="前言">前言</h2>
 <p>在<a href="http://zhangyigong.github.com/2015/01/27/database-and-sql/" target="_blank" rel="external">SQL 基础（一） 数据库和SQL</a>一文中，最后我们使用Mysql 在向表中插入汉字时出现了乱码。在实际工作中，乱码问题也时常发生，令人头痛。</p>
-<p>这里我希望通过这篇博客来捋清楚使用Mysql 时产生乱码问题的前因后果，以及相应的解决方法。</p>
+<p>比如在Mysql 数据库插入一条带有中文的数据形如 </p>
+<figure class="highlight `"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Employee <span class="keyword">VALUES</span>(<span class="literal">null</span>,<span class="string">'张三'</span>,<span class="string">'male'</span>,<span class="string">'1995-10-08'</span>,<span class="string">'2015-01-12'</span>,<span class="string">'Sales'</span>,<span class="number">2000</span>,<span class="string">'是个好员工！'</span>);</span></div></pre></td></tr></table></figure>
+
+<p>在查询时结果集中很容易出现乱码。</p>
+<p>关于解决Mysql 中文乱码问题，在网上有多方法，这里我希望通过这篇博客来捋清楚使用Mysql 时产生乱码问题的前因后果，以及相应的解决方法。其中借鉴了网上一些内容，我会在博客的最后列出相关的链接，感谢这些作者。</p>
 <a id="more"></a>
 
+<h2 id="Mysql_和字符集相关的变量">Mysql 和字符集相关的变量</h2>
+<p>首先，我们不带任何参数启动Mysql 服务，然后在Mysql 的命令行客户端执行语句 <code>show variables like &#39;character_set%&#39;;</code> ，查看Mysql 使用的字符集的变量有哪些，显示如下的结果</p>
+<p><img src="http://zhang1g.qiniudn.com/show_character_set_variables.PNG" alt="查看Mysql 的默认字符集"></p>
+<p>有上图中可以看到，Mysql 中共有6 处使用了字符集，分别是：client 、connection、database、results、server 和system。其中与服务器相关的是：database、server、system（永远无法修改，就是utf-8），与客户端相关的是：connection、client、results 。</p>
+<p>或者可以在命令行客户端输入 <code>status;</code>，也可以看到与字符编码相关的变量。</p>
+<p><img src="http://zhang1g.qiniudn.com/statuus.PNG" alt="查看Mysql 的默认字符集"></p>
+<p>下面对这些变量做一个简单的介绍</p>
+<table>
+<thead>
+<tr>
+<th>和字符集相关的变量</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>client</strong></td>
+<td style="text-align:center">为客户端使用的字符集</td>
+</tr>
+<tr>
+<td><strong>connection</strong></td>
+<td style="text-align:center">为连接数据库的字符集设置类型，如果程序没有指明连接数据库使用的字符集类型则按照服务器端默认的字符集设置</td>
+</tr>
+<tr>
+<td><strong>database</strong></td>
+<td style="text-align:center">为数据库服务器中某个库使用的字符集设定，如果建库时没有指明，将使用服务器安装时指定的字符集设置</td>
+</tr>
+<tr>
+<td><strong>results</strong></td>
+<td style="text-align:center">为数据库给客户端返回时使用的字符集设定，如果没有指明，使用服务器默认的字符集</td>
+</tr>
+<tr>
+<td><strong>server</strong></td>
+<td style="text-align:center">为服务器安装时指定的默认字符集设定</td>
+</tr>
+<tr>
+<td><strong>system</strong></td>
+<td style="text-align:center">为数据库系统使用的字符集设定</td>
+</tr>
+</tbody>
+</table>
+<h2 id="出现乱码的原因">出现乱码的原因</h2>
+<p>了解上面的信息之后，我们来分析<a href="http://zhangyigong.github.com/2015/01/27/database-and-sql/" target="_blank" rel="external">SQL 基础（一） 数据库和SQL</a>一文中产生乱码的原因。我们发现除了默认的system 变量编码为utf-8 外，其余变量的编码格式为latin1，因此当向表中插入中文字符时才会出现乱码。</p>
+<p>不同的编码格式会导致,同一字符在不同字符集下的编码会不同。同样同一编码在不同的字符集中代码的字符也不相同。当MySQL 返回的字符串的编码格式（字符集）与你的客户工具程序（mysql客户端, php, java, query browser, …）当前使用的字符集不同时，就会造成乱码。</p>
+<p>MySQL 中默认字符集的设置有四级：<strong>服务器级</strong>，<strong>数据库级</strong>，<strong>表级</strong> 以及<strong>字段级</strong>的字符集设置。注意前三种均为默认设置，并不代表字段最终会使用这个字符集设置。所以建议要用 <code>show create table tablename ;</code> 或 <code>show full fields from tableName;</code> 来检查当前表中字段的字符集设置。</p>
+<p><img src="http://zhang1g.qiniudn.com/show-create-table-name.PNG" alt="Mysql 查看表中字段的 字符集设置"></p>
+<p>我们已经知道，MySQL 中关于连接环境的字符集设置有client，connection， results，通过这些参数，MySQL 就知道你的客户端工具用的是什么字符集，结果集应该是什么字符集。这样MySQL 就会做必要的翻译，一旦这些参数有误，自然会导致字符串在转输过程中的转换错误。基本上99%的乱码由些造成。</p>
+<h2 id="出现乱码的解决方法">出现乱码的解决方法</h2>
+<p>根据上面的分析，我们得出Mysql 向表中插入中文数据时出现乱码的原因有如下2 个：</p>
+<ol>
+<li>表中字段的字符集没有设置为中文兼容（GBK/GB2312/UTF8）</li>
+<li>Mysql 相关的参数字符集设置不统一，尤其是变量client，connection, results</li>
+</ol>
+<p>针对上面的问题，我们采取的方法步骤如下：</p>
+<p><strong>修改server 和database 的编码格式</strong> </p>
+<p>通过执行 <code>status;</code> 命令，我们已经发现发现sever 和database 的字符集目前为默认字符集latin1，需要修改为utf8 编码。在Mysql 安装文件夹下找到文件 <code>my.ini</code>，并修改server 和database 的字符编码：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">...</span></div><div class="line">[mysql]</div><div class="line">default-character-set=utf8</div><div class="line"><span class="keyword">...</span></div><div class="line">[mysqld]</div><div class="line">default-character-set=utf8</div></pre></td></tr></table></figure>
+
+<p>修改之后重新启动Mysql 服务和客户端，server 和database 的字符集编码就改变了，但是我们之前创建的数据库shop 的编码仍然是latin1，此时我们可以选择删除数据库shop并重新创建，也可以通过下面的命令直接修改数据库shop 的编码格式。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">DATABASE</span> shop <span class="keyword">DEFAULT</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> UTF8 <span class="keyword">COLLATE</span> UTF8_BIN;</span></div></pre></td></tr></table></figure>
+
+<p>之后执行</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> <span class="title">shop</span>;</div><div class="line">status;</div></pre></td></tr></table></figure>
+
+<p>此时我们发现database shop 的编码已经变为utf8。</p>
+<p><strong>修改表和字段的编码</strong></p>
+<p>此时执行 <code>SELECT * FROM Product;</code>，我们发现查询的结果仍然显示乱码。现在我们需要执行命令将表和包含中文的字段对应的字符集也设置成UTF8，但是由于之前我们已经在数据库中插入了数据，所以需要先将表中的内容清空，注意备份数据，将之前向表中插入数据的脚本保存为sql 文件。</p>
+<p>执行命令 <code>TRUNCATE TABLE Product;</code> 可以将表Product 中的内容清空。</p>
+<p>在修改了shop 数据库的编码格式之后，修改表Product 和各个字段编码的具体代码如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Product <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8;</span></div><div class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Product MODIFY product_id <span class="built_in">CHAR</span>(<span class="number">4</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> UTF8 <span class="keyword">NOT</span> <span class="literal">NULL</span>;</span></div><div class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Product MODIFY product_name <span class="built_in">VARCHAR</span>(<span class="number">100</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> UTF8  <span class="keyword">NOT</span> <span class="literal">NULL</span>;</span></div><div class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Product MODIFY product_id <span class="built_in">VARCHAR</span>(<span class="number">32</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> UTF8 <span class="keyword">NOT</span> <span class="literal">NULL</span>;</span></div><div class="line"><span class="operator"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Product;</span></div></pre></td></tr></table></figure>
+
+<p>我们发现表和字段都变成UTF8编码了，之后我们执行之前保存的向表中插入数据的sql 脚本,非常不幸，在插入数据时出现了如下所示的错误</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="input"><span class="prompt">mysql&gt;</span> <span class="constant">INSERT</span> <span class="constant">INTO</span> <span class="constant">Product</span> <span class="constant">VALUES</span> (<span class="string">'0001'</span>,<span class="string">'T恤衫'</span>,<span class="string">'衣服'</span>,<span class="number">1000</span>,<span class="number">500</span>,<span class="string">'2009-09-20'</span>);</span></div><div class="line"></div><div class="line">**<span class="constant">ERROR</span> <span class="number">1406</span> (<span class="number">22001</span>)<span class="symbol">:</span> <span class="constant">Data</span> too long for column <span class="string">'product_name'</span> at row <span class="number">1</span>**</div></pre></td></tr></table></figure>
+
+<p>乍一看，是字段长度引起的问题，但是实际是还是字符编码的问题，如果我们是在Linux 下的终端执行命令，或者使用Java等编写客户端代码时遇到这种错误，可以在执行inser、select、update 命令之前输入下面的命令即可解决。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">set</span> <span class="keyword">names</span> utf8;</span></div></pre></td></tr></table></figure>
+
+<p>这条命令相当于同时设定client、connection、results 的字符编码为utf8。该命令将终端的字符编码设为了UTF8。此后再插入数据库中的内容都会按照UTF8的编码来处理。</p>
+<p>但是在Windows下，Mysql 客户端命令行窗口不支持UTF8编码，所以使用 <code>set names utf8;</code> 不会达到转化中文的效果。但是这个问题还是可以解决的，可以放弃命令行窗口登录MySQL，使用图形化客户端，也可以修改Mysql 安装路径下的 <code>my.ini</code> 文件，在[client]下面，加上 <code>default-character-set=utf8</code>，并将[mysql]下的默认编码格式改回来，改成 <code>default-character-set=latin1</code>，并重启Mysql 服务，之后再执行插入数据的脚本就没有问题了。<br>具体如下所示</p>
+<p><img src="http://zhang1g.qiniudn.com/select-no-error-code.PNG" alt="成功解决Mysql中文乱码问题"></p>
+<p>最终 <code>my.ini</code> 文件中配置如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[client]</div><div class="line">default-character-<span class="operator"><span class="keyword">set</span>=utf8</span></div><div class="line">[mysql]</div><div class="line"><span class="keyword">default</span>-<span class="built_in">character</span>-<span class="keyword">set</span>=latin1</div><div class="line">[mysqld]</div><div class="line"><span class="keyword">default</span>-<span class="built_in">character</span>-<span class="keyword">set</span>=utf8</div></pre></td></tr></table></figure>
+
+<p><strong>在创建数据库和表时指定编码格式</strong></p>
+<p>上面的内容是针对已经出现的乱码问题进行修改，那么我们是不是可以将乱码问题一开始就杜绝呢？当然可以在创建数据库和表时指定编码格式，具体如下所示</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">database</span> shop <span class="built_in">character</span> <span class="keyword">set</span> utf8;</span></div><div class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> Product (</span></div><div class="line">	product_id <span class="built_in">CHAR</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">	...,</div><div class="line">	<span class="keyword">primary</span> <span class="keyword">key</span>(product_id)</div><div class="line">)<span class="keyword">engine</span>=<span class="keyword">InnoDB</span> <span class="keyword">default</span> <span class="keyword">charset</span>=utf8;</div></pre></td></tr></table></figure>
+
+<p>到目前为止我们就成功解决了Mysql 的中文乱码问题。</p>
+<h2 id="总结">总结</h2>
+<p>这篇博客整理分析了使用Mysql 时出现中文乱码的原因和解决方法，下面整理一下其中出现的SQL 语句，方便以后回顾</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'character_set%'</span>;</span></div><div class="line"><span class="operator"><span class="keyword">use</span> database_name;</span></div><div class="line">status;</div><div class="line"><span class="operator"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> tablename;</span></div><div class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">database</span> database_name <span class="built_in">character</span> <span class="keyword">set</span> utf8;</span></div><div class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">table</span> table_name <span class="built_in">character</span> <span class="keyword">set</span> utf8;</span></div><div class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">table</span> table_name modify column_name <span class="built_in">varchar</span>(<span class="number">32</span>) <span class="built_in">character</span> <span class="keyword">set</span> utf8 <span class="keyword">not</span> <span class="literal">null</span>;</span></div><div class="line"><span class="operator"><span class="keyword">set</span> <span class="keyword">names</span> utf8;</span></div><div class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">database</span> shop <span class="built_in">character</span> <span class="keyword">set</span> utf8;</span></div><div class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> Product (</span></div><div class="line">	product_id <span class="built_in">CHAR</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">	...,</div><div class="line">	<span class="keyword">primary</span> <span class="keyword">key</span>(product_id)</div><div class="line">)<span class="keyword">engine</span>=<span class="keyword">InnoDB</span> <span class="keyword">default</span> <span class="keyword">charset</span>=utf8;</div></pre></td></tr></table></figure>
+
+<h2 id="参考文献">参考文献</h2>
+<p><a href="http://www.cnblogs.com/sunzn/archive/2013/03/14/2960248.html" target="_blank" rel="external">MySQL 插入数据时，中文乱码问题的解决</a></p>
+<p><a href="http://blog.csdn.net/blpluto/article/details/5704733" target="_blank" rel="external">MySQL插入显示汉字出现乱码问题的解决</a></p>
+<p><a href="http://www.cnblogs.com/pricks/archive/2010/01/10/1643471.html" target="_blank" rel="external">mysql 插入中文乱码解决方案</a></p>
+<p><a href="http://blog.csdn.net/ACMAIN_CHM/article/details/4174186" target="_blank" rel="external">MySQL 中文显示乱码</a></p>
+<p><a href="http://blog.csdn.net/mydeman/article/details/1665997" target="_blank" rel="external">MySQL插入中文时出现ERROR 1406 (22001): Data too long for column ‘name’ at row 1</a></p>
+<p><a href="http://blog.useasp.net/archive/2012/04/24/how_to_use_UTF8_encoding_in_Windows_CMD.aspx" target="_blank" rel="external">在Windows的CMD中如何设置支持UTF8编码?</a></p>
+<p><a href="http://www.cnblogs.com/candle806/archive/2013/01/14/2859721.html" target="_blank" rel="external">mysql命令行修改字符编码</a></p>
 
       
     </div>
