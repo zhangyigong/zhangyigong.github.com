@@ -4,7 +4,7 @@
   <subtitle><![CDATA[眯着眼睛安静思考世界的攻城狮]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-01-27T07:44:08.655Z</updated>
+  <updated>2015-01-27T07:58:53.524Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[SQL基础教程（二）SQL 查询基础]]></title>
+    <title><![CDATA[SQL基础（二）SQL 查询基础]]></title>
     <link href="http://zhangyigong.github.com/2015/01/27/sql-query-base-learn/"/>
     <id>http://zhangyigong.github.com/2015/01/27/sql-query-base-learn/</id>
     <published>2015-01-27T07:42:22.000Z</published>
-    <updated>2015-01-27T07:43:55.000Z</updated>
+    <updated>2015-01-27T07:47:01.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/sql-base-learn.jpg" alt="《SQL 基础教程》图书封面"></p>
 <h2 id="前言">前言</h2>
 ]]></content>
@@ -72,7 +72,7 @@
     <link href="http://zhangyigong.github.com/2015/01/27/database-and-sql/"/>
     <id>http://zhangyigong.github.com/2015/01/27/database-and-sql/</id>
     <published>2015-01-27T02:11:48.000Z</published>
-    <updated>2015-01-27T07:39:18.000Z</updated>
+    <updated>2015-01-27T07:57:09.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/sql-base-learn.jpg" alt="《SQL 基础教程》图书封面"></p>
 <h2 id="前言">前言</h2>
 <p>总是感觉之前学的数据库相关的知识很零散，不够系统，加之好久没有看关于SQL 的知识，不免有点生疏了，于是想找一本合适的教材回顾一下。后来找到了一本可以堪称是零基础入门的SQL 书籍，这里给大家推荐一下：</p>
@@ -84,12 +84,12 @@
 <h2 id="数据库是什么">数据库是什么</h2>
 <p>很多人可能会觉得我们在使用计算机管理数据的时候，使用文本文件或者Excel 之类的电子表格软件不就可以了吗？为什么非要使用DBMS 这样专门的系统来管理数据呢？</p>
 <p>因为使用文本文件或者Excel 如下的缺点：</p>
-<ul>
-<li>无法多人共享数据，即使文件放在连接网络的计算机上，并设置了网络共享，也存在某个用户打开文件的时候其他用户无法编辑的情况。</li>
+<ol>
+<li>无法多人共享数据，即使文件放在连接网络的计算机上，并设置了网络共享，也存在某个用户打开文件的时候其他用户无法编辑的情况</li>
 <li>无法提供操作大量数据所需的格式</li>
 <li>实现读写自动化需要一定的编程能力</li>
 <li>无法应对文件误删、硬盘故障等突发事件</li>
-</ul>
+</ol>
 <p>而DBMS 能够克服这些不足，实现多个用户简单安全地操作大量数据。</p>
 <p><strong>DBMS 和RDBMS</strong></p>
 <p>DBMS（数据库管理系统） 通过数据的保存格式进行划分，有以下5 钟类型</p>
@@ -116,17 +116,21 @@
 <p>SQL 使用关键字、表名、列名组合成一条SQL 语句，根据指令种类的不同，可以分为以下3类</p>
 <ul>
 <li>DDL（数据定义语言）</li>
-<li>DML（数据操作语言）</li>
-<li>DCL（数据控制语言）</li>
 </ul>
 <p>DDL 用来创建或者删除数据库或者数据库中的表对象等，它包含以下几种指令</p>
 <p>CREATE：创建数据库和表等对象<br>DROP：    删除数据库和表等对象<br>ALTER：    修改数据库和表等对象的结构</p>
+<ul>
+<li>DML（数据操作语言）</li>
+</ul>
 <p>DML 用来查询或者变更表中的记录，它包含以下几种指令</p>
 <p>SELECT：查询表中的数据<br>INSERT：向表中插入数据<br>UPDATE：变更表中的数据<br>DELETE：删除表中的数据</p>
+<ul>
+<li>DCL（数据控制语言）</li>
+</ul>
 <p>DCL 用来确认或者取消对数据库中的数据进行的变更。除此之外，还可以对用户权限进行设定，它包含以下几种指令</p>
 <p>COMMIT：    确认对数据库中的数据进行变更<br>ROLLBACK：    取消对数据库中的数据进行的变更<br>GRANT：        赋予用户操作权限<br>REVOKE：    取消用户操作权限</p>
-<p>上述类型的SQL 语句中，我们使用最多的是DML 类型的语句，SQL 语句都要以半角符号的分号 <code>;</code> 作为结束。</p>
-<p>而在书写SQL 语句的过程中需要注意，SQL <strong>不区分关键字、表名、列名的大小写</strong>，但是插入到表中的数据是区分大小写的。</p>
+<p>上述类型的SQL 语句中，我们使用最多的是DML 类型的语句。</p>
+<p>而在书写SQL 语句的过程中需要注意，SQL 语句都要以半角符号的分号 <code>;</code> 作为结束，SQL <strong>不区分关键字、表名、列名的大小写</strong>，但是插入到表中的数据是区分大小写的。</p>
 <p>另外，SQL 语句中常数的书写方式是固定的，字符串常量要用单引号括起来，比如 <code>&#39;abc&#39;</code> ，日期类型的常量也要用单引号括起来，比如 <code>&#39;2015-01-27&#39;</code>，但是数字的常量直接书写即可，不需要任何标记。</p>
 <h2 id="表的创建">表的创建</h2>
 <p>我们以创建下面所示的商品表为例来创建所需的数据库表，这个表可以看做是某个小商店销售商品的一览表。</p>
@@ -248,8 +252,8 @@
 <p>在更新表结构时，Oracle 和SQL Server 有特定的语法需要注意</p>
 <blockquote>
 <ul>
-<li>使用Oracle 和SQL Server 时不用写COLUMN</li>
-<li>在Oracle 中添加多列时可以使用括弧：ALTER TABLE &lt;表名&gt; ADD (&lt;列名1&gt;,&lt;列名2&gt;,…);</li>
+<li><strong>使用Oracle 和SQL Server 时不用写COLUMN</strong></li>
+<li><strong>在Oracle 中添加多列时可以使用括弧：</strong> <code>ALTER TABLE &lt;表名&gt; ADD (&lt;列名1&gt;,&lt;列名2&gt;,...);</code></li>
 </ul>
 </blockquote>
 <p><strong>表数据的更新</strong></p>
@@ -264,8 +268,8 @@
 <p>开始插入行的指令语句中，不同的RDBMS 略有不同</p>
 <blockquote>
 <ul>
-<li>Oracle 和DB2 中，无需使用 START TRANSACTION 语句</li>
-<li>SQL Server 和 PostgreSQL 则要使用 BEGIN TRANSACTION 语句</li>
+<li><strong>Oracle 和DB2 中，无需使用 <code>START TRANSACTION</code> 语句</strong></li>
+<li><strong>SQL Server 和 PostgreSQL 则要使用 <code>BEGIN TRANSACTION</code> 语句</strong></li>
 </ul>
 </blockquote>
 <ol>
@@ -283,26 +287,24 @@
 <p>可以使用 <code>RENAME</code> 指令来解决这样的问题，但是不同的数据库使用时略有差异。</p>
 <blockquote>
 <ul>
-<li>Oracle,PostgreSQL : ALTER TABLE Product RENAME TO Item;</li>
-<li>DB2:                  RENAME TABLE Product TO Item;</li>
-<li>SQL Server:          sp_rename ‘Product’ , ‘Item’;</li>
-<li>Mysql:              RENAME TABLE Product TO Item;</li>
+<li><strong>Oracle,PostgreSQL: <code>ALTER TABLE Product RENAME TO Item;</code></strong></li>
+</ul>
+<ul>
+<li>DB2:                 <code>RENAME TABLE Product TO Item;</code></li>
+<li>SQL Server:               <code>sp_rename &#39;Product&#39; , &#39;Item&#39;;</code></li>
+<li>Mysql:                   <code>RENAME TABLE Product TO Item;</code></li>
 </ul>
 </blockquote>
 <h2 id="实际操作">实际操作</h2>
 <p>针对上面的内容，我们以Windows 下的Mysql5.5 为例进行具体操作，步骤如下</p>
-<ul>
-<li>打开CMD 命令窗口，执行 <code>net start mysql</code> 开启MySQL 服务；</li>
-</ul>
+<p>Step 1：打开CMD 命令窗口，执行 <code>net start mysql</code> 开启MySQL 服务；</p>
 <p><img src="http://zhang1g.qiniudn.com/net-start-mysql.PNG" alt="开启Mysql 服务"></p>
-<ul>
-<li>打开Mysql 命令行客户端，输入密码，执行下面的指令，注意需要使用 <code>use &lt;数据库名&gt;;</code> 来切换数据库。</li>
-</ul>
+<p>Step 2：打开Mysql 命令行客户端，输入密码，执行下面的指令，注意需要使用 <code>use &lt;数据库名&gt;;</code> 来切换数据库。</p>
 <p><img src="http://zhang1g.qiniudn.com/create-table-shop.PNG" alt="创建数据库shop 以及表Product"></p>
 <p><img src="http://zhang1g.qiniudn.com/insert-data-to-table-shop.PNG" alt="向表Product 中插入数据"></p>
 <p>插入数据后我们通过Mysql Administrator 之类的带界面的Mysql 客户端查看我们的结果，很可惜地发现插入的汉字显示为乱码</p>
 <p><img src="http://zhang1g.qiniudn.com/inser-data-to-shop-error-code.PNG" alt="插入的汉字显示为乱码"></p>
-<p>这里我们先不做处理，在该系列博客的番外篇<a href="http://zhangyigong.github.com/2015/01-27/solve-mysql-messy-code" target="_blank" rel="external">SQL基础教程-番外篇：解决Mysql的中文乱码问题</a>中，我们会详细讲述Mysql 产生中文乱码的前因后果以及解决方法。</p>
+<p>这里我们先不做处理，在该系列博客的番外篇<a href="http://zhangyigong.github.com/2015/01/27/solve-mysql-messy-code" target="_blank" rel="external">SQL基础教程-番外篇：解决Mysql的中文乱码问题</a>中，我们会详细讲述Mysql 产生中文乱码的前因后果以及解决方法。</p>
 <h2 id="总结">总结</h2>
 <p>这一片博客中我们简单介绍了一下为什么要使用数据库来管理数据，根据SQL 语句的类型将SQL 语句分为 DDL、DML、DCL 三类，并且对除了SQL 查询以外的其他语法做了简单的介绍，包括</p>
 <ul>
@@ -311,7 +313,7 @@
 <li>表结构的更新</li>
 <li>表数据的更新</li>
 </ul>
-<p>下一篇我们会介绍SQL 查询相关的基础内容。</p>
+<p>在下一篇<a href="http://zhangyigong.github.com/2015/01/27/sql-query-base-learn/" target="_blank" rel="external">SQL基础教程（二）SQL 查询基础</a>我们会介绍SQL 查询相关的基础内容。</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p><img src="http://zhang1g.qiniudn.com/sql-base-learn.jpg" alt="《SQL 基础教程》图书封面"></p>
