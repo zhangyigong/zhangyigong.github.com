@@ -4,7 +4,7 @@
   <subtitle><![CDATA[眯着眼睛安静思考世界的攻城狮]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-01-27T17:41:28.951Z</updated>
+  <updated>2015-02-12T07:40:45.427Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -13,6 +13,21 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[漫谈验证码（四）破解验证码的相关知识]]></title>
+    <link href="http://zhangyigong.github.com/2015/01/28/basic-knowledge-of-crack-captcha/"/>
+    <id>http://zhangyigong.github.com/2015/01/28/basic-knowledge-of-crack-captcha/</id>
+    <published>2015-01-28T04:42:32.000Z</published>
+    <updated>2015-01-28T04:46:53.000Z</updated>
+    <content type="html"><![CDATA[]]></content>
+    <summary type="html">
+    <![CDATA[]]>
+    </summary>
+    
+      <category term="感悟杂谈" scheme="http://zhangyigong.github.com/tags/%E6%84%9F%E6%82%9F%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[SQL 基础（二）SQL 查询基础]]></title>
@@ -38,18 +53,17 @@
   </entry>
   
   <entry>
-    <title><![CDATA[SQL 基础教程（番外篇）解决Mysql 的中文乱码问题]]></title>
+    <title><![CDATA[SQL 基础（番外篇）解决Mysql 的中文乱码问题]]></title>
     <link href="http://zhangyigong.github.com/2015/01/27/solve-mysql-messy-code/"/>
     <id>http://zhangyigong.github.com/2015/01/27/solve-mysql-messy-code/</id>
     <published>2015-01-27T07:17:15.000Z</published>
-    <updated>2015-01-27T17:41:02.000Z</updated>
+    <updated>2015-01-28T04:48:09.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/solve-mysql-messy-code.jpeg" alt="解决Mysql的中文乱码问题"></p>
 <h2 id="前言">前言</h2>
-<p>在<a href="http://zhangyigong.github.com/2015/01/27/database-and-sql/" target="_blank" rel="external">SQL 基础（一） 数据库和SQL</a>一文中，最后我们使用Mysql 在向表中插入汉字时出现了乱码。在实际工作中，乱码问题也时常发生，令人头痛。</p>
-<p>比如在Mysql 数据库插入一条带有中文的数据形如 </p>
-<figure class="highlight `"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Employee <span class="keyword">VALUES</span>(<span class="literal">null</span>,<span class="string">'张三'</span>,<span class="string">'male'</span>,<span class="string">'1995-10-08'</span>,<span class="string">'2015-01-12'</span>,<span class="string">'Sales'</span>,<span class="number">2000</span>,<span class="string">'是个好员工！'</span>);</span></div></pre></td></tr></table></figure>
+<p>在[SQL 基础（一） 数据库和SQL] (<a href="http://zhangyigong.github.com/2015/01/27/database-and-sql/)一文中，最后我们使用Mysql" target="_blank" rel="external">http://zhangyigong.github.com/2015/01/27/database-and-sql/)一文中，最后我们使用Mysql</a> 在向表中插入汉字时出现了乱码。在实际工作中，乱码问题也时常发生，令人头痛。</p>
+<p>比如在Mysql 数据库插入下面一条带有中文的数据，在查询时结果集中很容易出现乱码。</p>
+<figure class="highlight `"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Employee <span class="keyword">VALUES</span>(<span class="literal">null</span>,<span class="string">'张三'</span>,<span class="string">'male'</span>,<span class="string">'1995-10-08'</span>,</span></div><div class="line">	<span class="string">'2015-01-12'</span>,<span class="string">'Sales'</span>,<span class="number">2000</span>,<span class="string">'是个好员工！'</span>);</div></pre></td></tr></table></figure>
 
-<p>在查询时结果集中很容易出现乱码。</p>
 <p>关于解决Mysql 中文乱码问题，在网上有多方法，这里我希望通过这篇博客来捋清楚使用Mysql 时产生乱码问题的前因后果，以及相应的解决方法。其中借鉴了网上一些内容，我会在博客的最后列出相关的链接，感谢这些作者。</p>
 <a id="more"></a>
 
@@ -64,33 +78,33 @@
 <thead>
 <tr>
 <th>和字符集相关的变量</th>
-<th style="text-align:center">说明</th>
+<th style="text-align:left">说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>client</strong></td>
-<td style="text-align:center">为客户端使用的字符集</td>
+<td style="text-align:left">为客户端使用的字符集</td>
 </tr>
 <tr>
 <td><strong>connection</strong></td>
-<td style="text-align:center">为连接数据库的字符集设置类型，如果程序没有指明连接数据库使用的字符集类型则按照服务器端默认的字符集设置</td>
+<td style="text-align:left">为连接数据库的字符集设置类型，如果程序没有指明连接数据库使用的字符集类型则按照服务器端默认的字符集设置</td>
 </tr>
 <tr>
 <td><strong>database</strong></td>
-<td style="text-align:center">为数据库服务器中某个库使用的字符集设定，如果建库时没有指明，将使用服务器安装时指定的字符集设置</td>
+<td style="text-align:left">为数据库服务器中某个库使用的字符集设定，如果建库时没有指明，将使用服务器安装时指定的字符集设置</td>
 </tr>
 <tr>
 <td><strong>results</strong></td>
-<td style="text-align:center">为数据库给客户端返回时使用的字符集设定，如果没有指明，使用服务器默认的字符集</td>
+<td style="text-align:left">为数据库给客户端返回时使用的字符集设定，如果没有指明，使用服务器默认的字符集</td>
 </tr>
 <tr>
 <td><strong>server</strong></td>
-<td style="text-align:center">为服务器安装时指定的默认字符集设定</td>
+<td style="text-align:left">为服务器安装时指定的默认字符集设定</td>
 </tr>
 <tr>
 <td><strong>system</strong></td>
-<td style="text-align:center">为数据库系统使用的字符集设定</td>
+<td style="text-align:left">为数据库系统使用的字符集设定</td>
 </tr>
 </tbody>
 </table>
@@ -157,11 +171,10 @@
     <summary type="html">
     <![CDATA[<p><img src="http://zhang1g.qiniudn.com/solve-mysql-messy-code.jpeg" alt="解决Mysql的中文乱码问题"></p>
 <h2 id="前言">前言</h2>
-<p>在<a href="http://zhangyigong.github.com/2015/01/27/database-and-sql/" target="_blank" rel="external">SQL 基础（一） 数据库和SQL</a>一文中，最后我们使用Mysql 在向表中插入汉字时出现了乱码。在实际工作中，乱码问题也时常发生，令人头痛。</p>
-<p>比如在Mysql 数据库插入一条带有中文的数据形如 </p>
-<figure class="highlight `"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Employee <span class="keyword">VALUES</span>(<span class="literal">null</span>,<span class="string">'张三'</span>,<span class="string">'male'</span>,<span class="string">'1995-10-08'</span>,<span class="string">'2015-01-12'</span>,<span class="string">'Sales'</span>,<span class="number">2000</span>,<span class="string">'是个好员工！'</span>);</span></div></pre></td></tr></table></figure>
+<p>在[SQL 基础（一） 数据库和SQL] (<a href="http://zhangyigong.github.com/2015/01/27/database-and-sql/)一文中，最后我们使用Mysql" target="_blank" rel="external">http://zhangyigong.github.com/2015/01/27/database-and-sql/)一文中，最后我们使用Mysql</a> 在向表中插入汉字时出现了乱码。在实际工作中，乱码问题也时常发生，令人头痛。</p>
+<p>比如在Mysql 数据库插入下面一条带有中文的数据，在查询时结果集中很容易出现乱码。</p>
+<figure class="highlight `"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Employee <span class="keyword">VALUES</span>(<span class="literal">null</span>,<span class="string">'张三'</span>,<span class="string">'male'</span>,<span class="string">'1995-10-08'</span>,</span></div><div class="line">	<span class="string">'2015-01-12'</span>,<span class="string">'Sales'</span>,<span class="number">2000</span>,<span class="string">'是个好员工！'</span>);</div></pre></td></tr></table></figure>
 
-<p>在查询时结果集中很容易出现乱码。</p>
 <p>关于解决Mysql 中文乱码问题，在网上有多方法，这里我希望通过这篇博客来捋清楚使用Mysql 时产生乱码问题的前因后果，以及相应的解决方法。其中借鉴了网上一些内容，我会在博客的最后列出相关的链接，感谢这些作者。</p>
 ]]>
     
@@ -180,7 +193,7 @@
     <link href="http://zhangyigong.github.com/2015/01/27/database-and-sql/"/>
     <id>http://zhangyigong.github.com/2015/01/27/database-and-sql/</id>
     <published>2015-01-27T02:11:48.000Z</published>
-    <updated>2015-01-27T17:41:06.000Z</updated>
+    <updated>2015-01-28T04:48:06.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/sql-base-learn2.jpg" alt="《SQL 基础教程》图书封面"></p>
 <h2 id="前言">前言</h2>
 <p>总是感觉之前学的数据库相关的知识很零散，不够系统，加之好久没有看关于SQL 的知识，不免有点生疏了，于是想找一本合适的教材回顾一下。后来找到了一本可以堪称是零基础入门的SQL 书籍，这里给大家推荐一下：</p>
@@ -250,7 +263,7 @@
 <th style="text-align:right">商品分类</th>
 <th style="text-align:right">销售单价</th>
 <th style="text-align:right">进货单价</th>
-<th style="text-align:center">登记日期</th>
+<th style="text-align:right">登记日期</th>
 </tr>
 </thead>
 <tbody>
@@ -260,7 +273,7 @@
 <td style="text-align:right">衣服</td>
 <td style="text-align:right">1000</td>
 <td style="text-align:right">500</td>
-<td style="text-align:center">2009-09-20</td>
+<td style="text-align:right">2009-09-20</td>
 </tr>
 <tr>
 <td>0002</td>
@@ -268,7 +281,7 @@
 <td style="text-align:right">办公用品</td>
 <td style="text-align:right">500</td>
 <td style="text-align:right">320</td>
-<td style="text-align:center">2009-09-11</td>
+<td style="text-align:right">2009-09-11</td>
 </tr>
 <tr>
 <td>0003</td>
@@ -276,7 +289,7 @@
 <td style="text-align:right">衣服</td>
 <td style="text-align:right">4000</td>
 <td style="text-align:right">2800</td>
-<td style="text-align:center"></td>
+<td style="text-align:right"></td>
 </tr>
 <tr>
 <td>0004</td>
@@ -284,7 +297,7 @@
 <td style="text-align:right">厨房用品</td>
 <td style="text-align:right">3000</td>
 <td style="text-align:right">2800</td>
-<td style="text-align:center">2009-09-20</td>
+<td style="text-align:right">2009-09-20</td>
 </tr>
 <tr>
 <td>0005</td>
@@ -292,7 +305,7 @@
 <td style="text-align:right">厨房用品</td>
 <td style="text-align:right">6800</td>
 <td style="text-align:right">5000</td>
-<td style="text-align:center">2009-01-15</td>
+<td style="text-align:right">2009-01-15</td>
 </tr>
 <tr>
 <td>0006</td>
@@ -300,7 +313,7 @@
 <td style="text-align:right">厨房用品</td>
 <td style="text-align:right">500</td>
 <td style="text-align:right"></td>
-<td style="text-align:center">2009-09-20</td>
+<td style="text-align:right">2009-09-20</td>
 </tr>
 <tr>
 <td>0007</td>
@@ -308,7 +321,7 @@
 <td style="text-align:right">厨房用品</td>
 <td style="text-align:right">880</td>
 <td style="text-align:right">790</td>
-<td style="text-align:center">2008-04-28</td>
+<td style="text-align:right">2008-04-28</td>
 </tr>
 <tr>
 <td>0008</td>
@@ -316,7 +329,7 @@
 <td style="text-align:right">办公用品</td>
 <td style="text-align:right">100</td>
 <td style="text-align:right"></td>
-<td style="text-align:center">2009-11-11</td>
+<td style="text-align:right">2009-11-11</td>
 </tr>
 </tbody>
 </table>
@@ -398,7 +411,7 @@
 <p><img src="http://zhang1g.qiniudn.com/insert-data-to-table-shop.PNG" alt="向表Product 中插入数据"></p>
 <p>插入数据后我们通过Mysql Administrator 之类的带界面的Mysql 客户端查看我们的结果，很可惜地发现插入的汉字显示为乱码</p>
 <p><img src="http://zhang1g.qiniudn.com/inser-data-to-shop-error-code.PNG" alt="插入的汉字显示为乱码"></p>
-<p>这里我们先不做处理，在该系列博客的番外篇<a href="http://zhangyigong.github.com/2015/01/27/solve-mysql-messy-code" target="_blank" rel="external">SQL基础教程（番外篇）解决Mysql 的中文乱码问题</a>中，我们会详细讲述Mysql 产生中文乱码的前因后果以及解决方法。</p>
+<p>这里我们先不做处理，在该系列博客的番外篇<a href="http://zhangyigong.github.com/2015/01/27/solve-mysql-messy-code" target="_blank" rel="external">SQL基础（番外篇）解决Mysql 的中文乱码问题</a>中，我们会详细讲述Mysql 产生中文乱码的前因后果以及解决方法。</p>
 <h2 id="总结">总结</h2>
 <p>这一片博客中我们简单介绍了一下为什么要使用数据库来管理数据，根据SQL 语句的类型将SQL 语句分为 DDL、DML、DCL 三类，并且对除了SQL 查询以外的其他语法做了简单的介绍，包括</p>
 <ul>
