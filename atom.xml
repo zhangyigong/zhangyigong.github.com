@@ -4,7 +4,7 @@
   <subtitle><![CDATA[眯着眼睛安静思考世界的攻城狮]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-03-04T08:31:54.587Z</updated>
+  <updated>2015-03-04T08:36:56.412Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -127,7 +127,7 @@
     <link href="http://zhangyigong.github.com/2015/02/04/design-pattern-and-design-principles-second/"/>
     <id>http://zhangyigong.github.com/2015/02/04/design-pattern-and-design-principles-second/</id>
     <published>2015-02-04T07:24:33.000Z</published>
-    <updated>2015-03-04T08:24:01.000Z</updated>
+    <updated>2015-03-04T08:36:45.000Z</updated>
     <content type="html"><![CDATA[<p>在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容。</p>
 <a id="more"></a>
 
@@ -136,8 +136,7 @@
 <p><strong>里氏代换原则是实现开闭原则的重要方式之一</strong>，由于使用基类对象的地方都可以使用子类对象，因此<strong>在程序中尽量使用基类类型来对对象进行定义，而在运行时再确定其子类类型，用子类对象来替换父类对象</strong>。</p>
 <p>一个简单的例子如下：</p>
 <p><img src="http://my.csdn.net/uploads/201205/06/1336312710_1412.jpg" alt="不好的设计"></p>
-<p>在原本的设计中，无论是普通客户还是VIP客户，发送邮件的过程都是相同的，也就是说两个send()方法中的代码重复。</p>
-<p>可以考虑增加一个新的抽象客户类Customer，而将CommonCustomer 和VIPCustomer 类作为其子类，邮件发送类EmailSender 类针对抽象客户类Customer 编程，根据里氏代换原则，能够接受基类对象的地方必然能够接受子类对象，因此将EmailSender 中的send()方法的参数类型改为Customer，如果需要增加新类型的客户，只需将其作为Customer 类的子类即可。</p>
+<p>在原本的设计中，无论是普通客户还是VIP客户，发送邮件的过程都是相同的，也就是说两个send()方法中的代码重复。<br>可以考虑增加一个新的抽象客户类Customer，而将CommonCustomer 和VIPCustomer 类作为其子类，邮件发送类EmailSender 类针对抽象客户类Customer 编程，根据里氏代换原则，能够接受基类对象的地方必然能够接受子类对象，因此将EmailSender 中的send()方法的参数类型改为Customer，如果需要增加新类型的客户，只需将其作为Customer 类的子类即可。</p>
 <p>修改后的结构如下</p>
 <p><img src="http://my.csdn.net/uploads/201205/06/1336312720_2300.jpg" alt="好的设计"></p>
 <p>在上面的例子中，在传递参数时使用基类对象，除此以外，在定义成员变量、定义局部变量、确定方法返回类型时都可使用里氏代换原则。针对基类编程，在程序运行时再确定具体子类。</p>
@@ -179,341 +178,27 @@
 <p>可以通过引入一个专门用于控制界面控件交互的中间类(Mediator)来降低界面控件之间的耦合度。引入中间类之后，界面控件之间不再发生直接引用，而是将请求先转发给中间类，再由中间类来完成对其他控件的调用。当需要增加或删除新的控件时，只需修改中间类即可，无须修改新增控件或已有控件的源代码，</p>
 <h2 id="总结">总结</h2>
 <p>关于面向对象设计原则，我们使用通俗的方式进行概括总结。</p>
-<p>单一职责原则要求在设计时一个类只负责一个功能领域中的相应职责，应该只有一个引起它变化的原因。</p>
-<p>开闭原则指的是一个软件实体应该尽量在不修改原有代码的情况下进行扩展。</p>
-<p>里氏代换原则要求所有引用基类（父类）的地方必须能透明地使用其子类的对象。</p>
-<p>依赖倒转原则要求针对接口编程，而不要针对实现编程，针对抽象层编程时，需要将具体类的对象通过依赖注入(DependencyInjection, DI)的方式注入到其他对象中，常用的注入方式有三种，分别是：构造注入，设值注入（Setter注入）和接口注入。</p>
-<p>开闭原则是目标，里氏代换原则是基础，依赖倒转原则是手段，它们相辅相成，不可分割。</p>
-<p>接口隔离原则指的是使用多个专门的接口，而不使用单一的总接口，即客户端不应该依赖那些它不需要的接口。</p>
-<p>合成复用原则指的是尽量使用对象组合，而不是继承来达到复用的目的。</p>
-<p>迪米特法则要求一个软件实体应当尽可能少地与其他实体发生相互作用，对于不直接通信的类对象，如果其中的一个对象需要调用另一个对象的某一个方法的话，可以通过第三者转发这个调用。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容。</p>
-]]>
-    
-    </summary>
-    
-      <category term="设计模式" scheme="http://zhangyigong.github.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[设计模式概述与面向对象设计原则（二）]]></title>
-    <link href="http://zhangyigong.github.com/2015/02/04/design-pattern-and-design-principles-second/"/>
-    <id>http://zhangyigong.github.com/2015/02/04/design-pattern-and-design-principles-second/</id>
-    <published>2015-02-04T07:24:33.000Z</published>
-    <updated>2015-03-04T08:24:01.000Z</updated>
-    <content type="html"><![CDATA[<p>在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容。</p>
-<a id="more"></a>
-
-<h2 id="里氏代换原则">里氏代换原则</h2>
-<p>里氏代换原则的一个通俗的定义是：所有引用基类（父类）的地方必须能透明地使用其子类的对象。</p>
-<p><strong>里氏代换原则是实现开闭原则的重要方式之一</strong>，由于使用基类对象的地方都可以使用子类对象，因此<strong>在程序中尽量使用基类类型来对对象进行定义，而在运行时再确定其子类类型，用子类对象来替换父类对象</strong>。</p>
-<p>一个简单的例子如下：</p>
-<p><img src="http://my.csdn.net/uploads/201205/06/1336312710_1412.jpg" alt="不好的设计"></p>
-<p>在原本的设计中，无论是普通客户还是VIP客户，发送邮件的过程都是相同的，也就是说两个send()方法中的代码重复。</p>
-<p>可以考虑增加一个新的抽象客户类Customer，而将CommonCustomer 和VIPCustomer 类作为其子类，邮件发送类EmailSender 类针对抽象客户类Customer 编程，根据里氏代换原则，能够接受基类对象的地方必然能够接受子类对象，因此将EmailSender 中的send()方法的参数类型改为Customer，如果需要增加新类型的客户，只需将其作为Customer 类的子类即可。</p>
-<p>修改后的结构如下</p>
-<p><img src="http://my.csdn.net/uploads/201205/06/1336312720_2300.jpg" alt="好的设计"></p>
-<p>在上面的例子中，在传递参数时使用基类对象，除此以外，在定义成员变量、定义局部变量、确定方法返回类型时都可使用里氏代换原则。针对基类编程，在程序运行时再确定具体子类。</p>
-<h2 id="依赖倒转原则">依赖倒转原则</h2>
-<p>依赖倒转原则通俗的来说就是<strong>要针对接口编程，而不要针对实现编程</strong>。</p>
-<p>在实现依赖倒转原则时，我们需要针对抽象层编程，而将具体类的对象通过依赖注入(DependencyInjection, DI)的方式注入到其他对象中，<strong>依赖注入是指当一个对象要与其他对象发生依赖关系时，通过抽象来注入所依赖的对象。常用的注入方式有三种，分别是：构造注入，设值注入（Setter注入）和接口注入</strong>。</p>
-<p>一个简单的例子如下</p>
-<p><img src="http://my.csdn.net/uploads/201205/13/1336909329_9009.jpg" alt="不好的设计"></p>
-<p>CustomerDAO 将存储在TXT或Excel文件中的客户信息转存到数据库中，需要调用数据格式转换类中的方法。但是由于CustomerDAO 针对具体数据转换类编程，因此在增加新的数据转换类或者更换数据转换类时都不得不修改CustomerDAO 的源代码。我们可以通过引入抽象数据转换类解决该问题</p>
-<p><img src="http://my.csdn.net/uploads/201205/13/1336909334_4352.jpg" alt="好的设计"></p>
-<p>在修改之后的设计中，CustomerDAO 针对抽象类DataConvertor 编程，而将具体数据转换类名存储在配置文件中，符合依赖倒转原则。</p>
-<p>在上述重构过程中，我们使用了开闭原则、里氏代换原则和依赖倒转原则，在大多数情况下，这三个设计原则会同时出现，<strong>开闭原则是目标，里氏代换原则是基础，依赖倒转原则是手段</strong>，它们相辅相成，相互补充。</p>
-<h2 id="接口隔离原则">接口隔离原则</h2>
-<p>接口隔离原则指的是使用多个专门的接口，而不使用单一的总接口，即<strong>客户端不应该依赖那些它不需要的接口</strong>。</p>
-<p>下面通过一个简单实例来加深理解：</p>
-<p><img src="http://my.csdn.net/uploads/201205/13/1336910243_3390.jpg" alt="不好的设计"></p>
-<p>CustomerDataDisplay 接口中的方法dataRead()用于从文件中读取数据，方法transformToXML()用于将数据转换成XML 格式，方法createChart()用于创建图表，方法displayChart()用于显示图表，方法createReport()用于创建文字报表，方法displayReport()用于显示文字报表。</p>
-<p>由于在接口CustomerDataDisplay中定义了太多方法，即该接口承担了太多职责，一方面导致该接口的实现类很庞大，在不同的实现类中都不得不实现接口中定义的所有方法，灵活性较差，如果出现大量的空方法，将导致系统中产生大量的无用代码，影响代码质量；另一方面由于客户端针对大接口编程，将在一定程序上破坏程序的封装性，客户端看到了不应该看到的方法，没有为客户端定制接口。</p>
-<p>使用接口隔离原则进行重构后的结构如下</p>
-<p><img src="http://my.csdn.net/uploads/201205/13/1336910247_6209.jpg" alt="好的设计"></p>
-<h2 id="合成复用原则">合成复用原则</h2>
-<p>合成复用原则指的是<strong>尽量使用对象组合，而不是继承来达到复用的目的</strong>。</p>
-<h2 id="迪米特法则">迪米特法则</h2>
-<p>迪米特法则指的是<strong>一个软件实体应当尽可能少地与其他实体发生相互作用</strong>。可以形象地理解为不要和“陌生人”说话、只与你的直接朋友通信。在迪米特法则中，对于一个对象，其朋友包括以下几类：</p>
-<ol>
-<li>当前对象本身(this)；</li>
-<li>以参数形式传入到当前对象方法中的对象；</li>
-<li>当前对象的成员对象；</li>
-<li>如果当前对象的成员对象是一个集合，那么集合中的元素也都是朋友；</li>
-<li>当前对象所创建的对象。</li>
-</ol>
-<p>迪米特法则要求我们在设计系统时，应该尽量减少对象之间的交互，如果两个对象之间不必彼此直接通信，那么这两个对象就不应当发生任何直接的相互作用，如果其中的一个对象需要调用另一个对象的某一个方法的话，可以<strong>通过第三者转发这个调用</strong>。简言之，就是通过引入一个合理的第三者来降低现有对象之间的耦合度。</p>
-<p>为了便于理解，给出一个简单的例子</p>
-<p><img src="http://my.csdn.net/uploads/201205/14/1336930654_2743.jpg" alt="不好的设计"></p>
-<p>界面控件之间存在复杂的交互关系，一个控件事件的触发将导致多个其他界面控件产生响应，例如，当一个按钮(Button)被单击时，对应的列表框(List)、组合框(ComboBox)、文本框(TextBox)、文本标签(Label)等都将发生改变。</p>
-<p>由于界面控件之间的交互关系复杂，导致在该窗口中增加新的界面控件时需要修改与之交互的其他控件的源代码，系统扩展性较差，也不便于增加和删除新控件。</p>
-<p>现使用迪米特对其进行重构。</p>
-<p><img src="http://my.csdn.net/uploads/201205/14/1336930673_6550.jpg" alt="好的设计"></p>
-<p>可以通过引入一个专门用于控制界面控件交互的中间类(Mediator)来降低界面控件之间的耦合度。引入中间类之后，界面控件之间不再发生直接引用，而是将请求先转发给中间类，再由中间类来完成对其他控件的调用。当需要增加或删除新的控件时，只需修改中间类即可，无须修改新增控件或已有控件的源代码，</p>
-<h2 id="总结">总结</h2>
-<p>关于面向对象设计原则，我们使用通俗的方式进行概括总结。</p>
-<p>单一职责原则要求在设计时一个类只负责一个功能领域中的相应职责，应该只有一个引起它变化的原因。</p>
-<p>开闭原则指的是一个软件实体应该尽量在不修改原有代码的情况下进行扩展。</p>
-<p>里氏代换原则要求所有引用基类（父类）的地方必须能透明地使用其子类的对象。</p>
-<p>依赖倒转原则要求针对接口编程，而不要针对实现编程，针对抽象层编程时，需要将具体类的对象通过依赖注入(DependencyInjection, DI)的方式注入到其他对象中，常用的注入方式有三种，分别是：构造注入，设值注入（Setter注入）和接口注入。</p>
-<p>开闭原则是目标，里氏代换原则是基础，依赖倒转原则是手段，它们相辅相成，不可分割。</p>
-<p>接口隔离原则指的是使用多个专门的接口，而不使用单一的总接口，即客户端不应该依赖那些它不需要的接口。</p>
-<p>合成复用原则指的是尽量使用对象组合，而不是继承来达到复用的目的。</p>
-<p>迪米特法则要求一个软件实体应当尽可能少地与其他实体发生相互作用，对于不直接通信的类对象，如果其中的一个对象需要调用另一个对象的某一个方法的话，可以通过第三者转发这个调用。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容。</p>
-]]>
-    
-    </summary>
-    
-      <category term="设计模式" scheme="http://zhangyigong.github.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[设计模式概述与面向对象设计原则（二）]]></title>
-    <link href="http://zhangyigong.github.com/2015/02/04/design-pattern-and-design-principles-second/"/>
-    <id>http://zhangyigong.github.com/2015/02/04/design-pattern-and-design-principles-second/</id>
-    <published>2015-02-04T07:24:33.000Z</published>
-    <updated>2015-03-04T08:24:01.000Z</updated>
-    <content type="html"><![CDATA[<p>在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容。</p>
-<a id="more"></a>
-
-<h2 id="里氏代换原则">里氏代换原则</h2>
-<p>里氏代换原则的一个通俗的定义是：所有引用基类（父类）的地方必须能透明地使用其子类的对象。</p>
-<p><strong>里氏代换原则是实现开闭原则的重要方式之一</strong>，由于使用基类对象的地方都可以使用子类对象，因此<strong>在程序中尽量使用基类类型来对对象进行定义，而在运行时再确定其子类类型，用子类对象来替换父类对象</strong>。</p>
-<p>一个简单的例子如下：</p>
-<p><img src="http://my.csdn.net/uploads/201205/06/1336312710_1412.jpg" alt="不好的设计"></p>
-<p>在原本的设计中，无论是普通客户还是VIP客户，发送邮件的过程都是相同的，也就是说两个send()方法中的代码重复。</p>
-<p>可以考虑增加一个新的抽象客户类Customer，而将CommonCustomer 和VIPCustomer 类作为其子类，邮件发送类EmailSender 类针对抽象客户类Customer 编程，根据里氏代换原则，能够接受基类对象的地方必然能够接受子类对象，因此将EmailSender 中的send()方法的参数类型改为Customer，如果需要增加新类型的客户，只需将其作为Customer 类的子类即可。</p>
-<p>修改后的结构如下</p>
-<p><img src="http://my.csdn.net/uploads/201205/06/1336312720_2300.jpg" alt="好的设计"></p>
-<p>在上面的例子中，在传递参数时使用基类对象，除此以外，在定义成员变量、定义局部变量、确定方法返回类型时都可使用里氏代换原则。针对基类编程，在程序运行时再确定具体子类。</p>
-<h2 id="依赖倒转原则">依赖倒转原则</h2>
-<p>依赖倒转原则通俗的来说就是<strong>要针对接口编程，而不要针对实现编程</strong>。</p>
-<p>在实现依赖倒转原则时，我们需要针对抽象层编程，而将具体类的对象通过依赖注入(DependencyInjection, DI)的方式注入到其他对象中，<strong>依赖注入是指当一个对象要与其他对象发生依赖关系时，通过抽象来注入所依赖的对象。常用的注入方式有三种，分别是：构造注入，设值注入（Setter注入）和接口注入</strong>。</p>
-<p>一个简单的例子如下</p>
-<p><img src="http://my.csdn.net/uploads/201205/13/1336909329_9009.jpg" alt="不好的设计"></p>
-<p>CustomerDAO 将存储在TXT或Excel文件中的客户信息转存到数据库中，需要调用数据格式转换类中的方法。但是由于CustomerDAO 针对具体数据转换类编程，因此在增加新的数据转换类或者更换数据转换类时都不得不修改CustomerDAO 的源代码。我们可以通过引入抽象数据转换类解决该问题</p>
-<p><img src="http://my.csdn.net/uploads/201205/13/1336909334_4352.jpg" alt="好的设计"></p>
-<p>在修改之后的设计中，CustomerDAO 针对抽象类DataConvertor 编程，而将具体数据转换类名存储在配置文件中，符合依赖倒转原则。</p>
-<p>在上述重构过程中，我们使用了开闭原则、里氏代换原则和依赖倒转原则，在大多数情况下，这三个设计原则会同时出现，<strong>开闭原则是目标，里氏代换原则是基础，依赖倒转原则是手段</strong>，它们相辅相成，相互补充。</p>
-<h2 id="接口隔离原则">接口隔离原则</h2>
-<p>接口隔离原则指的是使用多个专门的接口，而不使用单一的总接口，即<strong>客户端不应该依赖那些它不需要的接口</strong>。</p>
-<p>下面通过一个简单实例来加深理解：</p>
-<p><img src="http://my.csdn.net/uploads/201205/13/1336910243_3390.jpg" alt="不好的设计"></p>
-<p>CustomerDataDisplay 接口中的方法dataRead()用于从文件中读取数据，方法transformToXML()用于将数据转换成XML 格式，方法createChart()用于创建图表，方法displayChart()用于显示图表，方法createReport()用于创建文字报表，方法displayReport()用于显示文字报表。</p>
-<p>由于在接口CustomerDataDisplay中定义了太多方法，即该接口承担了太多职责，一方面导致该接口的实现类很庞大，在不同的实现类中都不得不实现接口中定义的所有方法，灵活性较差，如果出现大量的空方法，将导致系统中产生大量的无用代码，影响代码质量；另一方面由于客户端针对大接口编程，将在一定程序上破坏程序的封装性，客户端看到了不应该看到的方法，没有为客户端定制接口。</p>
-<p>使用接口隔离原则进行重构后的结构如下</p>
-<p><img src="http://my.csdn.net/uploads/201205/13/1336910247_6209.jpg" alt="好的设计"></p>
-<h2 id="合成复用原则">合成复用原则</h2>
-<p>合成复用原则指的是<strong>尽量使用对象组合，而不是继承来达到复用的目的</strong>。</p>
-<h2 id="迪米特法则">迪米特法则</h2>
-<p>迪米特法则指的是<strong>一个软件实体应当尽可能少地与其他实体发生相互作用</strong>。可以形象地理解为不要和“陌生人”说话、只与你的直接朋友通信。在迪米特法则中，对于一个对象，其朋友包括以下几类：</p>
-<ol>
-<li>当前对象本身(this)；</li>
-<li>以参数形式传入到当前对象方法中的对象；</li>
-<li>当前对象的成员对象；</li>
-<li>如果当前对象的成员对象是一个集合，那么集合中的元素也都是朋友；</li>
-<li>当前对象所创建的对象。</li>
-</ol>
-<p>迪米特法则要求我们在设计系统时，应该尽量减少对象之间的交互，如果两个对象之间不必彼此直接通信，那么这两个对象就不应当发生任何直接的相互作用，如果其中的一个对象需要调用另一个对象的某一个方法的话，可以<strong>通过第三者转发这个调用</strong>。简言之，就是通过引入一个合理的第三者来降低现有对象之间的耦合度。</p>
-<p>为了便于理解，给出一个简单的例子</p>
-<p><img src="http://my.csdn.net/uploads/201205/14/1336930654_2743.jpg" alt="不好的设计"></p>
-<p>界面控件之间存在复杂的交互关系，一个控件事件的触发将导致多个其他界面控件产生响应，例如，当一个按钮(Button)被单击时，对应的列表框(List)、组合框(ComboBox)、文本框(TextBox)、文本标签(Label)等都将发生改变。</p>
-<p>由于界面控件之间的交互关系复杂，导致在该窗口中增加新的界面控件时需要修改与之交互的其他控件的源代码，系统扩展性较差，也不便于增加和删除新控件。</p>
-<p>现使用迪米特对其进行重构。</p>
-<p><img src="http://my.csdn.net/uploads/201205/14/1336930673_6550.jpg" alt="好的设计"></p>
-<p>可以通过引入一个专门用于控制界面控件交互的中间类(Mediator)来降低界面控件之间的耦合度。引入中间类之后，界面控件之间不再发生直接引用，而是将请求先转发给中间类，再由中间类来完成对其他控件的调用。当需要增加或删除新的控件时，只需修改中间类即可，无须修改新增控件或已有控件的源代码，</p>
-<h2 id="总结">总结</h2>
-<p>关于面向对象设计原则，我们使用通俗的方式进行概括总结。</p>
-<p>单一职责原则要求在设计时一个类只负责一个功能领域中的相应职责，应该只有一个引起它变化的原因。</p>
-<p>开闭原则指的是一个软件实体应该尽量在不修改原有代码的情况下进行扩展。</p>
-<p>里氏代换原则要求所有引用基类（父类）的地方必须能透明地使用其子类的对象。</p>
-<p>依赖倒转原则要求针对接口编程，而不要针对实现编程，针对抽象层编程时，需要将具体类的对象通过依赖注入(DependencyInjection, DI)的方式注入到其他对象中，常用的注入方式有三种，分别是：构造注入，设值注入（Setter注入）和接口注入。</p>
-<p>开闭原则是目标，里氏代换原则是基础，依赖倒转原则是手段，它们相辅相成，不可分割。</p>
-<p>接口隔离原则指的是使用多个专门的接口，而不使用单一的总接口，即客户端不应该依赖那些它不需要的接口。</p>
-<p>合成复用原则指的是尽量使用对象组合，而不是继承来达到复用的目的。</p>
-<p>迪米特法则要求一个软件实体应当尽可能少地与其他实体发生相互作用，对于不直接通信的类对象，如果其中的一个对象需要调用另一个对象的某一个方法的话，可以通过第三者转发这个调用。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容。</p>
-]]>
-    
-    </summary>
-    
-      <category term="设计模式" scheme="http://zhangyigong.github.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[设计模式概述与面向对象设计原则（一）]]></title>
-    <link href="http://zhangyigong.github.com/2015/02/04/design-pattern-and-design-principles-first/"/>
-    <id>http://zhangyigong.github.com/2015/02/04/design-pattern-and-design-principles-first/</id>
-    <published>2015-02-04T01:50:16.000Z</published>
-    <updated>2015-03-04T08:24:03.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="设计模式概述">设计模式概述</h2>
-<p>设计模式从本质上来看，是众多代码复用手段中的一种，他最早由GOF（四人帮）在《设计模式——可复用面向对象软件的基础》一书中提出。要学懂设计模式，必须要首先理解设计模式的真实意图 — <strong>可复用面向对象软件的基础</strong>，这正是那本著作的副标题。    </p>
-<a id="more"></a> 
-
-<p>下面给出设计模式的定义：</p>
-<blockquote>
-<p>设计模式(Design Pattern)是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结，使用设计模式是为了可重用代码、让代码更容易被他人理解并且保证代码可靠性。</p>
-</blockquote>
-<p>一个成熟的设计模式一般包含以下几部分：</p>
-<ol>
-<li>模式名称（Patthern Name）    </li>
-<li>问题（Problem）</li>
-<li>解决方案（Solution）</li>
-<li>效果（Consequences）</li>
-</ol>
-<p><strong>模式名称</strong>主要是方便开发人员交流，一般是根据设计模式的功能或者结构来命名的。<strong>问题</strong>描述了应该在何时使用模式，它包含了设计中存在的问题以及问题存在的原因。<strong>解决方案</strong>描述了一个设计模式的组成成分，以及这些组成成分之间的相互关系，各自的职责和协作方式，通常解决方案通过UML类图和核心代码来进行描述。<strong>效果</strong>描述了模式的优缺点以及在使用模式时应权衡的问题。</p>
-<p>根据设计模式的用途可以分为创建型（Creational），结构型（Structural）和行为型（Behavioral）三种。其中</p>
 <ul>
-<li>创建型模式主要用于描述如何创建对象（5种）</li>
-<li>结构型模式主要用于描述如何实现类或对象的组合（7种）</li>
-<li>行为型模式主要用于描述类或对象怎样交互以及怎样分配职责（11种）</li>
+<li><p>单一职责原则要求在设计时一个类只负责一个功能领域中的相应职责，应该只有一个引起它变化的原因。</p>
+</li>
+<li><p>开闭原则指的是一个软件实体应该尽量在不修改原有代码的情况下进行扩展。</p>
+</li>
+<li><p>里氏代换原则要求所有引用基类（父类）的地方必须能透明地使用其子类的对象。</p>
+</li>
+<li><p>依赖倒转原则要求针对接口编程，而不要针对实现编程，针对抽象层编程时，需要将具体类的对象通过依赖注入(DependencyInjection, DI)的方式注入到其他对象中，常用的注入方式有三种，分别是：构造注入，设值注入（Setter注入）和接口注入。</p>
+</li>
+<li><p>开闭原则是目标，里氏代换原则是基础，依赖倒转原则是手段，它们相辅相成，不可分割。</p>
+</li>
+<li><p>接口隔离原则指的是使用多个专门的接口，而不使用单一的总接口，即客户端不应该依赖那些它不需要的接口。</p>
+</li>
+<li><p>合成复用原则指的是尽量使用对象组合，而不是继承来达到复用的目的。</p>
+</li>
+<li><p>迪米特法则要求一个软件实体应当尽可能少地与其他实体发生相互作用，对于不直接通信的类对象，如果其中的一个对象需要调用另一个对象的某一个方法的话，可以通过第三者转发这个调用。</p>
+</li>
 </ul>
-<p>设计模式还可以分为类模式和对象模式。我们经常将两种分类方式结合使用，如单例模式是对象创建型模式，模板方法模式是类行为型模式。</p>
-<p>值得注意的是，简单工厂模式因为太简单了，因此没有放到这23种设计模式当中。</p>
-<h2 id="面向对象设计原则">面向对象设计原则</h2>
-<p>面向对象设计原则共包括7个：</p>
-<ol>
-<li>单一职责原则 — 一个类只负责一个功能领域中的相应职责</li>
-<li>开闭原则         — 软件实体应对扩展开放，而对修改关闭</li>
-<li>里氏代换原则    — 所有引用基类对象的地方能够透明地使用其子类的对象        </li>
-<li>依赖倒转原则 — 抽象不应该依赖于细节，细节应该依赖于抽象</li>
-<li>接口隔离原则 — 使用多个专门的接口，而不使用单一的总接口</li>
-<li>合成复用原则 — 尽量使用对象组合，而不是继承来达到复用的目的</li>
-<li>迪米特法则    — 一个软件实体应当尽可能少地与其他实体发生相互作用</li>
-</ol>
-<p>下面讲述各个设计原则的详细内容，其中用到的实际例子均来自于<a href="http://blog.csdn.net/lovelion/article/details/17517213" target="_blank" rel="external">刘伟技术博客</a>中讲解设计原则的相关内容。</p>
-<p><strong>单一职责原则</strong></p>
-<p>单一职责可以从另外一个角度理解：<strong>对一个类而言，应该只有一个引起它变化的原因</strong>。它是实现软件设计高内聚、低耦合的指导方针。</p>
-<p>一个简单的例子如下：</p>
-<p><img src="http://my.csdn.net/uploads/201205/05/1336147233_3529.jpg" alt="不好的实现"></p>
-<p>图中的CustomerDataChart 类中的方法说明如下：getConnection()方法用于连接数据库，findCustomers()用于查询所有的客户信息，createChart()用于创建图表，displayChart()用于显示图表。</p>
-<p>CustomerDataChart 类承担了太多的职责，既包含与数据库相关的方法，又包含与图表生成和显示相关的方法。</p>
-<p>如果在其他类中也需要连接数据库或者使用findCustomers()方法查询客户信息，则难以实现代码的重用。无论是修改数据库连接方式还是修改图表显示方式都需要修改该类，它不止一个引起它变化的原因，违背了单一职责原则。因此需要对该类进行拆分，使其满足单一职责原则，类CustomerDataChart 可拆分为如下三个类：</p>
-<ol>
-<li><strong>DBUtil</strong>：负责连接数据库，包含数据库连接方法getConnection()；</li>
-<li><strong>CustomerDAO</strong>：负责操作数据库中的Customer表，包含对Customer表的增删改查等方法，如findCustomers()；</li>
-<li><strong>CustomerDataChart</strong>：负责图表的生成和显示，包含方法createChart()和displayChart()。</li>
-</ol>
-<p>使用单一职责原则重构后的结构如下所示：</p>
-<p><img src="http://my.csdn.net/uploads/201205/05/1336147240_4896.jpg" alt="好的实现"></p>
-<p><strong>开闭原则</strong></p>
-<p>开闭原则指的是一个软件实体应该尽量在不修改原有代码的情况下进行扩展。一个软件实体可以指一个独立的类，也可以是由多个类组成的一个局部结构。</p>
-<p>软件系统的扩展和维护会随着需求的变化而经常发生，利用开闭原则对系统进行扩展的时候，需要对系统进行抽象化设计，具体表现为可以为系统定义一个相对稳定的抽象层，而将不同的实现行为移至具体的实现层中完成。如果需要修改系统的行为，无须对抽象层进行任何改动，只需要增加新的具体类来实现新的业务功能即可，实现在不修改已有代码的基础上扩展系统的功能，达到开闭原则的要求。</p>
-<p>一个例子如下：</p>
-<p><img src="http://my.csdn.net/uploads/201205/05/1336201566_1496.jpg" alt="不好的实现"></p>
-<p>ChartDisplay 可以显示各种类型的图表，如饼状图和柱状图等。在ChartDisplay 类的display()方法中存在如下代码片段：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">...</span><span class="attribute">...</span>  </div><div class="line"><span class="keyword">if</span> (<span class="keyword">type</span><span class="built_in">.</span><span class="keyword">equals</span>(<span class="string">"pie"</span>)) {  </div><div class="line">    PieChart chart <span class="subst">=</span> <span class="literal">new</span> PieChart();  </div><div class="line">    chart<span class="built_in">.</span>display();  </div><div class="line">}  </div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">type</span><span class="built_in">.</span><span class="keyword">equals</span>(<span class="string">"bar"</span>)) {  </div><div class="line">    BarChart chart <span class="subst">=</span> <span class="literal">new</span> BarChart();  </div><div class="line">    chart<span class="built_in">.</span>display();  </div><div class="line">}  </div><div class="line"><span class="attribute">...</span><span class="attribute">...</span></div></pre></td></tr></table></figure>
-
-<p>这样如果要新增一个图标类，如折线图，则需要修改ChartDisplay 类的display()方法的源代码，增加新的判断逻辑，违反了开闭原则。</p>
-<p>可以通过抽象化的方式对系统进行重构，使之增加新的图表类时无须修改源代码，满足开闭原则。具体做法如下：</p>
-<ol>
-<li>增加一个抽象图表类AbstractChart，将各种具体图表类作为其子类；</li>
-<li>ChartDisplay 类针对抽象图表类进行编程，由客户端来决定使用哪种具体图表。</li>
-</ol>
-<p><img src="http://my.csdn.net/uploads/201205/05/1336201573_6059.jpg" alt="好的实现"></p>
-<p>在修改过的实现中，我们引入了抽象图表类AbstractChart，且ChartDisplay 针对抽象图表类进行编程，并通过setChart()方法由客户端来设置实例化的具体图表对象，在ChartDisplay 的display()方法中调用chart 对象的display()方法显示图表。如果需要增加一种新的图表，如折线图LineChart，只需要将LineChart 也作为AbstractChart 的子类，在客户端向ChartDisplay 中注入一个LineChart对象即可，无须修改现有类库的源代码。     </p>
-<p>需要注意，因为xml 和properties 等格式的配置文件是纯文本文件，可以直接通过VI 编辑器或记事本进行编辑，且无须编译，因此在软件开发中，一般不把对配置文件的修改认为是对系统源代码的修改。</p>
-<p>由于篇幅的限制这一篇博客中只讲述2种设计原则，剩余4种设计原则的详细内容在下一篇博客中讲述。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h2 id="设计模式概述">设计模式概述</h2>
-<p>设计模式从本质上来看，是众多代码复用手段中的一种，他最早由GOF（四人帮）在《设计模式——可复用面向对象软件的基础》一书中提出。要学懂设计模式，必须要首先理解设计模式的真实意图 — <strong>可复用面向对象软件的基础</strong>，这正是那本著作的副标题。    </p>
-]]>
-    
-    </summary>
-    
-      <category term="设计模式" scheme="http://zhangyigong.github.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[设计模式概述与面向对象设计原则（一）]]></title>
-    <link href="http://zhangyigong.github.com/2015/02/04/design-pattern-and-design-principles-first/"/>
-    <id>http://zhangyigong.github.com/2015/02/04/design-pattern-and-design-principles-first/</id>
-    <published>2015-02-04T01:50:16.000Z</published>
-    <updated>2015-03-04T08:24:03.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="设计模式概述">设计模式概述</h2>
-<p>设计模式从本质上来看，是众多代码复用手段中的一种，他最早由GOF（四人帮）在《设计模式——可复用面向对象软件的基础》一书中提出。要学懂设计模式，必须要首先理解设计模式的真实意图 — <strong>可复用面向对象软件的基础</strong>，这正是那本著作的副标题。    </p>
-<a id="more"></a> 
-
-<p>下面给出设计模式的定义：</p>
-<blockquote>
-<p>设计模式(Design Pattern)是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结，使用设计模式是为了可重用代码、让代码更容易被他人理解并且保证代码可靠性。</p>
-</blockquote>
-<p>一个成熟的设计模式一般包含以下几部分：</p>
-<ol>
-<li>模式名称（Patthern Name）    </li>
-<li>问题（Problem）</li>
-<li>解决方案（Solution）</li>
-<li>效果（Consequences）</li>
-</ol>
-<p><strong>模式名称</strong>主要是方便开发人员交流，一般是根据设计模式的功能或者结构来命名的。<strong>问题</strong>描述了应该在何时使用模式，它包含了设计中存在的问题以及问题存在的原因。<strong>解决方案</strong>描述了一个设计模式的组成成分，以及这些组成成分之间的相互关系，各自的职责和协作方式，通常解决方案通过UML类图和核心代码来进行描述。<strong>效果</strong>描述了模式的优缺点以及在使用模式时应权衡的问题。</p>
-<p>根据设计模式的用途可以分为创建型（Creational），结构型（Structural）和行为型（Behavioral）三种。其中</p>
-<ul>
-<li>创建型模式主要用于描述如何创建对象（5种）</li>
-<li>结构型模式主要用于描述如何实现类或对象的组合（7种）</li>
-<li>行为型模式主要用于描述类或对象怎样交互以及怎样分配职责（11种）</li>
-</ul>
-<p>设计模式还可以分为类模式和对象模式。我们经常将两种分类方式结合使用，如单例模式是对象创建型模式，模板方法模式是类行为型模式。</p>
-<p>值得注意的是，简单工厂模式因为太简单了，因此没有放到这23种设计模式当中。</p>
-<h2 id="面向对象设计原则">面向对象设计原则</h2>
-<p>面向对象设计原则共包括7个：</p>
-<ol>
-<li>单一职责原则 — 一个类只负责一个功能领域中的相应职责</li>
-<li>开闭原则         — 软件实体应对扩展开放，而对修改关闭</li>
-<li>里氏代换原则    — 所有引用基类对象的地方能够透明地使用其子类的对象        </li>
-<li>依赖倒转原则 — 抽象不应该依赖于细节，细节应该依赖于抽象</li>
-<li>接口隔离原则 — 使用多个专门的接口，而不使用单一的总接口</li>
-<li>合成复用原则 — 尽量使用对象组合，而不是继承来达到复用的目的</li>
-<li>迪米特法则    — 一个软件实体应当尽可能少地与其他实体发生相互作用</li>
-</ol>
-<p>下面讲述各个设计原则的详细内容，其中用到的实际例子均来自于<a href="http://blog.csdn.net/lovelion/article/details/17517213" target="_blank" rel="external">刘伟技术博客</a>中讲解设计原则的相关内容。</p>
-<p><strong>单一职责原则</strong></p>
-<p>单一职责可以从另外一个角度理解：<strong>对一个类而言，应该只有一个引起它变化的原因</strong>。它是实现软件设计高内聚、低耦合的指导方针。</p>
-<p>一个简单的例子如下：</p>
-<p><img src="http://my.csdn.net/uploads/201205/05/1336147233_3529.jpg" alt="不好的实现"></p>
-<p>图中的CustomerDataChart 类中的方法说明如下：getConnection()方法用于连接数据库，findCustomers()用于查询所有的客户信息，createChart()用于创建图表，displayChart()用于显示图表。</p>
-<p>CustomerDataChart 类承担了太多的职责，既包含与数据库相关的方法，又包含与图表生成和显示相关的方法。</p>
-<p>如果在其他类中也需要连接数据库或者使用findCustomers()方法查询客户信息，则难以实现代码的重用。无论是修改数据库连接方式还是修改图表显示方式都需要修改该类，它不止一个引起它变化的原因，违背了单一职责原则。因此需要对该类进行拆分，使其满足单一职责原则，类CustomerDataChart 可拆分为如下三个类：</p>
-<ol>
-<li><strong>DBUtil</strong>：负责连接数据库，包含数据库连接方法getConnection()；</li>
-<li><strong>CustomerDAO</strong>：负责操作数据库中的Customer表，包含对Customer表的增删改查等方法，如findCustomers()；</li>
-<li><strong>CustomerDataChart</strong>：负责图表的生成和显示，包含方法createChart()和displayChart()。</li>
-</ol>
-<p>使用单一职责原则重构后的结构如下所示：</p>
-<p><img src="http://my.csdn.net/uploads/201205/05/1336147240_4896.jpg" alt="好的实现"></p>
-<p><strong>开闭原则</strong></p>
-<p>开闭原则指的是一个软件实体应该尽量在不修改原有代码的情况下进行扩展。一个软件实体可以指一个独立的类，也可以是由多个类组成的一个局部结构。</p>
-<p>软件系统的扩展和维护会随着需求的变化而经常发生，利用开闭原则对系统进行扩展的时候，需要对系统进行抽象化设计，具体表现为可以为系统定义一个相对稳定的抽象层，而将不同的实现行为移至具体的实现层中完成。如果需要修改系统的行为，无须对抽象层进行任何改动，只需要增加新的具体类来实现新的业务功能即可，实现在不修改已有代码的基础上扩展系统的功能，达到开闭原则的要求。</p>
-<p>一个例子如下：</p>
-<p><img src="http://my.csdn.net/uploads/201205/05/1336201566_1496.jpg" alt="不好的实现"></p>
-<p>ChartDisplay 可以显示各种类型的图表，如饼状图和柱状图等。在ChartDisplay 类的display()方法中存在如下代码片段：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">...</span><span class="attribute">...</span>  </div><div class="line"><span class="keyword">if</span> (<span class="keyword">type</span><span class="built_in">.</span><span class="keyword">equals</span>(<span class="string">"pie"</span>)) {  </div><div class="line">    PieChart chart <span class="subst">=</span> <span class="literal">new</span> PieChart();  </div><div class="line">    chart<span class="built_in">.</span>display();  </div><div class="line">}  </div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">type</span><span class="built_in">.</span><span class="keyword">equals</span>(<span class="string">"bar"</span>)) {  </div><div class="line">    BarChart chart <span class="subst">=</span> <span class="literal">new</span> BarChart();  </div><div class="line">    chart<span class="built_in">.</span>display();  </div><div class="line">}  </div><div class="line"><span class="attribute">...</span><span class="attribute">...</span></div></pre></td></tr></table></figure>
-
-<p>这样如果要新增一个图标类，如折线图，则需要修改ChartDisplay 类的display()方法的源代码，增加新的判断逻辑，违反了开闭原则。</p>
-<p>可以通过抽象化的方式对系统进行重构，使之增加新的图表类时无须修改源代码，满足开闭原则。具体做法如下：</p>
-<ol>
-<li>增加一个抽象图表类AbstractChart，将各种具体图表类作为其子类；</li>
-<li>ChartDisplay 类针对抽象图表类进行编程，由客户端来决定使用哪种具体图表。</li>
-</ol>
-<p><img src="http://my.csdn.net/uploads/201205/05/1336201573_6059.jpg" alt="好的实现"></p>
-<p>在修改过的实现中，我们引入了抽象图表类AbstractChart，且ChartDisplay 针对抽象图表类进行编程，并通过setChart()方法由客户端来设置实例化的具体图表对象，在ChartDisplay 的display()方法中调用chart 对象的display()方法显示图表。如果需要增加一种新的图表，如折线图LineChart，只需要将LineChart 也作为AbstractChart 的子类，在客户端向ChartDisplay 中注入一个LineChart对象即可，无须修改现有类库的源代码。     </p>
-<p>需要注意，因为xml 和properties 等格式的配置文件是纯文本文件，可以直接通过VI 编辑器或记事本进行编辑，且无须编译，因此在软件开发中，一般不把对配置文件的修改认为是对系统源代码的修改。</p>
-<p>由于篇幅的限制这一篇博客中只讲述2种设计原则，剩余4种设计原则的详细内容在下一篇博客中讲述。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="设计模式概述">设计模式概述</h2>
-<p>设计模式从本质上来看，是众多代码复用手段中的一种，他最早由GOF（四人帮）在《设计模式——可复用面向对象软件的基础》一书中提出。要学懂设计模式，必须要首先理解设计模式的真实意图 — <strong>可复用面向对象软件的基础</strong>，这正是那本著作的副标题。    </p>
+    <![CDATA[<p>在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容。</p>
 ]]>
     
     </summary>

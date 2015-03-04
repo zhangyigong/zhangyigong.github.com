@@ -125,7 +125,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud">
-						<a href="/tags/blog/" style="font-size: 16.67px;">blog</a><a href="/tags/github/" style="font-size: 13.33px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/java/" style="font-size: 13.33px;">java</a><a href="/tags/linux/" style="font-size: 10.00px;">linux</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/mysql/" style="font-size: 10.00px;">mysql</a><a href="/tags/opensource/" style="font-size: 10.00px;">opensource</a><a href="/tags/sql/" style="font-size: 13.33px;">sql</a><a href="/tags/web/" style="font-size: 13.33px;">web</a><a href="/tags/感悟杂谈/" style="font-size: 10.00px;">感悟杂谈</a><a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a><a href="/tags/设计模式/" style="font-size: 20.00px;">设计模式</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
+						<a href="/tags/blog/" style="font-size: 20.00px;">blog</a><a href="/tags/github/" style="font-size: 15.00px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/java/" style="font-size: 15.00px;">java</a><a href="/tags/linux/" style="font-size: 10.00px;">linux</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/mysql/" style="font-size: 10.00px;">mysql</a><a href="/tags/opensource/" style="font-size: 10.00px;">opensource</a><a href="/tags/sql/" style="font-size: 15.00px;">sql</a><a href="/tags/web/" style="font-size: 15.00px;">web</a><a href="/tags/感悟杂谈/" style="font-size: 10.00px;">感悟杂谈</a><a href="/tags/数据库/" style="font-size: 15.00px;">数据库</a><a href="/tags/设计模式/" style="font-size: 15.00px;">设计模式</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
 					</div>
 				</section>
 				
@@ -246,8 +246,7 @@
 <p><strong>里氏代换原则是实现开闭原则的重要方式之一</strong>，由于使用基类对象的地方都可以使用子类对象，因此<strong>在程序中尽量使用基类类型来对对象进行定义，而在运行时再确定其子类类型，用子类对象来替换父类对象</strong>。</p>
 <p>一个简单的例子如下：</p>
 <p><img src="http://my.csdn.net/uploads/201205/06/1336312710_1412.jpg" alt="不好的设计"></p>
-<p>在原本的设计中，无论是普通客户还是VIP客户，发送邮件的过程都是相同的，也就是说两个send()方法中的代码重复。</p>
-<p>可以考虑增加一个新的抽象客户类Customer，而将CommonCustomer 和VIPCustomer 类作为其子类，邮件发送类EmailSender 类针对抽象客户类Customer 编程，根据里氏代换原则，能够接受基类对象的地方必然能够接受子类对象，因此将EmailSender 中的send()方法的参数类型改为Customer，如果需要增加新类型的客户，只需将其作为Customer 类的子类即可。</p>
+<p>在原本的设计中，无论是普通客户还是VIP客户，发送邮件的过程都是相同的，也就是说两个send()方法中的代码重复。<br>可以考虑增加一个新的抽象客户类Customer，而将CommonCustomer 和VIPCustomer 类作为其子类，邮件发送类EmailSender 类针对抽象客户类Customer 编程，根据里氏代换原则，能够接受基类对象的地方必然能够接受子类对象，因此将EmailSender 中的send()方法的参数类型改为Customer，如果需要增加新类型的客户，只需将其作为Customer 类的子类即可。</p>
 <p>修改后的结构如下</p>
 <p><img src="http://my.csdn.net/uploads/201205/06/1336312720_2300.jpg" alt="好的设计"></p>
 <p>在上面的例子中，在传递参数时使用基类对象，除此以外，在定义成员变量、定义局部变量、确定方法返回类型时都可使用里氏代换原则。针对基类编程，在程序运行时再确定具体子类。</p>
@@ -289,14 +288,24 @@
 <p>可以通过引入一个专门用于控制界面控件交互的中间类(Mediator)来降低界面控件之间的耦合度。引入中间类之后，界面控件之间不再发生直接引用，而是将请求先转发给中间类，再由中间类来完成对其他控件的调用。当需要增加或删除新的控件时，只需修改中间类即可，无须修改新增控件或已有控件的源代码，</p>
 <h2 id="总结">总结</h2>
 <p>关于面向对象设计原则，我们使用通俗的方式进行概括总结。</p>
-<p>单一职责原则要求在设计时一个类只负责一个功能领域中的相应职责，应该只有一个引起它变化的原因。</p>
-<p>开闭原则指的是一个软件实体应该尽量在不修改原有代码的情况下进行扩展。</p>
-<p>里氏代换原则要求所有引用基类（父类）的地方必须能透明地使用其子类的对象。</p>
-<p>依赖倒转原则要求针对接口编程，而不要针对实现编程，针对抽象层编程时，需要将具体类的对象通过依赖注入(DependencyInjection, DI)的方式注入到其他对象中，常用的注入方式有三种，分别是：构造注入，设值注入（Setter注入）和接口注入。</p>
-<p>开闭原则是目标，里氏代换原则是基础，依赖倒转原则是手段，它们相辅相成，不可分割。</p>
-<p>接口隔离原则指的是使用多个专门的接口，而不使用单一的总接口，即客户端不应该依赖那些它不需要的接口。</p>
-<p>合成复用原则指的是尽量使用对象组合，而不是继承来达到复用的目的。</p>
-<p>迪米特法则要求一个软件实体应当尽可能少地与其他实体发生相互作用，对于不直接通信的类对象，如果其中的一个对象需要调用另一个对象的某一个方法的话，可以通过第三者转发这个调用。</p>
+<ul>
+<li><p>单一职责原则要求在设计时一个类只负责一个功能领域中的相应职责，应该只有一个引起它变化的原因。</p>
+</li>
+<li><p>开闭原则指的是一个软件实体应该尽量在不修改原有代码的情况下进行扩展。</p>
+</li>
+<li><p>里氏代换原则要求所有引用基类（父类）的地方必须能透明地使用其子类的对象。</p>
+</li>
+<li><p>依赖倒转原则要求针对接口编程，而不要针对实现编程，针对抽象层编程时，需要将具体类的对象通过依赖注入(DependencyInjection, DI)的方式注入到其他对象中，常用的注入方式有三种，分别是：构造注入，设值注入（Setter注入）和接口注入。</p>
+</li>
+<li><p>开闭原则是目标，里氏代换原则是基础，依赖倒转原则是手段，它们相辅相成，不可分割。</p>
+</li>
+<li><p>接口隔离原则指的是使用多个专门的接口，而不使用单一的总接口，即客户端不应该依赖那些它不需要的接口。</p>
+</li>
+<li><p>合成复用原则指的是尽量使用对象组合，而不是继承来达到复用的目的。</p>
+</li>
+<li><p>迪米特法则要求一个软件实体应当尽可能少地与其他实体发生相互作用，对于不直接通信的类对象，如果其中的一个对象需要调用另一个对象的某一个方法的话，可以通过第三者转发这个调用。</p>
+</li>
+</ul>
 
       
     </div>
@@ -305,11 +314,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/02/04/design-pattern-and-design-principles-second/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/03/03/vim-basic-operations/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">&lt;</strong>
       <div class="article-nav-title">
         
-          设计模式概述与面向对象设计原则（二）
+          Vim 编辑器的使用
         
       </div>
     </a>
