@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>设计模式概述与面向对象设计原则（二） | 张一弓的Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式概述与面向对象设计原则（二）">
+<meta property="og:url" content="http://zhangyigong.github.com/2015/02/04/design-pattern-and-design-principles-second/">
+<meta property="og:site_name" content="张一弓的Blog">
+<meta property="og:description" content="在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容。">
+<meta property="og:image" content="http://my.csdn.net/uploads/201205/06/1336312710_1412.jpg">
+<meta property="og:image" content="http://my.csdn.net/uploads/201205/06/1336312720_2300.jpg">
+<meta property="og:image" content="http://my.csdn.net/uploads/201205/13/1336909329_9009.jpg">
+<meta property="og:image" content="http://my.csdn.net/uploads/201205/13/1336909334_4352.jpg">
+<meta property="og:image" content="http://my.csdn.net/uploads/201205/13/1336910243_3390.jpg">
+<meta property="og:image" content="http://my.csdn.net/uploads/201205/13/1336910247_6209.jpg">
+<meta property="og:image" content="http://my.csdn.net/uploads/201205/14/1336930654_2743.jpg">
+<meta property="og:image" content="http://my.csdn.net/uploads/201205/14/1336930673_6550.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式概述与面向对象设计原则（二）">
+<meta name="twitter:description" content="在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容。">
+
+  
+    <link rel="alternative" href="/atom.xml" title="张一弓的Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/shizi_favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  
+
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<div class="profilepic">
+			<img src="http://zhang1g.qiniudn.com/shizi.jpg">
+		</div>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lionel</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">眯着眼睛安静思考世界的攻城狮</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">-博客主页-</a></li>
+				        
+							<li><a href="/archives">-所有文章-</a></li>
+				        
+							<li><a href="/tags/读书">-读书心得-</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/zhangyigong" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/2865465100" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud">
+						<a href="/tags/blog/" style="font-size: 16.67px;">blog</a><a href="/tags/github/" style="font-size: 13.33px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/java/" style="font-size: 13.33px;">java</a><a href="/tags/linux/" style="font-size: 10.00px;">linux</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/mysql/" style="font-size: 10.00px;">mysql</a><a href="/tags/opensource/" style="font-size: 10.00px;">opensource</a><a href="/tags/sql/" style="font-size: 13.33px;">sql</a><a href="/tags/web/" style="font-size: 13.33px;">web</a><a href="/tags/感悟杂谈/" style="font-size: 10.00px;">感悟杂谈</a><a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a><a href="/tags/设计模式/" style="font-size: 20.00px;">设计模式</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://coderq.com/">码农圈</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.paomianba.com/">泡面吧</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.tuicool.com/">推酷网</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.w3cschool.cc/">W3CSCHOOL</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.liaoxuefeng.com/">廖雪峰的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.52ml.net/">我爱机器学习</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.readfar.com/">读远电子书下载</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.36kr.com/">36氪</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.vmovier.com/">V电影</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://dianying.fm/">电影FM</a>
+			        
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					华南理工大学13级研究生，一只倒腾 web 开发的程序猿，希望通过这个博客来记录和分享学习和生活中的点点滴滴。
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay"></div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="http://zhang1g.qiniudn.com/shizi.jpg">
+			</div>
+
+			<hgroup>
+			  <h1 class="header-author"><a href="/">Lionel</a></h1>
+			</hgroup>
+			
+			<p class="header-subtitle">眯着眼睛安静思考世界的攻城狮</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">-博客主页-</a></li>
+		        
+					<li><a href="/archives">-所有文章-</a></li>
+		        
+					<li><a href="/tags/读书">-读书心得-</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/zhangyigong" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/2865465100" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <article id="post-design-pattern-and-design-principles-second" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/02/04/design-pattern-and-design-principles-second/" class="article-date">
+  	<time datetime="2015-02-04T07:24:33.000Z" itemprop="datePublished">Feb 04</time>
+</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      设计模式概述与面向对象设计原则（二）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容。</p>
+<a id="more"></a>
+
+<h2 id="里氏代换原则">里氏代换原则</h2>
+<p>里氏代换原则的一个通俗的定义是：所有引用基类（父类）的地方必须能透明地使用其子类的对象。</p>
+<p><strong>里氏代换原则是实现开闭原则的重要方式之一</strong>，由于使用基类对象的地方都可以使用子类对象，因此<strong>在程序中尽量使用基类类型来对对象进行定义，而在运行时再确定其子类类型，用子类对象来替换父类对象</strong>。</p>
+<p>一个简单的例子如下：</p>
+<p><img src="http://my.csdn.net/uploads/201205/06/1336312710_1412.jpg" alt="不好的设计"></p>
+<p>在原本的设计中，无论是普通客户还是VIP客户，发送邮件的过程都是相同的，也就是说两个send()方法中的代码重复。</p>
+<p>可以考虑增加一个新的抽象客户类Customer，而将CommonCustomer 和VIPCustomer 类作为其子类，邮件发送类EmailSender 类针对抽象客户类Customer 编程，根据里氏代换原则，能够接受基类对象的地方必然能够接受子类对象，因此将EmailSender 中的send()方法的参数类型改为Customer，如果需要增加新类型的客户，只需将其作为Customer 类的子类即可。</p>
+<p>修改后的结构如下</p>
+<p><img src="http://my.csdn.net/uploads/201205/06/1336312720_2300.jpg" alt="好的设计"></p>
+<p>在上面的例子中，在传递参数时使用基类对象，除此以外，在定义成员变量、定义局部变量、确定方法返回类型时都可使用里氏代换原则。针对基类编程，在程序运行时再确定具体子类。</p>
+<h2 id="依赖倒转原则">依赖倒转原则</h2>
+<p>依赖倒转原则通俗的来说就是<strong>要针对接口编程，而不要针对实现编程</strong>。</p>
+<p>在实现依赖倒转原则时，我们需要针对抽象层编程，而将具体类的对象通过依赖注入(DependencyInjection, DI)的方式注入到其他对象中，<strong>依赖注入是指当一个对象要与其他对象发生依赖关系时，通过抽象来注入所依赖的对象。常用的注入方式有三种，分别是：构造注入，设值注入（Setter注入）和接口注入</strong>。</p>
+<p>一个简单的例子如下</p>
+<p><img src="http://my.csdn.net/uploads/201205/13/1336909329_9009.jpg" alt="不好的设计"></p>
+<p>CustomerDAO 将存储在TXT或Excel文件中的客户信息转存到数据库中，需要调用数据格式转换类中的方法。但是由于CustomerDAO 针对具体数据转换类编程，因此在增加新的数据转换类或者更换数据转换类时都不得不修改CustomerDAO 的源代码。我们可以通过引入抽象数据转换类解决该问题</p>
+<p><img src="http://my.csdn.net/uploads/201205/13/1336909334_4352.jpg" alt="好的设计"></p>
+<p>在修改之后的设计中，CustomerDAO 针对抽象类DataConvertor 编程，而将具体数据转换类名存储在配置文件中，符合依赖倒转原则。</p>
+<p>在上述重构过程中，我们使用了开闭原则、里氏代换原则和依赖倒转原则，在大多数情况下，这三个设计原则会同时出现，<strong>开闭原则是目标，里氏代换原则是基础，依赖倒转原则是手段</strong>，它们相辅相成，相互补充。</p>
+<h2 id="接口隔离原则">接口隔离原则</h2>
+<p>接口隔离原则指的是使用多个专门的接口，而不使用单一的总接口，即<strong>客户端不应该依赖那些它不需要的接口</strong>。</p>
+<p>下面通过一个简单实例来加深理解：</p>
+<p><img src="http://my.csdn.net/uploads/201205/13/1336910243_3390.jpg" alt="不好的设计"></p>
+<p>CustomerDataDisplay 接口中的方法dataRead()用于从文件中读取数据，方法transformToXML()用于将数据转换成XML 格式，方法createChart()用于创建图表，方法displayChart()用于显示图表，方法createReport()用于创建文字报表，方法displayReport()用于显示文字报表。</p>
+<p>由于在接口CustomerDataDisplay中定义了太多方法，即该接口承担了太多职责，一方面导致该接口的实现类很庞大，在不同的实现类中都不得不实现接口中定义的所有方法，灵活性较差，如果出现大量的空方法，将导致系统中产生大量的无用代码，影响代码质量；另一方面由于客户端针对大接口编程，将在一定程序上破坏程序的封装性，客户端看到了不应该看到的方法，没有为客户端定制接口。</p>
+<p>使用接口隔离原则进行重构后的结构如下</p>
+<p><img src="http://my.csdn.net/uploads/201205/13/1336910247_6209.jpg" alt="好的设计"></p>
+<h2 id="合成复用原则">合成复用原则</h2>
+<p>合成复用原则指的是<strong>尽量使用对象组合，而不是继承来达到复用的目的</strong>。</p>
+<h2 id="迪米特法则">迪米特法则</h2>
+<p>迪米特法则指的是<strong>一个软件实体应当尽可能少地与其他实体发生相互作用</strong>。可以形象地理解为不要和“陌生人”说话、只与你的直接朋友通信。在迪米特法则中，对于一个对象，其朋友包括以下几类：</p>
+<ol>
+<li>当前对象本身(this)；</li>
+<li>以参数形式传入到当前对象方法中的对象；</li>
+<li>当前对象的成员对象；</li>
+<li>如果当前对象的成员对象是一个集合，那么集合中的元素也都是朋友；</li>
+<li>当前对象所创建的对象。</li>
+</ol>
+<p>迪米特法则要求我们在设计系统时，应该尽量减少对象之间的交互，如果两个对象之间不必彼此直接通信，那么这两个对象就不应当发生任何直接的相互作用，如果其中的一个对象需要调用另一个对象的某一个方法的话，可以<strong>通过第三者转发这个调用</strong>。简言之，就是通过引入一个合理的第三者来降低现有对象之间的耦合度。</p>
+<p>为了便于理解，给出一个简单的例子</p>
+<p><img src="http://my.csdn.net/uploads/201205/14/1336930654_2743.jpg" alt="不好的设计"></p>
+<p>界面控件之间存在复杂的交互关系，一个控件事件的触发将导致多个其他界面控件产生响应，例如，当一个按钮(Button)被单击时，对应的列表框(List)、组合框(ComboBox)、文本框(TextBox)、文本标签(Label)等都将发生改变。</p>
+<p>由于界面控件之间的交互关系复杂，导致在该窗口中增加新的界面控件时需要修改与之交互的其他控件的源代码，系统扩展性较差，也不便于增加和删除新控件。</p>
+<p>现使用迪米特对其进行重构。</p>
+<p><img src="http://my.csdn.net/uploads/201205/14/1336930673_6550.jpg" alt="好的设计"></p>
+<p>可以通过引入一个专门用于控制界面控件交互的中间类(Mediator)来降低界面控件之间的耦合度。引入中间类之后，界面控件之间不再发生直接引用，而是将请求先转发给中间类，再由中间类来完成对其他控件的调用。当需要增加或删除新的控件时，只需修改中间类即可，无须修改新增控件或已有控件的源代码，</p>
+<h2 id="总结">总结</h2>
+<p>关于面向对象设计原则，我们使用通俗的方式进行概括总结。</p>
+<p>单一职责原则要求在设计时一个类只负责一个功能领域中的相应职责，应该只有一个引起它变化的原因。</p>
+<p>开闭原则指的是一个软件实体应该尽量在不修改原有代码的情况下进行扩展。</p>
+<p>里氏代换原则要求所有引用基类（父类）的地方必须能透明地使用其子类的对象。</p>
+<p>依赖倒转原则要求针对接口编程，而不要针对实现编程，针对抽象层编程时，需要将具体类的对象通过依赖注入(DependencyInjection, DI)的方式注入到其他对象中，常用的注入方式有三种，分别是：构造注入，设值注入（Setter注入）和接口注入。</p>
+<p>开闭原则是目标，里氏代换原则是基础，依赖倒转原则是手段，它们相辅相成，不可分割。</p>
+<p>接口隔离原则指的是使用多个专门的接口，而不使用单一的总接口，即客户端不应该依赖那些它不需要的接口。</p>
+<p>合成复用原则指的是尽量使用对象组合，而不是继承来达到复用的目的。</p>
+<p>迪米特法则要求一个软件实体应当尽可能少地与其他实体发生相互作用，对于不直接通信的类对象，如果其中的一个对象需要调用另一个对象的某一个方法的话，可以通过第三者转发这个调用。</p>
+
+      
+    </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/02/04/design-pattern-and-design-principles-second/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          设计模式概述与面向对象设计原则（二）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/02/04/design-pattern-and-design-principles-first/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">设计模式概述与面向对象设计原则（一）</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="design-pattern-and-design-principles-second" data-title="设计模式概述与面向对象设计原则（二）" data-url="http://zhangyigong.github.com/2015/02/04/design-pattern-and-design-principles-second/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zhangyigonggithub"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 张一弓  2015 
+    	</div>
+      	<div class="footer-right">
+      		Email：zhang_1g@163.com
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+  <script src="/js/main.js" type="text/javascript"></script>
+
+
+  </div>
+</body>
+</html>
