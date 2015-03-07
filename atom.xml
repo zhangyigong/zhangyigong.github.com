@@ -4,7 +4,7 @@
   <subtitle><![CDATA[眯着眼睛安静思考世界的攻城狮]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-03-07T15:55:59.708Z</updated>
+  <updated>2015-03-07T15:57:45.441Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -13,6 +13,211 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Linux 软件包管理（一）]]></title>
+    <link href="http://zhangyigong.github.com/2015/03/04/linux-software-management-1/"/>
+    <id>http://zhangyigong.github.com/2015/03/04/linux-software-management-1/</id>
+    <published>2015-03-04T08:56:07.000Z</published>
+    <updated>2015-03-07T15:42:30.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="软件包管理简介">软件包管理简介</h2>
+<p>Linux 中的可以安装的软件包可以分为两类：源码包和二进制包，其中源码包绝大部分是用C 语言写的，而二进制包又叫做RPM 包，是已经编译好的安装包，也是系统默认包，这两类安装包有各自的优缺点。</p>
+<p>源码包的优点是：</p>
+<ol>
+<li>开源，如果有足够的能力，可以修改源代码；</li>
+<li>可以自由选择所需的功能；</li>
+<li>软件是编译安装，所以更加适合自己的系统，比起RPM包更加稳定也效率更高；</li>
+<li>卸载方便。</li>
+</ol>
+<p>源码包的缺点是：</p>
+<ol>
+<li>安装过程步骤较多，尤其安装较大的软件集合时（如LAMP环境搭建），容易出现拼写错误；</li>
+<li>编译过程时间较长，安装比二进制安装时间长；</li>
+<li>因为是编译安装，安装过程中一旦报错新手很难解决。</li>
+</ol>
+<a id="more"></a>
+
+<p>RPM 包的优点是：</p>
+<ol>
+<li>包管理系统简单，只通过几个命令就可以实现包的安装、升级、查询和卸载；</li>
+<li>安装速度比源码包安装快的多。</li>
+</ol>
+<p>RPM 包的缺点是：</p>
+<ol>
+<li>经过编译，不再可以看到源代码；</li>
+<li>功能选择不如源码包灵活；</li>
+<li>存在包依赖性，难以管理。</li>
+</ol>
+<p>RPM 包相对而言安装比较简单，因此先来介绍RPM 软件包安装的相关内容。其中RPM 包的管理分为rpm 手动管理和yum 在线管理。</p>
+<h2 id="RPM_包管理-rpm_命令管理">RPM 包管理-rpm 命令管理</h2>
+<p>首先需要介绍两个内容，一个是RPM 包的命名规则，另外一个是RPM 包的依赖性。</p>
+<p><strong>RPM 包命名规则</strong></p>
+<p>所有的RPM 包都在Linux 的安装光盘中，以Centos 为例，在光盘目录下的Packages 目录下存放了所有的RPM 包，大约有2000多个。仔细看一下，我们会发现这些包的命名都是非常相似的。以Apache 的RPM 包为例：</p>
+<p><code>httpd-2.2.15-15.el6.centos.1.i686.rpm</code></p>
+<ul>
+<li>httpd      软件包名</li>
+<li>2.2.15    软件版本</li>
+<li>15      软件发布的次数</li>
+<li>el6.centos    适合的Linux平台</li>
+<li>i686      适合的硬件平台</li>
+<li>rpm      rpm包扩展名</li>
+</ul>
+<p>我们知道在linux 中是没有扩展名的，但是所有的RPM 包都必须以rpm 结尾，以方便管理员能够清晰的认识到文件的类型是RPM 安装包。另外如果在 <code>i686</code> 的位置上出现了 <code>noarch</code> 则表明在任何硬件平台上都可以安装。</p>
+<p>此处我们需要特别区分的是<strong>包名</strong>和<strong>包全名</strong>，因为在执行命令时不加区分会出错。可以简单的理解为在软件包还没有安装之前使用安装包相关的命令要使用包全名，并且要先切换到未安装的软件包的目录下进行操作。而对于已经安装的软件包，在使用命令时使用包名就可以了，因为它是搜索 <code>/var/lib/rpm/</code> 中的数据库，所以在任何的路径下都可以执行。</p>
+<p>比如说上面的Apache 软件包，软件包的软件包全名就是 <code>httpd-2.2.15-15.el6.centos.1.i686.rpm</code>,而包名是第一部分 <code>httpd</code>。</p>
+<p><strong>RPM 包依赖性</strong></p>
+<p>上面我们已经提到，依赖性是RPM 包的缺点。典型的依赖有树形依赖、环形依赖和模块依赖。</p>
+<ul>
+<li>树形依赖：    a-&gt;b-&gt;c</li>
+<li>环形依赖：    a-&gt;b-&gt;c-&gt;a</li>
+<li>模块依赖：    安装包依赖于库文件，可在<a href="www.rpmfind.net">模块依赖查询网站</a>上查询库文件对应的RPM 包</li>
+</ul>
+<p>在树形依赖的例子中，安装软件包a，会提示软件包b，安装提示软件包c，依赖关系为a依赖于b依赖于c。因此安装时要按照c、b、a 的顺序安装，卸载时要按照a、b、c 的顺序卸载。</p>
+<p>另外，在遇到环形依赖时，将a、b、c 用一条命令同时安装则可以解决。</p>
+<p>模块依赖指的是安装包依赖于 <code>.so.数字</code> 结尾的库文件，而库文件是属于rpm 包的一部分，因此我们需要在<a href="www.rpmfind.net">模块依赖查询网站</a>上查出库文件对应的rpm 包并安装该rpm 包。</p>
+<p>为了解决RPM 包的依赖性问题，就有了后来的yum 软件包管理，我们后面会提到。yum 会自动解决以上三种类型的依赖关系，而且如果不能上网的话，也可以使用光盘作为本地yum 源。不过Redhat 系列的linux，yum 的使用是收费的，还好Centos 的yum 使用是免费的。</p>
+<h2 id="RPM_包管理-rpm_手动管理">RPM 包管理-rpm 手动管理</h2>
+<p>在细说RPM 安装包之前，再强调一下包名和包全名的区别，一般来说，执行安装和升级命令，使用的是包全名，而查询和卸载这样的命令执行时使用的就只是包名。下面是关于使用rpm 命令管理RPM 包的一些内容。</p>
+<p><strong>RPM 包的安装</strong></p>
+<p><code>rpm –ivh 包全名</code></p>
+<p>选项：</p>
+<ul>
+<li>-i（install）    安装</li>
+<li>-v（verbose）    显示详细信息</li>
+<li>-h（hash）       显示进度</li>
+<li>—nodeps           不检测依赖性（一般不使用）</li>
+</ul>
+<p>注意在使用rpm 命令安装软件包时由于是从系统安装盘中安装，所以需要挂载光盘。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">mkdir</span> /mnt/cdrom</div><div class="line">mount /dev/sr0 /mnt/cdrom</div><div class="line"><span class="keyword">cd</span> /mnt/cdrom/Packages</div><div class="line">rpm -ivh httpd-<span class="number">2.2</span>.<span class="number">15</span>-<span class="number">15</span>.el6.centos.<span class="number">1</span>.i686.rpm</div></pre></td></tr></table></figure>
+
+<p><strong>RPM 包的升级</strong></p>
+<p><code>rpm -Uvh 包全名</code></p>
+<p>选项：</p>
+<ul>
+<li>-U（upgrade）    升级（注意此处的U 要使用大写字母）</li>
+</ul>
+<p><strong>RPM 包卸载</strong></p>
+<p><code>rpm -e 包名</code></p>
+<p>选项：</p>
+<ul>
+<li>-e（erase）  卸载</li>
+<li>—nodeps    不检查依赖性（一般不使用）</li>
+</ul>
+<p><strong>RPM 包查询是否安装</strong></p>
+<p>在实际应用时，我们可能很少使用rpm 命令进行软件包的安装和升级，但是使用rpm 命令查询软件包是否安装却是非常普遍的操作。</p>
+<p><code>rpm -q 包名</code>        #查询软件包是否安装</p>
+<p>选项：</p>
+<ul>
+<li>-q  查询（query）</li>
+</ul>
+<p><code>rpm –qa</code>            #查询所有已经安装的RPM包</p>
+<p>选项：</p>
+<ul>
+<li>-a  所有（all） </li>
+</ul>
+<p>要注意不管使用rpm 命令还是使用yum 在线安装的安装包，都可以使用上述命令进行查询。</p>
+<p>以Apache 软件包为例，在命令中使用管道符 <code>rpm -qa | grep httpd</code>，可以查询Apache 包名相关的软件包。</p>
+<p><strong>RPM 包查询详细信息</strong></p>
+<p><code>rpm –qi 包名</code>        #查询软件包的详细信息</p>
+<p>选项：</p>
+<ul>
+<li>-i  查询已安装的软件信息（information）</li>
+<li>-p  查询未安装包信息（package），<strong>注意命令之后要加的是包全名，而不是包名</strong></li>
+</ul>
+<p>在使用命令 <code>rpm –qip 包全名</code> 时要特别注意后面加的是包全名，而不是包名，不过查询未安装的软件包的信息，这样的命令不是很常用。</p>
+<p><strong>RPM 包查询包中的文件的安装位置</strong></p>
+<p>RPM 包的安装位置是默认的，一般不会修改，包中文件的安装位置在组件包的时候就已经决定了，我们可以查询包下文件的安装位置。</p>
+<p><code>rpm –ql 包名</code></p>
+<p>选项：</p>
+<ul>
+<li>-l  列表（list）</li>
+<li>-p  查询未安装包信息（package） ，注意后面要添加包全名而不是包名</li>
+</ul>
+<p><strong>查询系统文件属于哪一个RPM 包</strong></p>
+<p><code>rpm –qf 系统文件名</code></p>
+<p>选项：</p>
+<ul>
+<li>-f  查询系统文件属于哪个软件包（file）</li>
+</ul>
+<p>注意后面添加的文件名不应该是手工创建的文件、系统产生的临时文件或者日志文件等，必须是软件包安装时产生的系统文件。</p>
+<p><strong>RPM 包查询软件包的依赖性</strong></p>
+<p><code>rpm –qR 包名</code></p>
+<p>选项：</p>
+<ul>
+<li>-R  查询软件包的依赖性（requires）</li>
+<li>-p  查询未安装包信息（package），注意后面要添加包全名</li>
+</ul>
+<p><strong>RPM 包校验</strong></p>
+<p>RPM 包的校验主要是用来验证软件包对应的系统文件是否被修改。</p>
+<p><code>rpm –V 已安装的包名</code></p>
+<p>选项：</p>
+<ul>
+<li>-V  校验指定RPM包中的文件（verify）</li>
+</ul>
+<p>如果命令执行后没有输出提示，则表示系统文件没有被修改，否则说明系统文件被修改。输出的提示信息包含以下几方面的内容：</p>
+<blockquote>
+<p>S  文件大小是否改变<br>M  文件的类型或文件的权限（rwx）是否被改变<br>5  文件MD5校验和是否改变（可以看成文件内容是否改变）<br>D  设备的中，从代码是否改变<br>L  文件路径是否改变<br>U  文件的属主（所有者）是否改变<br>G  文件的属组是否改变<br>T  文件的修改时间是否改变</p>
+</blockquote>
+<p>而输出结果中的文件类型包括如下几种：</p>
+<blockquote>
+<p>c  配置文件（config file）<br>d  普通文档（documentation）<br>g  “鬼”文件（ghost file），很少见，就是该文件不应该被这个RPM包包含<br>l  授权文件（license file）<br>r  描述文件（read me）</p>
+</blockquote>
+<p>以验证Apache 软件包为例，修改Apache 的配置文件，默认路径为 <code>/etc/httpd/conf/http.conf</code>，之后执行命令 <code>rpm -V httpd</code>，输出结果如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">S.<span class="number">5</span>....T. <span class="keyword">c</span> /etc/httpd/<span class="keyword">conf</span>/http.<span class="keyword">conf</span></div></pre></td></tr></table></figure>
+
+<p><strong>RPM 包中的文件提取</strong></p>
+<p>该命令可以提取出RPM 包中某一个指定的系统文件，比如说由于误操作将重要的系统文件删除了，此时不需要重新安装系统，甚至不需要重新安装软件，我们只需要知道删除的系统文件属于哪一个RPM 包，然后从RPM 包中提取出相应的系统文件，覆盖该文件之前的路径即可。因此可以说提取命令主要是用来进行软件包恢复的。</p>
+<p><code>rpm2cpio 包全名  |  \
+cpio -idv .文件绝对路径</code></p>
+<p>注意上述命令中的反斜杠 <code>\</code> 表示一条命令没有输完，<code>.</code> 表示提取文件到当前路径。rpm2cpio 是将rpm包转换为cpio格式的命令，而cpio 是一个标准工具，它用于创建软件档案文件和从档案文件中提取文件。它的具体使用方法如下：</p>
+<p><code>cpio 选项 &lt; [文件|设备]</code></p>
+<p>选项：</p>
+<ul>
+<li>-i：copy-in模式，还原（提取）</li>
+<li>-d：还原时自动新建目录</li>
+<li>-v：显示还原过程</li>
+</ul>
+<p>下面以误删除 <code>ls</code> 系统命令为例进行讲解：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">rpm -qf /bin/<span class="keyword">ls</span> 	</div><div class="line">#查询<span class="keyword">ls</span>命令属于哪个软件包，若文件已经丢失，可通过其他途径查询所属软件包</div><div class="line">mv /bin/<span class="keyword">ls</span> /tmp/	</div><div class="line">#造成<span class="keyword">ls</span>命令误删除假象</div><div class="line">rpm2cpio /mnt/cdrom/Packages/coreutils-<span class="number">8.4</span>-<span class="number">19</span>.el6.i686.rpm | cpio -idv ./bin/<span class="keyword">ls</span></div><div class="line">#提取RPM包中<span class="keyword">ls</span>命令到当前目录的/bin/<span class="keyword">ls</span>下</div><div class="line"><span class="keyword">cp</span> /root/bin/<span class="keyword">ls</span> /bin/	</div><div class="line">#把<span class="keyword">ls</span>命令复制会/bin/目录，修复文件丢失</div></pre></td></tr></table></figure>
+
+<h2 id="总结">总结</h2>
+<p>这篇博客中我们首先讲述了RPM 包和源码包的优缺点，然后详细讲述了RPM 包手工管理的几条rpm 命令，主要包括：</p>
+<ol>
+<li><strong>RPM 包的安装</strong>        <code>rpm –ivh 包全名</code></li>
+<li><strong>RPM 包的升级</strong>        <code>rpm -Uvh 包全名</code></li>
+<li><strong>RPM 包卸载</strong>        <code>rpm –qa</code></li>
+<li><strong>RPM 包查询是否安装</strong>    <code>rpm -q 包名</code> </li>
+<li><strong>RPM 包查询详细信息</strong>        <code>rpm –qi 包名</code></li>
+<li><strong>RPM 包查询包中的文件的安装位置</strong>        <code>rpm –ql 包名</code>    </li>
+<li><strong>查询系统文件属于哪一个RPM 包</strong>            <code>rpm –qf 系统文件名</code></li>
+<li><strong>RPM 包查询软件包的依赖性</strong>            <code>rpm –qR 包名</code></li>
+<li><strong>RPM 包校验</strong>        <code>rpm –V 已安装的包名</code></li>
+<li><strong>RPM 包中的文件提取</strong>        <code>rpm2cpio 包全名  |  cpio -idv .文件绝对路径</code></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="软件包管理简介">软件包管理简介</h2>
+<p>Linux 中的可以安装的软件包可以分为两类：源码包和二进制包，其中源码包绝大部分是用C 语言写的，而二进制包又叫做RPM 包，是已经编译好的安装包，也是系统默认包，这两类安装包有各自的优缺点。</p>
+<p>源码包的优点是：</p>
+<ol>
+<li>开源，如果有足够的能力，可以修改源代码；</li>
+<li>可以自由选择所需的功能；</li>
+<li>软件是编译安装，所以更加适合自己的系统，比起RPM包更加稳定也效率更高；</li>
+<li>卸载方便。</li>
+</ol>
+<p>源码包的缺点是：</p>
+<ol>
+<li>安装过程步骤较多，尤其安装较大的软件集合时（如LAMP环境搭建），容易出现拼写错误；</li>
+<li>编译过程时间较长，安装比二进制安装时间长；</li>
+<li>因为是编译安装，安装过程中一旦报错新手很难解决。</li>
+</ol>
+]]>
+    
+    </summary>
+    
+      <category term="linux" scheme="http://zhangyigong.github.com/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Vim 编辑器的使用]]></title>
