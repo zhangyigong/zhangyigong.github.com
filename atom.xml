@@ -4,7 +4,7 @@
   <subtitle><![CDATA[眯着眼睛安静思考世界的攻城狮]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-03-09T02:23:43.234Z</updated>
+  <updated>2015-03-09T02:27:12.954Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[Linux 软件包管理（三）- 源码包管理]]></title>
+    <title><![CDATA[Linux 软件包管理（三）源码包管理]]></title>
     <link href="http://zhangyigong.github.com/2015/03/08/linux-software-management-3/"/>
     <id>http://zhangyigong.github.com/2015/03/08/linux-software-management-3/</id>
     <published>2015-03-08T15:41:55.000Z</published>
-    <updated>2015-03-09T02:13:26.000Z</updated>
+    <updated>2015-03-09T02:27:02.000Z</updated>
     <content type="html"><![CDATA[<h2 id="源码包与RPM_包的区别">源码包与RPM 包的区别</h2>
 <p><strong>安装之前的区别</strong></p>
 <p>安装之前的区别主要体现为概念上的区别：源码包是开源的，安装时配置更加自由，安装完成后效率更高，但是它安装更慢，安装过程更容易报错；而RPM 包只是编译好的二进制包，但是它安装速度快，出错也容易解决，只有依赖性的问题。</p>
@@ -103,11 +103,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[Linux 软件包管理（二）- yum 命令]]></title>
+    <title><![CDATA[Linux 软件包管理（二）yum 命令]]></title>
     <link href="http://zhangyigong.github.com/2015/03/07/linux-software-management-2/"/>
     <id>http://zhangyigong.github.com/2015/03/07/linux-software-management-2/</id>
     <published>2015-03-07T15:30:18.000Z</published>
-    <updated>2015-03-08T15:42:25.000Z</updated>
+    <updated>2015-03-09T02:27:05.000Z</updated>
     <content type="html"><![CDATA[<h2 id="yum_在线管理概述">yum 在线管理概述</h2>
 <p>通过rpm 命令手工管理软件包，最大的问题就是软件包的依赖性问题，而yum 正是为了解决这个问题而存在的，Redhat 系列的yum 是收费的，不过Centos 却是个例外，因此我们可以在Centos 环境下方便地使用yum 命令。</p>
 <p>使用yum 命令只需要提供需要安装的软件包的全名，系统就会自动从服务器上下载相应的软件包，各种依赖关系也会自动处理。当没有网络的时候，我们也可以将光盘配置成yum。</p>
@@ -214,11 +214,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[Linux 软件包管理（一）- rpm 命令]]></title>
+    <title><![CDATA[Linux 软件包管理（一）rpm 命令]]></title>
     <link href="http://zhangyigong.github.com/2015/03/04/linux-software-management-1/"/>
     <id>http://zhangyigong.github.com/2015/03/04/linux-software-management-1/</id>
     <published>2015-03-04T08:56:07.000Z</published>
-    <updated>2015-03-09T02:14:09.000Z</updated>
+    <updated>2015-03-09T02:26:46.000Z</updated>
     <content type="html"><![CDATA[<h2 id="软件包管理简介">软件包管理简介</h2>
 <p>Linux 中的可以安装的软件包可以分为两类：源码包和二进制包，其中源码包绝大部分是用C 语言写的，而二进制包又叫做RPM 包，是已经编译好的安装包，也是系统默认包，这两类安装包有各自的优缺点。</p>
 <p>源码包的优点是：</p>
