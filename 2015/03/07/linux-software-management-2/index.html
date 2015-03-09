@@ -272,27 +272,23 @@
 <p>一般来说，上述配置文件已经配置好了，不需要进行修改，在网络连通的情况下直接使用yum 命令即可，这里我们只需要看懂各个配置参数的含义就可以了。</p>
 <h2 id="常用_yum命令">常用 yum命令</h2>
 <p><strong>查询</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum <span class="keyword">list</span> 	<span class="comment">#查询服务器上所有可用软件包列表，可在任意目录下执行</span></div></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">yum</span> search 关键字		<span class="comment">#搜索服务器上所有和关键字相关的包</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum <span class="keyword">list</span> <span class="comment">#查询服务器上所有可用软件包列表，可在任意目录下执行</span></div><div class="line">yum search 关键字	<span class="comment">#搜索服务器上所有和关键字相关的包</span></div></pre></td></tr></table></figure>
 
 <p>上述命令中的关键字一般就是包名，注意包名和包全名的区别只对rpm 手工管理生效，yum 命令只是使用包名。</p>
 <p><strong>安装</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum –y <span class="operator"><span class="keyword">install</span> 包名  	#选项：<span class="keyword">install</span> 安装 	-y 自动回答yes</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum –y <span class="operator"><span class="keyword">install</span> 包名 #选项：<span class="keyword">install</span> 安装 -y 自动回答yes</span></div></pre></td></tr></table></figure>
 
 <p>安装完成之后可以执行命令 <code>rpm -q 包名</code> 查询软件包是否安装完成。</p>
 <p><strong>升级</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -<span class="keyword">y</span> <span class="keyword">update</span> 包名 		#选项：<span class="keyword">update</span> 升级  	-<span class="keyword">y</span> 自动回答yes</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -<span class="keyword">y</span> <span class="keyword">update</span> 包名 #选项：<span class="keyword">update</span> 升级 	-<span class="keyword">y</span> 自动回答yes</div></pre></td></tr></table></figure>
 
 <p>升级命令需要注意的是，不要忘了在后面添加包名，否则会连同linux 内核在内的软件包一同升级，导致出现宕机。</p>
 <p><strong>卸载</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -<span class="keyword">y</span> <span class="built_in">remove</span> 包名 		#选项：<span class="built_in">remove</span> 卸载		-<span class="keyword">y</span> 自动回答yes</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -<span class="keyword">y</span> <span class="built_in">remove</span> 包名 	#选项：<span class="built_in">remove</span> 卸载	-<span class="keyword">y</span> 自动回答yes</div></pre></td></tr></table></figure>
 
 <p>yum 卸载命令会自动处理依赖，可能会卸载系统的依赖包，导致系统宕机崩溃。所以我们一般要做到最小化安装，尽量不使用yum 卸载。</p>
 <p><strong>yum 软件组管理</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="title">yum</span> grouplist					<span class="comment">#列出所有可用的软件组列表</span></div><div class="line">yum groupinstall 软件组名		<span class="comment">#安装指定的软件组，组名可由gropulist 查出来，注意软件包租应该是英文名称，出现空格要用引号括起来</span></div><div class="line">yum groupremove 软件组名		<span class="comment">#卸载指定软件组</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="title">yum</span> grouplist	<span class="comment">#列出所有可用的软件组列表</span></div><div class="line">yum groupinstall 软件组名	<span class="comment">#安装指定的软件组，</span></div><div class="line"><span class="comment">#组名可由gropulist 查出来，注意软件包租应该是英文名称，出现空格要用引号括起来</span></div><div class="line">yum groupremove 软件组名	<span class="comment">#卸载指定软件组</span></div></pre></td></tr></table></figure>
 
 <h2 id="光盘yum源搭建">光盘yum源搭建</h2>
 <p>在网络连接断开时，如果使用yum 进行软件包的安装，可以将光盘作为yum 源。光盘yum 源的搭建步骤如下：</p>
@@ -303,6 +299,7 @@
 <p><strong>step3</strong>: 修改光盘yum 源文件</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">vim</span> CentOS-Media.repo</div></pre></td></tr></table></figure>
 
+<p>文件的内容具体如下所示：</p>
 <blockquote>
 <p>[c6-media]<br>name=CentOS-$releasever - Media<br>baseurl=file:///mnt/cdrom</p>
 <h1 id="地址为你自己的光盘挂载地址">地址为你自己的光盘挂载地址</h1>

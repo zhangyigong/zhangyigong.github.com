@@ -19,7 +19,6 @@
 安装之前的区别主要体现为概念上的区别：源码包是开源的，安装时配置更加自由，安装完成后效率更高，但是它安装更慢，安装过程更容易报错；而RPM 包只是编译好的二进制包，但是它安装速度快，出错也容易解决，只有依赖性的问题。
 安装之后的区别
 安装之后，两个最直接的区别就是安装位置的区别。我们知道RPM 包在安装时各个文件的路径已经确定好了，不用人为进行修改，而源码">
-<meta property="og:image" content="http://mirror.bit.edu.cn/apache/httpd/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 软件包管理（三）源码包管理">
 <meta name="twitter:description" content="源码包与RPM 包的区别
@@ -256,18 +255,14 @@
 
 <p>而在手工指定源码包的安装路径时，一般指定为 <code>/usr/local/软件名/</code>。</p>
 <p>由于二者安装位置不同带来的影响主要包括：</p>
-<ul>
-<li><p>RPM包安装的服务可以使用系统服务管理命令（service）来管理，例如RPM包安装的apache的启动方法是：<code>/etc/rc.d/init.d/httpd start</code>或者<code>service httpd start</code>，注意linux 中各种service 的执行文件的路径一般都在 <code>/etc/rc.d.init.d/</code>下，还有一点就是 <code>service</code> 命令是Redhat 系列Linux 的专有命令；</p>
-</li>
-<li><p>源码包安装的服务则不能被服务管理命令管理，因为没有安装到默认路径中。所以只能用绝对路径进行服务的管理，如 <code>/usr/local/apache2/bin/apachectl start</code></p>
-</li>
-</ul>
+<p>RPM包安装的服务可以使用系统服务管理命令（service）来管理，例如RPM包安装的apache的启动方法是：<code>/etc/rc.d/init.d/httpd start</code>或者<code>service httpd start</code>，注意linux 中各种service 的执行文件的路径一般都在 <code>/etc/rc.d.init.d/</code>下，还有一点就是 <code>service</code> 命令是Redhat 系列Linux 的专有命令；</p>
+<p>源码包安装的服务则不能被服务管理命令管理，因为没有安装到默认路径中。所以只能用绝对路径进行服务的管理，如 <code>/usr/local/apache2/bin/apachectl start</code></p>
 <p>总的来说就是RPM 包可以使用系统的服务管理命令来管理，而源码包只能使用绝对路径来管理。</p>
 <h2 id="源码包的安装过程">源码包的安装过程</h2>
 <p><strong>安装准备</strong></p>
 <ul>
 <li>安装C 语言编译器gcc，可以使用yum 在线安装</li>
-<li>以Apache 为例下载源码包 <img src="http://mirror.bit.edu.cn/apache/httpd/" alt="http://mirror.bit.edu.cn/apache/httpd/"></li>
+<li>以Apache 为例下载源码包<a href="http://mirror.bit.edu.cn/apache/httpd/" target="_blank" rel="external">http://mirror.bit.edu.cn/apache/httpd/</a></li>
 </ul>
 <p><strong>安装注意事项</strong></p>
 <ul>
@@ -280,22 +275,14 @@
 <p><strong>step2</strong>: 解压下载的源码包。使用命令 <code>tar -zxvf httpd-2.2.9.tar.gz</code> 将源码包解压缩，并执行命令 <code>du -sh httpd-2.2.9</code> 来查看解压后源码包的大小。</p>
 <p><strong>step3</strong>: 进入解压缩目录。注意这一步必须进行，因为后续操作必须在压缩目录中进行。进入目录之后，需要注意两个文件，一个是 <code>INSTALL</code>，一个是 <code>README</code>，前一个是安装说明，后一个是使用说明。因此在安装一个陌生的源码包时需要首先查看 <code>INSTALL</code> 文件，里面会有详细的软件包安装步骤的说明。</p>
 <p><strong>step4</strong>：./configure 软件配置与检查</p>
-<ul>
-<li><p><strong>定义需要的功能选项</strong>。软件配置的参数（功能选项）可以执行命令 <code>./configure --help</code> 查看不同功能选项的详细信息。这里安装路径是必须定义的，可通过命令 <code>./configure --prefix=/usr/local/apache2</code> 来指定安装位置。</p>
-</li>
-<li><p><strong>检测系统环境是否符合安装要求</strong>，比如是否安装了gcc 等。</p>
-</li>
-<li><p><strong>把定义好的功能选项和检测系统环境的信息都写入Makefile 文件</strong>，用于后续的编辑。Makefile 文件起初是不存在的，它要在执行命令 <code>./configure --prefix=/usr/local/apache2</code> 之后才会生成。</p>
-</li>
-</ul>
-<ul>
-<li><p>make 命令进行编译，比较耗时，如果在编译时报错，或者在执行 <code>./configure</code> 命令时报错，可以通过命令 <code>make clean</code> 清空产生的临时文件。</p>
-</li>
-<li><p>make install 编译安装，这一步执行后才会向指定目录下生成安装文件。</p>
-</li>
-<li><p>安装完成之后可以通过执行命令 <code>/usr/local/apache2/bin/apachect1 start</code> 来启动Apache 服务。那么为什么此处的命令不是 httpd 而是apachect1 呢？我们可以在解压的安装包目录下的 <code>INSTALL</code> 文件进行查看。</p>
-</li>
-</ul>
+<ol>
+<li>定义需要的功能选项。软件配置的参数（功能选项）可以执行命令 <code>./configure --help</code> 查看不同功能选项的详细信息。这里安装路径是必须定义的，可通过命令 <code>./configure --prefix=/usr/local/apache2</code> 来指定安装位置。</li>
+<li>检测系统环境是否符合安装要求，比如是否安装了gcc 等。</li>
+<li>把定义好的功能选项和检测系统环境的信息都写入Makefile 文件，用于后续的编辑。Makefile 文件起初是不存在的，它要在执行命令 <code>./configure --prefix=/usr/local/apache2</code> 之后才会生成。</li>
+<li>make 命令进行编译，比较耗时，如果在编译时报错，或者在执行 <code>./configure</code> 命令时报错，可以通过命令 <code>make clean</code> 清空产生的临时文件。</li>
+<li>make install 编译安装，这一步执行后才会向指定目录下生成安装文件。</li>
+<li>安装完成之后可以通过执行命令 <code>/usr/local/apache2/bin/apachect1 start</code> 来启动Apache 服务。那么为什么此处的命令不是 httpd 而是apachect1 呢？我们可以在解压的安装包目录下的 <code>INSTALL</code> 文件进行查看。</li>
+</ol>
 <p><strong>源码包的卸载</strong></p>
 <p>源码包的卸载不需要卸载命令，直接删除安装目录即可。不会遗留任何垃圾文件。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm -rf /usr/<span class="keyword">local</span>/apache2</div></pre></td></tr></table></figure>
