@@ -4,7 +4,7 @@
   <subtitle><![CDATA[眯着眼睛安静思考世界的攻城狮]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-03-09T02:38:28.209Z</updated>
+  <updated>2015-03-09T02:44:41.460Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -95,7 +95,7 @@
     <link href="http://zhangyigong.github.com/2015/03/07/linux-software-management-2/"/>
     <id>http://zhangyigong.github.com/2015/03/07/linux-software-management-2/</id>
     <published>2015-03-07T15:30:18.000Z</published>
-    <updated>2015-03-09T02:38:14.000Z</updated>
+    <updated>2015-03-09T02:44:30.000Z</updated>
     <content type="html"><![CDATA[<h2 id="yum_在线管理概述">yum 在线管理概述</h2>
 <p>通过rpm 命令手工管理软件包，最大的问题就是软件包的依赖性问题，而yum 正是为了解决这个问题而存在的，Redhat 系列的yum 是收费的，不过Centos 却是个例外，因此我们可以在Centos 环境下方便地使用yum 命令。</p>
 <p>使用yum 命令只需要提供需要安装的软件包的全名，系统就会自动从服务器上下载相应的软件包，各种依赖关系也会自动处理。当没有网络的时候，我们也可以将光盘配置成yum。</p>
@@ -133,15 +133,15 @@
 
 <p>上述命令中的关键字一般就是包名，注意包名和包全名的区别只对rpm 手工管理生效，yum 命令只是使用包名。</p>
 <p><strong>安装</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum –y <span class="operator"><span class="keyword">install</span> 包名 #选项：<span class="keyword">install</span> 安装 -y 自动回答yes</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum –y <span class="operator"><span class="keyword">install</span> 包名 	#选项：<span class="keyword">install</span> 安装 -y 自动回答yes</span></div></pre></td></tr></table></figure>
 
 <p>安装完成之后可以执行命令 <code>rpm -q 包名</code> 查询软件包是否安装完成。</p>
 <p><strong>升级</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -<span class="keyword">y</span> <span class="keyword">update</span> 包名 #选项：<span class="keyword">update</span> 升级 	-<span class="keyword">y</span> 自动回答yes</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -<span class="keyword">y</span> <span class="keyword">update</span> 包名 		#选项：<span class="keyword">update</span> 升级 	-<span class="keyword">y</span> 自动回答yes</div></pre></td></tr></table></figure>
 
 <p>升级命令需要注意的是，不要忘了在后面添加包名，否则会连同linux 内核在内的软件包一同升级，导致出现宕机。</p>
 <p><strong>卸载</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -<span class="keyword">y</span> <span class="built_in">remove</span> 包名 	#选项：<span class="built_in">remove</span> 卸载	-<span class="keyword">y</span> 自动回答yes</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -<span class="keyword">y</span> <span class="built_in">remove</span> 包名 		#选项：<span class="built_in">remove</span> 卸载	-<span class="keyword">y</span> 自动回答yes</div></pre></td></tr></table></figure>
 
 <p>yum 卸载命令会自动处理依赖，可能会卸载系统的依赖包，导致系统宕机崩溃。所以我们一般要做到最小化安装，尽量不使用yum 卸载。</p>
 <p><strong>yum 软件组管理</strong></p>
