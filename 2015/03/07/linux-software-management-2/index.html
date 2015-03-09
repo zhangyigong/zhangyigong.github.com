@@ -251,7 +251,7 @@
 <p><img src="http://zhang1g.qiniudn.com/network-setup-command-2.PNG" alt="setup 命令配置网络参数"></p>
 <p>执行 <code>setup</code> 命令之后，选择 <code>Network configuration</code> 选项，回车之后选择设备配置项进行各项网络参数的配置。</p>
 <p>如果当前网络环境中没有DHCP 服务器，则按空格取消DHCP 选项中的 <code>*</code> 号，进行IP 地址的手动更改，接下来就是各项网络参数的更改，更改配置完成后保存退出。注意此时更改还没有生效，需要<strong>重新启动系统或者网络服务</strong>配置才会生效，一般来说可以执行一下命令重启网络服务。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">service</span> network restart		<span class="comment">#重启网络服务</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service network restart		</div><div class="line"><span class="preprocessor">#重启网络服务</span></div></pre></td></tr></table></figure>
 
 <p>还需要注意的另外一点是，Centos 6.3 的版本之中，网卡默认是没有启动的。因此在重启网络服务之前需要首先执行命令 <code>vi /etc/sysconfig/network-scripts/ifcfg-eth0</code>，修改配置文件中的内容，把 <code>ONBOOT=“no”</code> 改为 <code>ONBOOT=“yes”</code> 来启动网卡。如果没有 <code>setup</code> 命令，也是在这个配置文件中进行网络参数的配置。</p>
 <h2 id="网络yum_源">网络yum 源</h2>
@@ -272,23 +272,23 @@
 <p>一般来说，上述配置文件已经配置好了，不需要进行修改，在网络连通的情况下直接使用yum 命令即可，这里我们只需要看懂各个配置参数的含义就可以了。</p>
 <h2 id="常用_yum命令">常用 yum命令</h2>
 <p><strong>查询</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum <span class="keyword">list</span> <span class="comment">#查询服务器上所有可用软件包列表，可在任意目录下执行</span></div><div class="line">yum search 关键字	<span class="comment">#搜索服务器上所有和关键字相关的包</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">yum list </div><div class="line"><span class="preprocessor">#查询服务器上所有可用软件包列表，可在任意目录下执行</span></div><div class="line"></div><div class="line">yum search 关键字	</div><div class="line"><span class="preprocessor">#搜索服务器上所有和关键字相关的包</span></div></pre></td></tr></table></figure>
 
 <p>上述命令中的关键字一般就是包名，注意包名和包全名的区别只对rpm 手工管理生效，yum 命令只是使用包名。</p>
 <p><strong>安装</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum –y <span class="operator"><span class="keyword">install</span> 包名 	#选项：<span class="keyword">install</span> 安装 -y 自动回答yes</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum –y <span class="operator"><span class="keyword">install</span> 包名 	</span></div><div class="line">#选项：<span class="keyword">install</span> 安装 -y 自动回答yes</div></pre></td></tr></table></figure>
 
 <p>安装完成之后可以执行命令 <code>rpm -q 包名</code> 查询软件包是否安装完成。</p>
 <p><strong>升级</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -<span class="keyword">y</span> <span class="keyword">update</span> 包名 		#选项：<span class="keyword">update</span> 升级 	-<span class="keyword">y</span> 自动回答yes</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum -<span class="keyword">y</span> <span class="keyword">update</span> 包名 		</div><div class="line">#选项：<span class="keyword">update</span> 升级 	-<span class="keyword">y</span> 自动回答yes</div></pre></td></tr></table></figure>
 
 <p>升级命令需要注意的是，不要忘了在后面添加包名，否则会连同linux 内核在内的软件包一同升级，导致出现宕机。</p>
 <p><strong>卸载</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -<span class="keyword">y</span> <span class="built_in">remove</span> 包名 		#选项：<span class="built_in">remove</span> 卸载	-<span class="keyword">y</span> 自动回答yes</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum -<span class="keyword">y</span> <span class="built_in">remove</span> 包名 		</div><div class="line">#选项：<span class="built_in">remove</span> 卸载	-<span class="keyword">y</span> 自动回答yes</div></pre></td></tr></table></figure>
 
 <p>yum 卸载命令会自动处理依赖，可能会卸载系统的依赖包，导致系统宕机崩溃。所以我们一般要做到最小化安装，尽量不使用yum 卸载。</p>
 <p><strong>yum 软件组管理</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="title">yum</span> grouplist	<span class="comment">#列出所有可用的软件组列表</span></div><div class="line">yum groupinstall 软件组名	<span class="comment">#安装指定的软件组，</span></div><div class="line"><span class="comment">#组名可由gropulist 查出来，注意软件包租应该是英文名称，出现空格要用引号括起来</span></div><div class="line">yum groupremove 软件组名	<span class="comment">#卸载指定软件组</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">yum grouplist	</div><div class="line"><span class="preprocessor">#列出所有可用的软件组列表</span></div><div class="line">yum groupinstall 软件组名	</div><div class="line"><span class="preprocessor">#安装指定的软件组，组名可由gropulist 查出来，</span></div><div class="line"><span class="preprocessor">#注意软件包租应该是英文名称，出现空格要用引号括起来</span></div><div class="line">yum groupremove 软件组名	</div><div class="line"><span class="preprocessor">#卸载指定软件组</span></div></pre></td></tr></table></figure>
 
 <h2 id="光盘yum源搭建">光盘yum源搭建</h2>
 <p>在网络连接断开时，如果使用yum 进行软件包的安装，可以将光盘作为yum 源。光盘yum 源的搭建步骤如下：</p>
@@ -300,16 +300,8 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">vim</span> CentOS-Media.repo</div></pre></td></tr></table></figure>
 
 <p>文件的内容具体如下所示：</p>
-<blockquote>
-<p>[c6-media]<br>name=CentOS-$releasever - Media<br>baseurl=file:///mnt/cdrom</p>
-<h1 id="地址为你自己的光盘挂载地址">地址为你自己的光盘挂载地址</h1>
-<h1 id="file:///media/cdrom/">file:///media/cdrom/</h1>
-<h1 id="file:///media/cdrecorder/">file:///media/cdrecorder/</h1>
-<h1 id="注释这两个不存在的地址">注释这两个不存在的地址</h1>
-<p>gpgcheck=1<br>enabled=1</p>
-<h1 id="把enabled=0改为enabled=1，让这个yum源配置文件生效">把enabled=0改为enabled=1，让这个yum源配置文件生效</h1>
-<p>gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6</p>
-</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[c6-media]</div><div class="line">name=CentOS-$releasever - Media</div><div class="line">baseurl=file:<span class="comment">///mnt/cdrom</span></div><div class="line"><span class="preprocessor">#地址为你自己的光盘挂载地址</span></div><div class="line"><span class="preprocessor"># file:///media/cdrom/</span></div><div class="line"><span class="preprocessor"># file:///media/cdrecorder/</span></div><div class="line"><span class="preprocessor">#注释这两个不存在的地址</span></div><div class="line">gpgcheck=<span class="number">1</span></div><div class="line">enabled=<span class="number">1</span></div><div class="line"><span class="preprocessor">#把enabled=0改为enabled=1，让这个yum源配置文件生效</span></div><div class="line">gpgkey=file:<span class="comment">///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6</span></div></pre></td></tr></table></figure>
+
 <p>在修改yum 源文件时需要注意一下几点内容：</p>
 <ol>
 <li>baseurl 不再是基于http 的，需要改成光盘挂载点，此外要把多余的file 注释掉；</li>
