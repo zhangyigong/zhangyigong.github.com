@@ -7,15 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="开源组件简介
 在漫谈验证码（一） 使用Servlet 生成验证码一文中，我们介绍了使用Servlet 生成验证码的方法。但是生成的验证码图片比较简单，使用图像识别的方法还是很容易破解，因此我们在实际应用中希望能够生成比较复杂的验证码图片，比如汉字、算式等，并且添加一些干扰。
-使用一些相关的开源组件可以很容易的实现上述功能。常见的开源组件包括Kaptcha、jCaptcha 和Simplecapt">
+使用一些相关的开源组件可以很容易的实现上述功能。常见的开源组件包括Kaptcha、jCaptcha 和Simplecaptc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="漫谈验证码（二） 使用开源组件生成验证码">
 <meta property="og:url" content="http://zhangyigong.github.com/2015/01/17/verification-code-generate-by-opensource-component/">
 <meta property="og:site_name" content="张一弓的Blog">
 <meta property="og:description" content="开源组件简介
 在漫谈验证码（一） 使用Servlet 生成验证码一文中，我们介绍了使用Servlet 生成验证码的方法。但是生成的验证码图片比较简单，使用图像识别的方法还是很容易破解，因此我们在实际应用中希望能够生成比较复杂的验证码图片，比如汉字、算式等，并且添加一些干扰。
-使用一些相关的开源组件可以很容易的实现上述功能。常见的开源组件包括Kaptcha、jCaptcha 和Simplecapt">
-<meta property="og:image" content="http://zhang1g.qiniudn.com/kaptcha-verify-code1.gif">
+使用一些相关的开源组件可以很容易的实现上述功能。常见的开源组件包括Kaptcha、jCaptcha 和Simplecaptc">
 <meta property="og:image" content="http://zhang1g.qiniudn.com/kaptcha-verify-code2.PNG">
 <meta property="og:image" content="http://zhang1g.qiniudn.com/kaptcha-verify-code3.PNG">
 <meta property="og:image" content="http://zhang1g.qiniudn.com/kaptcha-source-structure.PNG">
@@ -29,7 +28,7 @@
 <meta name="twitter:title" content="漫谈验证码（二） 使用开源组件生成验证码">
 <meta name="twitter:description" content="开源组件简介
 在漫谈验证码（一） 使用Servlet 生成验证码一文中，我们介绍了使用Servlet 生成验证码的方法。但是生成的验证码图片比较简单，使用图像识别的方法还是很容易破解，因此我们在实际应用中希望能够生成比较复杂的验证码图片，比如汉字、算式等，并且添加一些干扰。
-使用一些相关的开源组件可以很容易的实现上述功能。常见的开源组件包括Kaptcha、jCaptcha 和Simplecapt">
+使用一些相关的开源组件可以很容易的实现上述功能。常见的开源组件包括Kaptcha、jCaptcha 和Simplecaptc">
 
   
     <link rel="alternative" href="/atom.xml" title="张一弓的Blog" type="application/atom+xml">
@@ -133,7 +132,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud">
-						<a href="/tags/blog/" style="font-size: 20.00px;">blog</a><a href="/tags/github/" style="font-size: 15.00px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/java/" style="font-size: 15.00px;">java</a><a href="/tags/linux/" style="font-size: 15.00px;">linux</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/mysql/" style="font-size: 10.00px;">mysql</a><a href="/tags/opensource/" style="font-size: 10.00px;">opensource</a><a href="/tags/sql/" style="font-size: 15.00px;">sql</a><a href="/tags/web/" style="font-size: 15.00px;">web</a><a href="/tags/感悟杂谈/" style="font-size: 10.00px;">感悟杂谈</a><a href="/tags/数据库/" style="font-size: 15.00px;">数据库</a><a href="/tags/设计模式/" style="font-size: 15.00px;">设计模式</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
+						<a href="/tags/blog/" style="font-size: 16.67px;">blog</a><a href="/tags/github/" style="font-size: 13.33px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/java/" style="font-size: 13.33px;">java</a><a href="/tags/linux/" style="font-size: 20.00px;">linux</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/mysql/" style="font-size: 10.00px;">mysql</a><a href="/tags/opensource/" style="font-size: 10.00px;">opensource</a><a href="/tags/sql/" style="font-size: 13.33px;">sql</a><a href="/tags/web/" style="font-size: 13.33px;">web</a><a href="/tags/感悟杂谈/" style="font-size: 10.00px;">感悟杂谈</a><a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a><a href="/tags/设计模式/" style="font-size: 13.33px;">设计模式</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
 					</div>
 				</section>
 				
@@ -246,16 +245,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://zhang1g.qiniudn.com/kaptcha-verify-code1.gif" alt="使用开源组件生成验证码"></p>
-<h2 id="开源组件简介">开源组件简介</h2>
+        <h2 id="开源组件简介">开源组件简介</h2>
 <p>在<a href="http://zhangyigong.github.io/2015/01/16/verification-code-generated-by-java-servlet/" target="_blank" rel="external">漫谈验证码（一） 使用Servlet 生成验证码</a>一文中，我们介绍了使用Servlet 生成验证码的方法。但是生成的验证码图片比较简单，使用图像识别的方法还是很容易破解，因此我们在实际应用中希望能够生成比较复杂的验证码图片，比如汉字、算式等，并且添加一些干扰。</p>
 <p>使用一些相关的开源组件可以很容易的实现上述功能。常见的开源组件包括Kaptcha、jCaptcha 和Simplecaptcha。</p>
-<a id="more"></a>
-
 <p>SimpleCaptcha 是很棒的项目，但是，SimpleCaptcha 似乎没有被维护和更新，在JDK1.5 和Servlet 输出的HTTP 头部情况下还存在一些问题，有一堆的错误报告。 近几年，SimpleCaptcha 的论坛没有任何的消息，也没有新的版本或任何改变。 </p>
 <p>jCaptcha 是很多Java 开发者使用的验证码组件，但是默认的配置相对有点恶心，它是一个很棒的项目，但绝对不是一个快速解决方案，更像是一个库。在网站上，它默认输出的样式不是太难分辨就是不够好，也相当的慢。</p>
 <p>肯定的是，你需要花很多的时间来熟悉它的API。但事实是，我愿意是一个简单的jar 包文件，轻松地导入我的项目，然后在web.xml 添加几行代码即可。 </p>
 <p>因此，这里推荐一个非常简单的验证码组件：<strong>Kaptcha</strong>。 </p>
+<a id="more"></a>
+
 <p>Kaptcha 很容易安装使用，并且默认输出验证码。默认产生的验证码和放在这篇博客最前面的验证码图片很相似。如果你想改变输出的样式，可以通过配置一组选项，就可以输出自定义的变形样式。</p>
 <p>接下来我们将使用Kaptcha 开源组件来生成不同格式的复杂的验证码图片。</p>
 <h2 id="Kaptcha_组件生成复杂验证码">Kaptcha 组件生成复杂验证码</h2>

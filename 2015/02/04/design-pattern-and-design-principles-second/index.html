@@ -5,7 +5,8 @@
   
   <title>设计模式概述与面向对象设计原则（二） | 张一弓的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容，包括：
+  <meta name="description" content="前言
+在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容，包括：
 
 里氏代换原则
 依赖倒转原则
@@ -15,12 +16,13 @@
 
 里氏代换原则
 里氏代换原则的一个通俗的定义是：所有引用基类（父类）的地方必须能透明地使用其子类的对象。
-里氏代换原则是实现开闭原则的重要方式之一，由于使用基类对象的地方都可以使用子类对象，因此在程序中尽量使用基类类型来对对象进行定">
+里氏代换原则是实现开闭原则的重要方式之一，由于使用基类对象的地方都可以使用子类对象，因此在程序中尽量使用基类类型来对对象">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式概述与面向对象设计原则（二）">
 <meta property="og:url" content="http://zhangyigong.github.com/2015/02/04/design-pattern-and-design-principles-second/">
 <meta property="og:site_name" content="张一弓的Blog">
-<meta property="og:description" content="在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容，包括：
+<meta property="og:description" content="前言
+在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容，包括：
 
 里氏代换原则
 依赖倒转原则
@@ -30,7 +32,7 @@
 
 里氏代换原则
 里氏代换原则的一个通俗的定义是：所有引用基类（父类）的地方必须能透明地使用其子类的对象。
-里氏代换原则是实现开闭原则的重要方式之一，由于使用基类对象的地方都可以使用子类对象，因此在程序中尽量使用基类类型来对对象进行定">
+里氏代换原则是实现开闭原则的重要方式之一，由于使用基类对象的地方都可以使用子类对象，因此在程序中尽量使用基类类型来对对象">
 <meta property="og:image" content="http://my.csdn.net/uploads/201205/06/1336312710_1412.jpg">
 <meta property="og:image" content="http://my.csdn.net/uploads/201205/06/1336312720_2300.jpg">
 <meta property="og:image" content="http://my.csdn.net/uploads/201205/13/1336909329_9009.jpg">
@@ -41,7 +43,8 @@
 <meta property="og:image" content="http://my.csdn.net/uploads/201205/14/1336930673_6550.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式概述与面向对象设计原则（二）">
-<meta name="twitter:description" content="在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容，包括：
+<meta name="twitter:description" content="前言
+在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容，包括：
 
 里氏代换原则
 依赖倒转原则
@@ -51,7 +54,7 @@
 
 里氏代换原则
 里氏代换原则的一个通俗的定义是：所有引用基类（父类）的地方必须能透明地使用其子类的对象。
-里氏代换原则是实现开闭原则的重要方式之一，由于使用基类对象的地方都可以使用子类对象，因此在程序中尽量使用基类类型来对对象进行定">
+里氏代换原则是实现开闭原则的重要方式之一，由于使用基类对象的地方都可以使用子类对象，因此在程序中尽量使用基类类型来对对象">
 
   
     <link rel="alternative" href="/atom.xml" title="张一弓的Blog" type="application/atom+xml">
@@ -155,7 +158,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud">
-						<a href="/tags/blog/" style="font-size: 20.00px;">blog</a><a href="/tags/github/" style="font-size: 15.00px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/java/" style="font-size: 15.00px;">java</a><a href="/tags/linux/" style="font-size: 15.00px;">linux</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/mysql/" style="font-size: 10.00px;">mysql</a><a href="/tags/opensource/" style="font-size: 10.00px;">opensource</a><a href="/tags/sql/" style="font-size: 15.00px;">sql</a><a href="/tags/web/" style="font-size: 15.00px;">web</a><a href="/tags/感悟杂谈/" style="font-size: 10.00px;">感悟杂谈</a><a href="/tags/数据库/" style="font-size: 15.00px;">数据库</a><a href="/tags/设计模式/" style="font-size: 15.00px;">设计模式</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
+						<a href="/tags/blog/" style="font-size: 16.67px;">blog</a><a href="/tags/github/" style="font-size: 13.33px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/java/" style="font-size: 13.33px;">java</a><a href="/tags/linux/" style="font-size: 20.00px;">linux</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/mysql/" style="font-size: 10.00px;">mysql</a><a href="/tags/opensource/" style="font-size: 10.00px;">opensource</a><a href="/tags/sql/" style="font-size: 13.33px;">sql</a><a href="/tags/web/" style="font-size: 13.33px;">web</a><a href="/tags/感悟杂谈/" style="font-size: 10.00px;">感悟杂谈</a><a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a><a href="/tags/设计模式/" style="font-size: 13.33px;">设计模式</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
 					</div>
 				</section>
 				
@@ -268,7 +271,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容，包括：</p>
+        <h2 id="前言">前言</h2>
+<p>在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容，包括：</p>
 <ul>
 <li>里氏代换原则</li>
 <li>依赖倒转原则</li>

@@ -4,7 +4,7 @@
   <subtitle><![CDATA[眯着眼睛安静思考世界的攻城狮]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhangyigong.github.com/"/>
-  <updated>2015-03-07T15:57:45.441Z</updated>
+  <updated>2015-03-09T02:23:43.234Z</updated>
   <id>http://zhangyigong.github.com/</id>
   
   <author>
@@ -15,11 +15,210 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[Linux 软件包管理（一）]]></title>
+    <title><![CDATA[Linux 软件包管理（三）- 源码包管理]]></title>
+    <link href="http://zhangyigong.github.com/2015/03/08/linux-software-management-3/"/>
+    <id>http://zhangyigong.github.com/2015/03/08/linux-software-management-3/</id>
+    <published>2015-03-08T15:41:55.000Z</published>
+    <updated>2015-03-09T02:13:26.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="源码包与RPM_包的区别">源码包与RPM 包的区别</h2>
+<p><strong>安装之前的区别</strong></p>
+<p>安装之前的区别主要体现为概念上的区别：源码包是开源的，安装时配置更加自由，安装完成后效率更高，但是它安装更慢，安装过程更容易报错；而RPM 包只是编译好的二进制包，但是它安装速度快，出错也容易解决，只有依赖性的问题。</p>
+<p><strong>安装之后的区别</strong></p>
+<p>安装之后，两个最直接的区别就是安装位置的区别。我们知道RPM 包在安装时各个文件的路径已经确定好了，不用人为进行修改，而源码包在安装时则需要人为指定安装路径。由于安装位置的区别，使得源码包和RPM 包在后续的管理工程中也会有一些区别。</p>
+<p>RPM 包的默认安装位置大致如下：</p>
+<blockquote>
+<p>/etc/              配置文件安装目录<br>/usr/bin/          可执行的命令安装目录<br>/usr/lib/          程序所使用的函数库保存位置<br>/usr/share/doc/   基本的软件使用手册保存位置<br>/usr/share/man/   帮助文件保存位置 </p>
+</blockquote>
+<a id="more"></a>
+
+<p>而在手工指定源码包的安装路径时，一般指定为 <code>/usr/local/软件名/</code>。</p>
+<p>由于二者安装位置不同带来的影响主要包括：</p>
+<ul>
+<li><p>RPM包安装的服务可以使用系统服务管理命令（service）来管理，例如RPM包安装的apache的启动方法是：<code>/etc/rc.d/init.d/httpd start</code>或者<code>service httpd start</code>，注意linux 中各种service 的执行文件的路径一般都在 <code>/etc/rc.d.init.d/</code>下，还有一点就是 <code>service</code> 命令是Redhat 系列Linux 的专有命令；</p>
+</li>
+<li><p>源码包安装的服务则不能被服务管理命令管理，因为没有安装到默认路径中。所以只能用绝对路径进行服务的管理，如 <code>/usr/local/apache2/bin/apachectl start</code></p>
+</li>
+</ul>
+<p>总的来说就是RPM 包可以使用系统的服务管理命令来管理，而源码包只能使用绝对路径来管理。</p>
+<h2 id="源码包的安装过程">源码包的安装过程</h2>
+<p><strong>安装准备</strong></p>
+<ul>
+<li>安装C 语言编译器gcc，可以使用yum 在线安装</li>
+<li>以Apache 为例下载源码包 <img src="http://mirror.bit.edu.cn/apache/httpd/" alt="http://mirror.bit.edu.cn/apache/httpd/"></li>
+</ul>
+<p><strong>安装注意事项</strong></p>
+<ul>
+<li>源代码保存位置：<code>/usr/local/src/</code></li>
+<li>软件安装位置：<code>/usr/local/</code></li>
+<li>如何确认安装过程报错：安装过程停止并且出现error、warning或no 的提示</li>
+</ul>
+<p><strong>源码包安装过程</strong></p>
+<p><strong>step1</strong>: 下载源码包到源码保存位置</p>
+<p><strong>step2</strong>: 解压下载的源码包。使用命令 <code>tar -zxvf httpd-2.2.9.tar.gz</code> 将源码包解压缩，并执行命令 <code>du -sh httpd-2.2.9</code> 来查看解压后源码包的大小。</p>
+<p><strong>step3</strong>: 进入解压缩目录。注意这一步必须进行，因为后续操作必须在压缩目录中进行。进入目录之后，需要注意两个文件，一个是 <code>INSTALL</code>，一个是 <code>README</code>，前一个是安装说明，后一个是使用说明。因此在安装一个陌生的源码包时需要首先查看 <code>INSTALL</code> 文件，里面会有详细的软件包安装步骤的说明。</p>
+<p><strong>step4</strong>：./configure 软件配置与检查</p>
+<ul>
+<li><p><strong>定义需要的功能选项</strong>。软件配置的参数（功能选项）可以执行命令 <code>./configure --help</code> 查看不同功能选项的详细信息。这里安装路径是必须定义的，可通过命令 <code>./configure --prefix=/usr/local/apache2</code> 来指定安装位置。</p>
+</li>
+<li><p><strong>检测系统环境是否符合安装要求</strong>，比如是否安装了gcc 等。</p>
+</li>
+<li><p><strong>把定义好的功能选项和检测系统环境的信息都写入Makefile 文件</strong>，用于后续的编辑。Makefile 文件起初是不存在的，它要在执行命令 <code>./configure --prefix=/usr/local/apache2</code> 之后才会生成。</p>
+</li>
+</ul>
+<ul>
+<li><p>make 命令进行编译，比较耗时，如果在编译时报错，或者在执行 <code>./configure</code> 命令时报错，可以通过命令 <code>make clean</code> 清空产生的临时文件。</p>
+</li>
+<li><p>make install 编译安装，这一步执行后才会向指定目录下生成安装文件。</p>
+</li>
+<li><p>安装完成之后可以通过执行命令 <code>/usr/local/apache2/bin/apachect1 start</code> 来启动Apache 服务。那么为什么此处的命令不是 httpd 而是apachect1 呢？我们可以在解压的安装包目录下的 <code>INSTALL</code> 文件进行查看。</p>
+</li>
+</ul>
+<p><strong>源码包的卸载</strong></p>
+<p>源码包的卸载不需要卸载命令，直接删除安装目录即可。不会遗留任何垃圾文件。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm -rf /usr/<span class="keyword">local</span>/apache2</div></pre></td></tr></table></figure>
+
+<h2 id="脚本安装包与软件包选择">脚本安装包与软件包选择</h2>
+<p>脚本安装包并不是独立的软件包类型，使用脚本安装常见的是安装源码包。脚本安装包是人为把安装过程写成了自动安装的脚本，只要执行脚本，定义简单的参数，就可以完成安装。</p>
+<p>脚本安装包一般是一些硬件的驱动，如果手工安装的话比较复杂，因此很多厂商会提供安装脚本。它类似于windows 下的软件安装方式，只需要执行脚本 <code>setup.sh</code> 即可。</p>
+<p>使用脚本安装可以使用 Webmin 软件进行实验。Webmin 是一个基于Web 的Linux 系统管理界面。可以通过图形化的方式设置用户帐号、Apache、DNS、文件共享等服务。 </p>
+<h2 id="总结">总结</h2>
+<p>本篇博客主要讲述了源码包和RPM 包的区别，以及源码包的安装步骤。那么如何在安装RPM 包和安装源码包之间进行取舍呢？可以这样理解，如果安装的源码包不会对外提供服务，比如gcc，那么就可以安装rpm 包，而像Apache 这样会对外提供服务的软件包则最好使用源码包的方式进行安装。另外还简单介绍了脚本安装包的使用。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="源码包与RPM_包的区别">源码包与RPM 包的区别</h2>
+<p><strong>安装之前的区别</strong></p>
+<p>安装之前的区别主要体现为概念上的区别：源码包是开源的，安装时配置更加自由，安装完成后效率更高，但是它安装更慢，安装过程更容易报错；而RPM 包只是编译好的二进制包，但是它安装速度快，出错也容易解决，只有依赖性的问题。</p>
+<p><strong>安装之后的区别</strong></p>
+<p>安装之后，两个最直接的区别就是安装位置的区别。我们知道RPM 包在安装时各个文件的路径已经确定好了，不用人为进行修改，而源码包在安装时则需要人为指定安装路径。由于安装位置的区别，使得源码包和RPM 包在后续的管理工程中也会有一些区别。</p>
+<p>RPM 包的默认安装位置大致如下：</p>
+<blockquote>
+<p>/etc/              配置文件安装目录<br>/usr/bin/          可执行的命令安装目录<br>/usr/lib/          程序所使用的函数库保存位置<br>/usr/share/doc/   基本的软件使用手册保存位置<br>/usr/share/man/   帮助文件保存位置 </p>
+</blockquote>
+]]>
+    
+    </summary>
+    
+      <category term="linux" scheme="http://zhangyigong.github.com/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Linux 软件包管理（二）- yum 命令]]></title>
+    <link href="http://zhangyigong.github.com/2015/03/07/linux-software-management-2/"/>
+    <id>http://zhangyigong.github.com/2015/03/07/linux-software-management-2/</id>
+    <published>2015-03-07T15:30:18.000Z</published>
+    <updated>2015-03-08T15:42:25.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="yum_在线管理概述">yum 在线管理概述</h2>
+<p>通过rpm 命令手工管理软件包，最大的问题就是软件包的依赖性问题，而yum 正是为了解决这个问题而存在的，Redhat 系列的yum 是收费的，不过Centos 却是个例外，因此我们可以在Centos 环境下方便地使用yum 命令。</p>
+<p>使用yum 命令只需要提供需要安装的软件包的全名，系统就会自动从服务器上下载相应的软件包，各种依赖关系也会自动处理。当没有网络的时候，我们也可以将光盘配置成yum。</p>
+<h2 id="IP地址配置">IP地址配置</h2>
+<p>使用网络服务器上的yum 源，需要保证安装的linux 能够访问外网，因此不仅要能够正确地配置IP 地址和子网掩码，还要正确的配置DNS 和网关。如果说使用 <code>ifconfig eth0 192.168.x.x</code> 对IP 地址进行修改，由于配置文件没有发生变化，配置只是临时生效，在重启系统或者网络服务之后会恢复到原来的IP 地址。 而且这种方式只能够配置网络的IP 和子网掩码，但是要上公网还需要配置系统的DNS 和网关。</p>
+<p>在包括Centos 在内的Redhat 系列的Linux 中配置网络参数有一种简便的方法，就是使用命令 <code>setup</code>，该命令可以使用窗口进行网络参数的配置，具体如下所示：</p>
+<a id="more"></a>
+
+<p><img src="http://zhang1g.qiniudn.com/network-setup-command-1.PNG" alt="setup 命令配置网络参数"></p>
+<p><img src="http://zhang1g.qiniudn.com/network-setup-command-2.PNG" alt="setup 命令配置网络参数"></p>
+<p>执行 <code>setup</code> 命令之后，选择 <code>Network configuration</code> 选项，回车之后选择设备配置项进行各项网络参数的配置。</p>
+<p>如果当前网络环境中没有DHCP 服务器，则按空格取消DHCP 选项中的 <code>*</code> 号，进行IP 地址的手动更改，接下来就是各项网络参数的更改，更改配置完成后保存退出。注意此时更改还没有生效，需要<strong>重新启动系统或者网络服务</strong>配置才会生效，一般来说可以执行一下命令重启网络服务。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">service</span> network restart		<span class="comment">#重启网络服务</span></div></pre></td></tr></table></figure>
+
+<p>还需要注意的另外一点是，Centos 6.3 的版本之中，网卡默认是没有启动的。因此在重启网络服务之前需要首先执行命令 <code>vi /etc/sysconfig/network-scripts/ifcfg-eth0</code>，修改配置文件中的内容，把 <code>ONBOOT=“no”</code> 改为 <code>ONBOOT=“yes”</code> 来启动网卡。如果没有 <code>setup</code> 命令，也是在这个配置文件中进行网络参数的配置。</p>
+<h2 id="网络yum_源">网络yum 源</h2>
+<p>网络yum 源地址保存在目录 <code>/etc/yum.repos.d/</code> 下面，该文件夹下所有以 <code>.repo</code> 为后缀的文件都是合法的yum 源。以默认的yum 源为例：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">vi</span> /etc/yum.repos.<span class="keyword">d</span>/CentOS-Base.repo</div></pre></td></tr></table></figure>
+
+<p><img src="http://zhang1g.qiniudn.com/yum-source-1.PNG" alt="yum 源配置文件中的软件池地址格式"></p>
+<p>其中包含了若干个软件池地址，格式如上图所示，具体的参数含义如下：</p>
+<ul>
+<li><strong>[base]</strong>           容器名称，一定要放在[]中</li>
+<li><strong>name</strong>            容器说明，可以自己随便写</li>
+<li><strong>mirrorlist</strong>      镜像站点，这个可以注释掉</li>
+<li><strong>baseurl</strong>         我们的yum源服务器的地址。默认是CentOS官方的yum源服务器，是可以使用的，如果你觉得慢可以改成你喜欢的yum源地址</li>
+<li><strong>enabled</strong>          此容器是否生效，如果不写或写成enable=1都是生效，写成enable=0就是不生效，默认是生效的</li>
+<li><strong>gpgcheck</strong>      如果是1是指RPM的数字证书生效，如果是0则不生效</li>
+<li><strong>gpgkey</strong>        数字证书的公钥文件保存位置。不用修改</li>
+</ul>
+<p>一般来说，上述配置文件已经配置好了，不需要进行修改，在网络连通的情况下直接使用yum 命令即可，这里我们只需要看懂各个配置参数的含义就可以了。</p>
+<h2 id="常用_yum命令">常用 yum命令</h2>
+<p><strong>查询</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum <span class="keyword">list</span> 	<span class="comment">#查询服务器上所有可用软件包列表，可在任意目录下执行</span></div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">yum</span> search 关键字		<span class="comment">#搜索服务器上所有和关键字相关的包</span></div></pre></td></tr></table></figure>
+
+<p>上述命令中的关键字一般就是包名，注意包名和包全名的区别只对rpm 手工管理生效，yum 命令只是使用包名。</p>
+<p><strong>安装</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum –y <span class="operator"><span class="keyword">install</span> 包名  	#选项：<span class="keyword">install</span> 安装 	-y 自动回答yes</span></div></pre></td></tr></table></figure>
+
+<p>安装完成之后可以执行命令 <code>rpm -q 包名</code> 查询软件包是否安装完成。</p>
+<p><strong>升级</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -<span class="keyword">y</span> <span class="keyword">update</span> 包名 		#选项：<span class="keyword">update</span> 升级  	-<span class="keyword">y</span> 自动回答yes</div></pre></td></tr></table></figure>
+
+<p>升级命令需要注意的是，不要忘了在后面添加包名，否则会连同linux 内核在内的软件包一同升级，导致出现宕机。</p>
+<p><strong>卸载</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -<span class="keyword">y</span> <span class="built_in">remove</span> 包名 		#选项：<span class="built_in">remove</span> 卸载		-<span class="keyword">y</span> 自动回答yes</div></pre></td></tr></table></figure>
+
+<p>yum 卸载命令会自动处理依赖，可能会卸载系统的依赖包，导致系统宕机崩溃。所以我们一般要做到最小化安装，尽量不使用yum 卸载。</p>
+<p><strong>yum 软件组管理</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="title">yum</span> grouplist					<span class="comment">#列出所有可用的软件组列表</span></div><div class="line">yum groupinstall 软件组名		<span class="comment">#安装指定的软件组，组名可由gropulist 查出来，注意软件包租应该是英文名称，出现空格要用引号括起来</span></div><div class="line">yum groupremove 软件组名		<span class="comment">#卸载指定软件组</span></div></pre></td></tr></table></figure>
+
+<h2 id="光盘yum源搭建">光盘yum源搭建</h2>
+<p>在网络连接断开时，如果使用yum 进行软件包的安装，可以将光盘作为yum 源。光盘yum 源的搭建步骤如下：</p>
+<p><strong>step1</strong>:    挂载光盘    <code>mount /dev/sr0 /mnt/cdrom</code></p>
+<p><strong>step2</strong>:     让网络yum源文件失效    </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /etc/yum.repos.d/</div><div class="line">mv CentOS-Base.repo CentOS-Base.repo.bak</div><div class="line">mv CentOS-Debuginfo.repo CentOS-Debuginfo.repo.bak</div><div class="line">mv CentOS-Vault.repo CentOS-Vault.repo.bak</div></pre></td></tr></table></figure>
+
+<p><strong>step3</strong>: 修改光盘yum 源文件</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">vim</span> CentOS-Media.repo</div></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[c6-media]<br>name=CentOS-$releasever - Media<br>baseurl=file:///mnt/cdrom</p>
+<h1 id="地址为你自己的光盘挂载地址">地址为你自己的光盘挂载地址</h1>
+<h1 id="file:///media/cdrom/">file:///media/cdrom/</h1>
+<h1 id="file:///media/cdrecorder/">file:///media/cdrecorder/</h1>
+<h1 id="注释这两个不存在的地址">注释这两个不存在的地址</h1>
+<p>gpgcheck=1<br>enabled=1</p>
+<h1 id="把enabled=0改为enabled=1，让这个yum源配置文件生效">把enabled=0改为enabled=1，让这个yum源配置文件生效</h1>
+<p>gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6</p>
+</blockquote>
+<p>在修改yum 源文件时需要注意一下几点内容：</p>
+<ol>
+<li>baseurl 不再是基于http 的，需要改成光盘挂载点，此外要把多余的file 注释掉；</li>
+<li>enabled 的值要修改为1；</li>
+<li>配置文件的排版格式不要乱修改，否则会出错，比如说注释要写在行首。</li>
+</ol>
+<h2 id="总结">总结</h2>
+<p>本篇博客主要讲述了使用yum 命令在线管理rpm 包的一些内容，主要包括：</p>
+<ul>
+<li>yum 在线管理的好处</li>
+<li>Centos 如何修改网络参数以及中间需要注意的地方</li>
+<li>网络yum 源所相关的配置文件路径 <code>/etc/yum.repos.d/</code> 以及文件格式</li>
+<li>常用的yum 命令，包括查询、安装、升级、卸载以及软件组的管理命令</li>
+<li>使用光盘搭建yum 源的步骤</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="yum_在线管理概述">yum 在线管理概述</h2>
+<p>通过rpm 命令手工管理软件包，最大的问题就是软件包的依赖性问题，而yum 正是为了解决这个问题而存在的，Redhat 系列的yum 是收费的，不过Centos 却是个例外，因此我们可以在Centos 环境下方便地使用yum 命令。</p>
+<p>使用yum 命令只需要提供需要安装的软件包的全名，系统就会自动从服务器上下载相应的软件包，各种依赖关系也会自动处理。当没有网络的时候，我们也可以将光盘配置成yum。</p>
+<h2 id="IP地址配置">IP地址配置</h2>
+<p>使用网络服务器上的yum 源，需要保证安装的linux 能够访问外网，因此不仅要能够正确地配置IP 地址和子网掩码，还要正确的配置DNS 和网关。如果说使用 <code>ifconfig eth0 192.168.x.x</code> 对IP 地址进行修改，由于配置文件没有发生变化，配置只是临时生效，在重启系统或者网络服务之后会恢复到原来的IP 地址。 而且这种方式只能够配置网络的IP 和子网掩码，但是要上公网还需要配置系统的DNS 和网关。</p>
+<p>在包括Centos 在内的Redhat 系列的Linux 中配置网络参数有一种简便的方法，就是使用命令 <code>setup</code>，该命令可以使用窗口进行网络参数的配置，具体如下所示：</p>
+]]>
+    
+    </summary>
+    
+      <category term="linux" scheme="http://zhangyigong.github.com/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Linux 软件包管理（一）- rpm 命令]]></title>
     <link href="http://zhangyigong.github.com/2015/03/04/linux-software-management-1/"/>
     <id>http://zhangyigong.github.com/2015/03/04/linux-software-management-1/</id>
     <published>2015-03-04T08:56:07.000Z</published>
-    <updated>2015-03-07T15:42:30.000Z</updated>
+    <updated>2015-03-09T02:14:09.000Z</updated>
     <content type="html"><![CDATA[<h2 id="软件包管理简介">软件包管理简介</h2>
 <p>Linux 中的可以安装的软件包可以分为两类：源码包和二进制包，其中源码包绝大部分是用C 语言写的，而二进制包又叫做RPM 包，是已经编译好的安装包，也是系统默认包，这两类安装包有各自的优缺点。</p>
 <p>源码包的优点是：</p>
@@ -224,8 +423,9 @@ cpio -idv .文件绝对路径</code></p>
     <link href="http://zhangyigong.github.com/2015/03/03/vim-basic-operations/"/>
     <id>http://zhangyigong.github.com/2015/03/03/vim-basic-operations/</id>
     <published>2015-03-03T14:42:32.000Z</published>
-    <updated>2015-03-07T15:55:08.000Z</updated>
-    <content type="html"><![CDATA[<p>Vim 编辑器是在Linux 系统下常用的一款全屏幕文本编辑器，它用来建立、编辑和显示配置文件、shell 脚本等文本文件。Vim 并没有菜单，<strong>只有命令</strong>。</p>
+    <updated>2015-03-09T02:22:37.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="前言">前言</h2>
+<p>Vim 编辑器是在Linux 系统下常用的一款全屏幕文本编辑器，它用来建立、编辑和显示配置文件、shell 脚本等文本文件。Vim 并没有菜单，<strong>只有命令</strong>。</p>
 <h2 id="Vim_工作模式">Vim 工作模式</h2>
 <p>Vim 包含三种工作模式：命令模式、插入模式和编辑模式。不同模式之间的转换关系如下图所示。</p>
 <p>执行命令 <code>vi filename</code> 后，不论filename 是新建的文件还是已经存在的文件，此时vim 进入的就是命令模式。此时输入任何字符，系统都会当做命令来处理，而不会在文件内容中进行显示。</p>
@@ -314,7 +514,8 @@ cpio -idv .文件绝对路径</code></p>
 <p>需要注意的是，在vim 的命令模式下添加了快捷键和替换之后，重启系统设置是不会继续生效的，而且在编辑其他文件时也不会生效，因此如果想一直对所有文件生效则需要将修改写入配置文件。具体位置为root用户的 /root目录或者普通用户的home 目录下的 <code>.vimrc</code> 文件，如果没有该文件可以自行添加。在该文件中添加命令是不需要输入冒号的。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>Vim 编辑器是在Linux 系统下常用的一款全屏幕文本编辑器，它用来建立、编辑和显示配置文件、shell 脚本等文本文件。Vim 并没有菜单，<strong>只有命令</strong>。</p>
+    <![CDATA[<h2 id="前言">前言</h2>
+<p>Vim 编辑器是在Linux 系统下常用的一款全屏幕文本编辑器，它用来建立、编辑和显示配置文件、shell 脚本等文本文件。Vim 并没有菜单，<strong>只有命令</strong>。</p>
 <h2 id="Vim_工作模式">Vim 工作模式</h2>
 <p>Vim 包含三种工作模式：命令模式、插入模式和编辑模式。不同模式之间的转换关系如下图所示。</p>
 <p>执行命令 <code>vi filename</code> 后，不论filename 是新建的文件还是已经存在的文件，此时vim 进入的就是命令模式。此时输入任何字符，系统都会当做命令来处理，而不会在文件内容中进行显示。</p>
@@ -333,8 +534,9 @@ cpio -idv .文件绝对路径</code></p>
     <link href="http://zhangyigong.github.com/2015/02/04/design-pattern-and-design-principles-second/"/>
     <id>http://zhangyigong.github.com/2015/02/04/design-pattern-and-design-principles-second/</id>
     <published>2015-02-04T07:24:33.000Z</published>
-    <updated>2015-03-07T15:54:08.000Z</updated>
-    <content type="html"><![CDATA[<p>在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容，包括：</p>
+    <updated>2015-03-09T02:17:18.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="前言">前言</h2>
+<p>在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容，包括：</p>
 <ul>
 <li>里氏代换原则</li>
 <li>依赖倒转原则</li>
@@ -403,7 +605,8 @@ cpio -idv .文件绝对路径</code></p>
 </ul>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容，包括：</p>
+    <![CDATA[<h2 id="前言">前言</h2>
+<p>在上一篇博客中我们只讲述的7中面向对象设计原则中的2种，下面是剩余5种设计模式的详细内容，包括：</p>
 <ul>
 <li>里氏代换原则</li>
 <li>依赖倒转原则</li>
@@ -524,18 +727,17 @@ cpio -idv .文件绝对路径</code></p>
     <link href="http://zhangyigong.github.com/2015/01/27/solve-mysql-messy-code/"/>
     <id>http://zhangyigong.github.com/2015/01/27/solve-mysql-messy-code/</id>
     <published>2015-01-27T07:17:15.000Z</published>
-    <updated>2015-01-28T04:48:09.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/solve-mysql-messy-code.jpeg" alt="解决Mysql的中文乱码问题"></p>
-<h2 id="前言">前言</h2>
+    <updated>2015-03-09T02:20:25.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="前言">前言</h2>
 <p>在[SQL 基础（一） 数据库和SQL] (<a href="http://zhangyigong.github.com/2015/01/27/database-and-sql/)一文中，最后我们使用Mysql" target="_blank" rel="external">http://zhangyigong.github.com/2015/01/27/database-and-sql/)一文中，最后我们使用Mysql</a> 在向表中插入汉字时出现了乱码。在实际工作中，乱码问题也时常发生，令人头痛。</p>
 <p>比如在Mysql 数据库插入下面一条带有中文的数据，在查询时结果集中很容易出现乱码。</p>
 <figure class="highlight `"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Employee <span class="keyword">VALUES</span>(<span class="literal">null</span>,<span class="string">'张三'</span>,<span class="string">'male'</span>,<span class="string">'1995-10-08'</span>,</span></div><div class="line">	<span class="string">'2015-01-12'</span>,<span class="string">'Sales'</span>,<span class="number">2000</span>,<span class="string">'是个好员工！'</span>);</div></pre></td></tr></table></figure>
 
 <p>关于解决Mysql 中文乱码问题，在网上有多方法，这里我希望通过这篇博客来捋清楚使用Mysql 时产生乱码问题的前因后果，以及相应的解决方法。其中借鉴了网上一些内容，我会在博客的最后列出相关的链接，感谢这些作者。</p>
-<a id="more"></a>
-
 <h2 id="Mysql_和字符集相关的变量">Mysql 和字符集相关的变量</h2>
 <p>首先，我们不带任何参数启动Mysql 服务，然后在Mysql 的命令行客户端执行语句 <code>show variables like &#39;character_set%&#39;;</code> ，查看Mysql 使用的字符集的变量有哪些，显示如下的结果</p>
+<a id="more"></a>
+
 <p><img src="http://zhang1g.qiniudn.com/show_character_set_variables.PNG" alt="查看Mysql 的默认字符集"></p>
 <p>有上图中可以看到，Mysql 中共有6 处使用了字符集，分别是：client 、connection、database、results、server 和system。其中与服务器相关的是：database、server、system（永远无法修改，就是utf-8），与客户端相关的是：connection、client、results 。</p>
 <p>或者可以在命令行客户端输入 <code>status;</code>，也可以看到与字符编码相关的变量。</p>
@@ -636,13 +838,14 @@ cpio -idv .文件绝对路径</code></p>
 <p><a href="http://www.cnblogs.com/candle806/archive/2013/01/14/2859721.html" target="_blank" rel="external">mysql命令行修改字符编码</a></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="http://zhang1g.qiniudn.com/solve-mysql-messy-code.jpeg" alt="解决Mysql的中文乱码问题"></p>
-<h2 id="前言">前言</h2>
+    <![CDATA[<h2 id="前言">前言</h2>
 <p>在[SQL 基础（一） 数据库和SQL] (<a href="http://zhangyigong.github.com/2015/01/27/database-and-sql/)一文中，最后我们使用Mysql" target="_blank" rel="external">http://zhangyigong.github.com/2015/01/27/database-and-sql/)一文中，最后我们使用Mysql</a> 在向表中插入汉字时出现了乱码。在实际工作中，乱码问题也时常发生，令人头痛。</p>
 <p>比如在Mysql 数据库插入下面一条带有中文的数据，在查询时结果集中很容易出现乱码。</p>
 <figure class="highlight `"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Employee <span class="keyword">VALUES</span>(<span class="literal">null</span>,<span class="string">'张三'</span>,<span class="string">'male'</span>,<span class="string">'1995-10-08'</span>,</span></div><div class="line">	<span class="string">'2015-01-12'</span>,<span class="string">'Sales'</span>,<span class="number">2000</span>,<span class="string">'是个好员工！'</span>);</div></pre></td></tr></table></figure>
 
 <p>关于解决Mysql 中文乱码问题，在网上有多方法，这里我希望通过这篇博客来捋清楚使用Mysql 时产生乱码问题的前因后果，以及相应的解决方法。其中借鉴了网上一些内容，我会在博客的最后列出相关的链接，感谢这些作者。</p>
+<h2 id="Mysql_和字符集相关的变量">Mysql 和字符集相关的变量</h2>
+<p>首先，我们不带任何参数启动Mysql 服务，然后在Mysql 的命令行客户端执行语句 <code>show variables like &#39;character_set%&#39;;</code> ，查看Mysql 使用的字符集的变量有哪些，显示如下的结果</p>
 ]]>
     
     </summary>
@@ -660,17 +863,16 @@ cpio -idv .文件绝对路径</code></p>
     <link href="http://zhangyigong.github.com/2015/01/27/database-and-sql/"/>
     <id>http://zhangyigong.github.com/2015/01/27/database-and-sql/</id>
     <published>2015-01-27T02:11:48.000Z</published>
-    <updated>2015-01-28T04:48:06.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/sql-base-learn2.jpg" alt="《SQL 基础教程》图书封面"></p>
-<h2 id="前言">前言</h2>
+    <updated>2015-03-09T02:16:30.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="前言">前言</h2>
 <p>总是感觉之前学的数据库相关的知识很零散，不够系统，加之好久没有看关于SQL 的知识，不免有点生疏了，于是想找一本合适的教材回顾一下。后来找到了一本可以堪称是零基础入门的SQL 书籍，这里给大家推荐一下：</p>
 <p>《SQL 基础教程》 【日】MICK 著    孙淼 罗勇 译 </p>
 <p>书中的SQL 都是基于标准SQL 2003编写，并且关于几个常用的RDBMS 在使用SQL 时的区别叙述的很详细，行文也很流畅，只是书中的命名都是按日文来的，不过影响不是很大。书中使用的RDBMS 是PostgreSQL，但是由于在实际中我使用Mysql 较多，所以我会主要侧重于Mysql 的相关部分。</p>
 <p>下面就开始我们的SQL 之旅了。</p>
-<a id="more"></a>
-
 <h2 id="数据库是什么">数据库是什么</h2>
 <p>很多人可能会觉得我们在使用计算机管理数据的时候，使用文本文件或者Excel 之类的电子表格软件不就可以了吗？为什么非要使用DBMS 这样专门的系统来管理数据呢？</p>
+<a id="more"></a>
+
 <p>因为使用文本文件或者Excel 如下的缺点：</p>
 <ol>
 <li>无法多人共享数据，即使文件放在连接网络的计算机上，并设置了网络共享，也存在某个用户打开文件的时候其他用户无法编辑的情况</li>
@@ -890,12 +1092,13 @@ cpio -idv .文件绝对路径</code></p>
 <p>在下一篇<a href="http://zhangyigong.github.com/2015/01/27/sql-query-base-learn/" target="_blank" rel="external">SQL 基础（二）SQL 查询基础</a>我们会介绍SQL 查询相关的基础内容。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="http://zhang1g.qiniudn.com/sql-base-learn2.jpg" alt="《SQL 基础教程》图书封面"></p>
-<h2 id="前言">前言</h2>
+    <![CDATA[<h2 id="前言">前言</h2>
 <p>总是感觉之前学的数据库相关的知识很零散，不够系统，加之好久没有看关于SQL 的知识，不免有点生疏了，于是想找一本合适的教材回顾一下。后来找到了一本可以堪称是零基础入门的SQL 书籍，这里给大家推荐一下：</p>
 <p>《SQL 基础教程》 【日】MICK 著    孙淼 罗勇 译 </p>
 <p>书中的SQL 都是基于标准SQL 2003编写，并且关于几个常用的RDBMS 在使用SQL 时的区别叙述的很详细，行文也很流畅，只是书中的命名都是按日文来的，不过影响不是很大。书中使用的RDBMS 是PostgreSQL，但是由于在实际中我使用Mysql 较多，所以我会主要侧重于Mysql 的相关部分。</p>
 <p>下面就开始我们的SQL 之旅了。</p>
+<h2 id="数据库是什么">数据库是什么</h2>
+<p>很多人可能会觉得我们在使用计算机管理数据的时候，使用文本文件或者Excel 之类的电子表格软件不就可以了吗？为什么非要使用DBMS 这样专门的系统来管理数据呢？</p>
 ]]>
     
     </summary>
@@ -913,16 +1116,15 @@ cpio -idv .文件绝对路径</code></p>
     <link href="http://zhangyigong.github.com/2015/01/20/follow-up-process-of-bulid-blog/"/>
     <id>http://zhangyigong.github.com/2015/01/20/follow-up-process-of-bulid-blog/</id>
     <published>2015-01-20T04:47:08.000Z</published>
-    <updated>2015-01-26T13:22:44.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/blog2.jpg" alt="使用Github Pages 搭建独立博客的后续过程"></p>
-<h2 id="内容回顾">内容回顾</h2>
+    <updated>2015-03-09T02:17:59.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="内容回顾">内容回顾</h2>
 <p>在<a href="http://zhangyigong.github.io/2015/01/13/bulid-blog-with-githubpages-and-hexo/" target="_blank" rel="external">使用Github Pages 和Hexo 搭建独立博客</a>一文中，我们逐步讲解了如何搭建一个自己的独立博客，包括环境的安装和配置，博客主题的选择和修改，添加RSS 订阅和第三方系统等等。</p>
 <p>关于之前的内容，还有一篇很不错的文章<a href="http://blog.fens.me/hexo-blog-github/" target="_blank" rel="external">Hexo在github上构建免费的Web应用</a>，说的比较齐全，评论里面也有一些常见问题的解决方法，这里就不一一列举了。</p>
 <p>但是到目前为止，要成为一个真正意义上的独立博客，我们还有一些工作需要做，下面就是关于后续工作的一些记录。</p>
-<a id="more"></a>
-
 <h2 id="域名申请">域名申请</h2>
 <p>在很多地方都可以购买域名，比如说<a href="https://www.namecheap.com/" target="_blank" rel="external">NAMECHEAP</a> 还有<a href="http://www.namesilo.com/" target="_blank" rel="external">NAMESILO</a>，我是从<a href="https://www.godaddy.com/" target="_blank" rel="external">GODADDY</a> 上购买的这个域名，主要是因为它支持支付宝支付，支付比较方便。</p>
+<a id="more"></a>
+
 <p><img src="http://zhang1g.qiniudn.com/godaddy-logo.jpg" alt="从Godday 上购买域名"></p>
 <p>网上有很多在Godday 上购买域名的教程，但是随着Godday 网站的改版，有一些教程已经不适用了，这里我列出一些针对新版的购买教程。</p>
 <p><a href="http://www.admin5.com/article/20131014/527495.shtml" target="_blank" rel="external">2013年10月新版godaddy域名注册图文教程</a></p>
@@ -982,11 +1184,12 @@ cpio -idv .文件绝对路径</code></p>
 <p><a href="https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/" target="_blank" rel="external">Setting up a custom domain with GitHub Pages</a></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="http://zhang1g.qiniudn.com/blog2.jpg" alt="使用Github Pages 搭建独立博客的后续过程"></p>
-<h2 id="内容回顾">内容回顾</h2>
+    <![CDATA[<h2 id="内容回顾">内容回顾</h2>
 <p>在<a href="http://zhangyigong.github.io/2015/01/13/bulid-blog-with-githubpages-and-hexo/" target="_blank" rel="external">使用Github Pages 和Hexo 搭建独立博客</a>一文中，我们逐步讲解了如何搭建一个自己的独立博客，包括环境的安装和配置，博客主题的选择和修改，添加RSS 订阅和第三方系统等等。</p>
 <p>关于之前的内容，还有一篇很不错的文章<a href="http://blog.fens.me/hexo-blog-github/" target="_blank" rel="external">Hexo在github上构建免费的Web应用</a>，说的比较齐全，评论里面也有一些常见问题的解决方法，这里就不一一列举了。</p>
 <p>但是到目前为止，要成为一个真正意义上的独立博客，我们还有一些工作需要做，下面就是关于后续工作的一些记录。</p>
+<h2 id="域名申请">域名申请</h2>
+<p>在很多地方都可以购买域名，比如说<a href="https://www.namecheap.com/" target="_blank" rel="external">NAMECHEAP</a> 还有<a href="http://www.namesilo.com/" target="_blank" rel="external">NAMESILO</a>，我是从<a href="https://www.godaddy.com/" target="_blank" rel="external">GODADDY</a> 上购买的这个域名，主要是因为它支持支付宝支付，支付比较方便。</p>
 ]]>
     
     </summary>
@@ -1002,17 +1205,16 @@ cpio -idv .文件绝对路径</code></p>
     <link href="http://zhangyigong.github.com/2015/01/19/wonderful-use-of-verification-code/"/>
     <id>http://zhangyigong.github.com/2015/01/19/wonderful-use-of-verification-code/</id>
     <published>2015-01-19T12:13:43.000Z</published>
-    <updated>2015-01-20T04:49:30.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/verify-code-thinking.png" alt="验证码的奇思妙用"></p>
-<h2 id="验证码的起源">验证码的起源</h2>
+    <updated>2015-03-09T02:22:30.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="验证码的起源">验证码的起源</h2>
 <p>在刚开始有Internet 的时候，是没有验证码这种东西的，但是这导致了杯具的发生，垃圾评论和垃圾邮件可以轻松通过任何一个网站的注册程序，通过各种方式轰炸人民群众的眼球。</p>
 <p>最先想要解决这一问题的是<strong>雅虎</strong>，作为互联网时代早期最重要的免费邮件提供商，他们一方面要解决用户们每天遇到的数以百计的垃圾邮件轰炸，另一方面，他们自己的免费邮箱，恰恰又是垃圾邮件的最爱，因为耗费无数资源所阻止的垃圾邮件，都来自于自己的服务器。这让雅虎开始认真考虑如何解决人机辨识问题。</p>
-<a id="more"></a>
-
 <p>于是他们找到了一位当时刚刚21岁的天才Luis von Ahn。 而Luis Von Ahn 给出的方案，就是这个让人民群众微微皱眉，但是让计算机耸肩挠头的验证码。</p>
-<p><img src="http://zhang1g.qiniudn.com/Luis-von-Ahn.jpeg" alt="验证码的发明人Luis von Ahn"></p>
 <p>当时计算机辨识技术还很落后，对于经过扭曲、污染的文字，无法辨识。而人类却可以轻松认出这些文字。</p>
 <p>这是一个简单而巧妙的设计，计算机先是产生一个随机的字符串，然后用程序把这个字符串的图像进行随机的污染，扭曲，再显示给显示器前的人或者机器。凡是能够辨识这些字符的，即为人类。</p>
+<a id="more"></a>
+
+<p><img src="http://zhang1g.qiniudn.com/Luis-von-Ahn.jpeg" alt="验证码的发明人Luis von Ahn"></p>
 <h2 id="验证码的发展">验证码的发展</h2>
 <p>当全世界数以十亿计的人每天都会浪费几秒钟的时间参与辨认文字这一简单活动的时候，你是否有想过，这其中浪费的人脑智力是否能得到更好的应用呢？</p>
 <p>Luis Von Ahn 也在思考这个问题，他最终的设计是：<strong>让人们用这些脑力解决一些计算机无法解决的图书数字化</strong>。</p>
@@ -1048,10 +1250,12 @@ cpio -idv .文件绝对路径</code></p>
 <p>验证码技术是一种计算机技术发展下的矛盾产物，人类渴望计算机能够通过自动化的过程完成更多的任务，却同样要防止计算机被利用在破坏与恶意的用途当中。随着人工智能领域的研究成果越来越先进，计算机将变得越来越通情达理，不知道是不是会有一天计算机能够通过验证码验证，那时候我们又该如何区分人类和计算机呢？</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="http://zhang1g.qiniudn.com/verify-code-thinking.png" alt="验证码的奇思妙用"></p>
-<h2 id="验证码的起源">验证码的起源</h2>
+    <![CDATA[<h2 id="验证码的起源">验证码的起源</h2>
 <p>在刚开始有Internet 的时候，是没有验证码这种东西的，但是这导致了杯具的发生，垃圾评论和垃圾邮件可以轻松通过任何一个网站的注册程序，通过各种方式轰炸人民群众的眼球。</p>
 <p>最先想要解决这一问题的是<strong>雅虎</strong>，作为互联网时代早期最重要的免费邮件提供商，他们一方面要解决用户们每天遇到的数以百计的垃圾邮件轰炸，另一方面，他们自己的免费邮箱，恰恰又是垃圾邮件的最爱，因为耗费无数资源所阻止的垃圾邮件，都来自于自己的服务器。这让雅虎开始认真考虑如何解决人机辨识问题。</p>
+<p>于是他们找到了一位当时刚刚21岁的天才Luis von Ahn。 而Luis Von Ahn 给出的方案，就是这个让人民群众微微皱眉，但是让计算机耸肩挠头的验证码。</p>
+<p>当时计算机辨识技术还很落后，对于经过扭曲、污染的文字，无法辨识。而人类却可以轻松认出这些文字。</p>
+<p>这是一个简单而巧妙的设计，计算机先是产生一个随机的字符串，然后用程序把这个字符串的图像进行随机的污染，扭曲，再显示给显示器前的人或者机器。凡是能够辨识这些字符的，即为人类。</p>
 ]]>
     
     </summary>
@@ -1065,17 +1269,16 @@ cpio -idv .文件绝对路径</code></p>
     <link href="http://zhangyigong.github.com/2015/01/17/verification-code-generate-by-opensource-component/"/>
     <id>http://zhangyigong.github.com/2015/01/17/verification-code-generate-by-opensource-component/</id>
     <published>2015-01-17T08:53:28.000Z</published>
-    <updated>2015-01-20T04:41:32.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/kaptcha-verify-code1.gif" alt="使用开源组件生成验证码"></p>
-<h2 id="开源组件简介">开源组件简介</h2>
+    <updated>2015-03-09T02:20:53.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="开源组件简介">开源组件简介</h2>
 <p>在<a href="http://zhangyigong.github.io/2015/01/16/verification-code-generated-by-java-servlet/" target="_blank" rel="external">漫谈验证码（一） 使用Servlet 生成验证码</a>一文中，我们介绍了使用Servlet 生成验证码的方法。但是生成的验证码图片比较简单，使用图像识别的方法还是很容易破解，因此我们在实际应用中希望能够生成比较复杂的验证码图片，比如汉字、算式等，并且添加一些干扰。</p>
 <p>使用一些相关的开源组件可以很容易的实现上述功能。常见的开源组件包括Kaptcha、jCaptcha 和Simplecaptcha。</p>
-<a id="more"></a>
-
 <p>SimpleCaptcha 是很棒的项目，但是，SimpleCaptcha 似乎没有被维护和更新，在JDK1.5 和Servlet 输出的HTTP 头部情况下还存在一些问题，有一堆的错误报告。 近几年，SimpleCaptcha 的论坛没有任何的消息，也没有新的版本或任何改变。 </p>
 <p>jCaptcha 是很多Java 开发者使用的验证码组件，但是默认的配置相对有点恶心，它是一个很棒的项目，但绝对不是一个快速解决方案，更像是一个库。在网站上，它默认输出的样式不是太难分辨就是不够好，也相当的慢。</p>
 <p>肯定的是，你需要花很多的时间来熟悉它的API。但事实是，我愿意是一个简单的jar 包文件，轻松地导入我的项目，然后在web.xml 添加几行代码即可。 </p>
 <p>因此，这里推荐一个非常简单的验证码组件：<strong>Kaptcha</strong>。 </p>
+<a id="more"></a>
+
 <p>Kaptcha 很容易安装使用，并且默认输出验证码。默认产生的验证码和放在这篇博客最前面的验证码图片很相似。如果你想改变输出的样式，可以通过配置一组选项，就可以输出自定义的变形样式。</p>
 <p>接下来我们将使用Kaptcha 开源组件来生成不同格式的复杂的验证码图片。</p>
 <h2 id="Kaptcha_组件生成复杂验证码">Kaptcha 组件生成复杂验证码</h2>
@@ -1177,10 +1380,13 @@ cpio -idv .文件绝对路径</code></p>
 <p>至此，使用kaptcha 组件生成各类复杂验证码的工作就全部完成了。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="http://zhang1g.qiniudn.com/kaptcha-verify-code1.gif" alt="使用开源组件生成验证码"></p>
-<h2 id="开源组件简介">开源组件简介</h2>
+    <![CDATA[<h2 id="开源组件简介">开源组件简介</h2>
 <p>在<a href="http://zhangyigong.github.io/2015/01/16/verification-code-generated-by-java-servlet/" target="_blank" rel="external">漫谈验证码（一） 使用Servlet 生成验证码</a>一文中，我们介绍了使用Servlet 生成验证码的方法。但是生成的验证码图片比较简单，使用图像识别的方法还是很容易破解，因此我们在实际应用中希望能够生成比较复杂的验证码图片，比如汉字、算式等，并且添加一些干扰。</p>
 <p>使用一些相关的开源组件可以很容易的实现上述功能。常见的开源组件包括Kaptcha、jCaptcha 和Simplecaptcha。</p>
+<p>SimpleCaptcha 是很棒的项目，但是，SimpleCaptcha 似乎没有被维护和更新，在JDK1.5 和Servlet 输出的HTTP 头部情况下还存在一些问题，有一堆的错误报告。 近几年，SimpleCaptcha 的论坛没有任何的消息，也没有新的版本或任何改变。 </p>
+<p>jCaptcha 是很多Java 开发者使用的验证码组件，但是默认的配置相对有点恶心，它是一个很棒的项目，但绝对不是一个快速解决方案，更像是一个库。在网站上，它默认输出的样式不是太难分辨就是不够好，也相当的慢。</p>
+<p>肯定的是，你需要花很多的时间来熟悉它的API。但事实是，我愿意是一个简单的jar 包文件，轻松地导入我的项目，然后在web.xml 添加几行代码即可。 </p>
+<p>因此，这里推荐一个非常简单的验证码组件：<strong>Kaptcha</strong>。 </p>
 ]]>
     
     </summary>
@@ -1198,9 +1404,8 @@ cpio -idv .文件绝对路径</code></p>
     <link href="http://zhangyigong.github.com/2015/01/16/verification-code-generated-by-java-servlet/"/>
     <id>http://zhangyigong.github.com/2015/01/16/verification-code-generated-by-java-servlet/</id>
     <published>2015-01-15T16:45:07.000Z</published>
-    <updated>2015-01-19T11:27:07.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/verification-code.png" alt="使用servlet 和开源组件生成验证码"></p>
-<h2 id="为什么要使用验证码">为什么要使用验证码</h2>
+    <updated>2015-03-09T02:21:23.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="为什么要使用验证码">为什么要使用验证码</h2>
 <p>输入验证码是一个很麻烦的一个过程，很多用户都不喜欢，但是验证码却总是存在于各类的网站和Web 应用中，比如</p>
 <ul>
 <li>回复帖子的时候</li>
@@ -1208,8 +1413,6 @@ cpio -idv .文件绝对路径</code></p>
 <li>用户登录的时候<br>…</li>
 </ul>
 <p>为什么要使用验证码呢？</p>
-<a id="more"></a>
-
 <p>因为计算机可以模拟人的行为对网站进行一系列的操作，如果不使用验证码，将会导致一些可怕的事情发生</p>
 <ul>
 <li>对特定用户不断登录破解密码</li>
@@ -1217,6 +1420,8 @@ cpio -idv .文件绝对路径</code></p>
 <li>对某个网站提交垃圾数据</li>
 <li>对网站投票进行刷票<br>…</li>
 </ul>
+<a id="more"></a>
+
 <h2 id="什么是验证码">什么是验证码</h2>
 <p>有验证码的登录过程如下</p>
 <p><img src="http://zhang1g.qiniudn.com/verification-code2.png" alt="有验证码的登录过程"></p>
@@ -1322,8 +1527,7 @@ cpio -idv .文件绝对路径</code></p>
 <p>至此使用Servlet 生成验证码的工作就全部完成了。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="http://zhang1g.qiniudn.com/verification-code.png" alt="使用servlet 和开源组件生成验证码"></p>
-<h2 id="为什么要使用验证码">为什么要使用验证码</h2>
+    <![CDATA[<h2 id="为什么要使用验证码">为什么要使用验证码</h2>
 <p>输入验证码是一个很麻烦的一个过程，很多用户都不喜欢，但是验证码却总是存在于各类的网站和Web 应用中，比如</p>
 <ul>
 <li>回复帖子的时候</li>
@@ -1331,6 +1535,13 @@ cpio -idv .文件绝对路径</code></p>
 <li>用户登录的时候<br>…</li>
 </ul>
 <p>为什么要使用验证码呢？</p>
+<p>因为计算机可以模拟人的行为对网站进行一系列的操作，如果不使用验证码，将会导致一些可怕的事情发生</p>
+<ul>
+<li>对特定用户不断登录破解密码</li>
+<li>对某个网站不断创建无效账户</li>
+<li>对某个网站提交垃圾数据</li>
+<li>对网站投票进行刷票<br>…</li>
+</ul>
 ]]>
     
     </summary>
@@ -1346,21 +1557,19 @@ cpio -idv .文件绝对路径</code></p>
     <link href="http://zhangyigong.github.com/2015/01/13/bulid-blog-with-githubpages-and-hexo/"/>
     <id>http://zhangyigong.github.com/2015/01/13/bulid-blog-with-githubpages-and-hexo/</id>
     <published>2015-01-13T14:27:57.000Z</published>
-    <updated>2015-01-14T09:30:44.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/blog1.jpg" alt="使用Github Pages 和Hexo 搭建独立博客"></p>
-<h2 id="前言">前言</h2>
+    <updated>2015-03-09T02:15:42.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="为什么选择GitHub_Pages？">为什么选择GitHub Pages？</h2>
 <p>一直想搭建一个自己的独立博客，后来发现了Hexo 这个逼格极高的方式，而且比起Github Pages 官方推荐的Jekyll 操作要简便的多，因此就使用Github Pages 服务和Hexo 搭建了现在这个博客。</p>
 <p>这是一个在Win7 搭建独立博客的教程，我希望尽可能写的详细，给后来者一个指引。在搭建博客的过程中我摘录了其他人的一些教程，感谢这些作者们，在教程的最后我也会列出相关的链接。</p>
 <p>下面开始我们的博客搭建之旅。</p>
-<a id="more"></a>
-
-<h2 id="为什么选择GitHub_Pages？">为什么选择GitHub Pages？</h2>
 <p>很多人选择Wordpress 来搭建博客，但是相对会麻烦一点，<a href="https://pages.github.com/" target="_blank" rel="external">Github Pages</a> 可以被认为是用户编写的、托管在github上的静态网页，它是Github 推出的一项服务，本来是用于介绍托管在GitHub 的项目，不过，由于它的空间免费稳定，用来做搭建一个博客再好不过了。</p>
 <p>GitHub Pages 拥有两种Pages 模式</p>
 <ul>
 <li>User/Organization Pages 个人或公司站点</li>
 <li>Project Pages 项目站点</li>
 </ul>
+<a id="more"></a>
+
 <p>我们使用第一种模式，但是需要注意以下几点</p>
 <ol>
 <li><p>使用自己的Github 用户名，每个用户名下面只能建立一个</p>
@@ -1559,11 +1768,16 @@ cpio -idv .文件绝对路径</code></p>
 </ol>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="http://zhang1g.qiniudn.com/blog1.jpg" alt="使用Github Pages 和Hexo 搭建独立博客"></p>
-<h2 id="前言">前言</h2>
+    <![CDATA[<h2 id="为什么选择GitHub_Pages？">为什么选择GitHub Pages？</h2>
 <p>一直想搭建一个自己的独立博客，后来发现了Hexo 这个逼格极高的方式，而且比起Github Pages 官方推荐的Jekyll 操作要简便的多，因此就使用Github Pages 服务和Hexo 搭建了现在这个博客。</p>
 <p>这是一个在Win7 搭建独立博客的教程，我希望尽可能写的详细，给后来者一个指引。在搭建博客的过程中我摘录了其他人的一些教程，感谢这些作者们，在教程的最后我也会列出相关的链接。</p>
 <p>下面开始我们的博客搭建之旅。</p>
+<p>很多人选择Wordpress 来搭建博客，但是相对会麻烦一点，<a href="https://pages.github.com/" target="_blank" rel="external">Github Pages</a> 可以被认为是用户编写的、托管在github上的静态网页，它是Github 推出的一项服务，本来是用于介绍托管在GitHub 的项目，不过，由于它的空间免费稳定，用来做搭建一个博客再好不过了。</p>
+<p>GitHub Pages 拥有两种Pages 模式</p>
+<ul>
+<li>User/Organization Pages 个人或公司站点</li>
+<li>Project Pages 项目站点</li>
+</ul>
 ]]>
     
     </summary>
@@ -1581,14 +1795,11 @@ cpio -idv .文件绝对路径</code></p>
     <link href="http://zhangyigong.github.com/2015/01/13/markdown-grammar/"/>
     <id>http://zhangyigong.github.com/2015/01/13/markdown-grammar/</id>
     <published>2015-01-13T11:26:16.000Z</published>
-    <updated>2015-01-27T08:03:41.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://zhang1g.qiniudn.com/markdown-example4.jpg" alt="使用Markdown 语法编辑博客内容"></p>
-<h2 id="什么是_Markdown">什么是 Markdown</h2>
+    <updated>2015-03-09T02:19:54.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="什么是_Markdown">什么是 Markdown</h2>
 <p>Markdown 是一种方便记忆、书写的纯文本标记语言，我们可以使用这些标记符号以最小的输入代价生成极富表现力的文档：譬如您正在阅读的这篇博客。</p>
 <p>不同于其它 <em>所见即所得</em> 的编辑器：你只需使用键盘专注于书写文本内容，就可以生成印刷级的排版格式，省却在键盘和工具栏之间来回切换，调整内容和格式的麻烦。</p>
 <p><strong>Markdown 在流畅的书写和印刷级的阅读体验之间找到了平衡。</strong> 目前它已经成为世界上最大的技术分享网站 GitHub 和 技术问答网站 StackOverFlow 的御用书写格式。</p>
-<a id="more"></a>
-
 <p>可以使用Markdown：</p>
 <blockquote>
 <ul>
@@ -1599,6 +1810,8 @@ cpio -idv .文件绝对路径</code></p>
 </ul>
 </blockquote>
 <p>它使用简单的符号标记不同的标题，分割不同的段落，<strong>粗体</strong> 或者 <em>斜体</em> 某些文字，更棒的是，它还可以</p>
+<a id="more"></a>
+
 <h3 id="书写一个复杂的公式">书写一个复杂的公式</h3>
 <p>$$e^{\pi i}+1=?$$</p>
 <h3 id="高亮一段代码">高亮一段代码</h3>
@@ -1731,11 +1944,20 @@ cpio -idv .文件绝对路径</code></p>
 
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="http://zhang1g.qiniudn.com/markdown-example4.jpg" alt="使用Markdown 语法编辑博客内容"></p>
-<h2 id="什么是_Markdown">什么是 Markdown</h2>
+    <![CDATA[<h2 id="什么是_Markdown">什么是 Markdown</h2>
 <p>Markdown 是一种方便记忆、书写的纯文本标记语言，我们可以使用这些标记符号以最小的输入代价生成极富表现力的文档：譬如您正在阅读的这篇博客。</p>
 <p>不同于其它 <em>所见即所得</em> 的编辑器：你只需使用键盘专注于书写文本内容，就可以生成印刷级的排版格式，省却在键盘和工具栏之间来回切换，调整内容和格式的麻烦。</p>
 <p><strong>Markdown 在流畅的书写和印刷级的阅读体验之间找到了平衡。</strong> 目前它已经成为世界上最大的技术分享网站 GitHub 和 技术问答网站 StackOverFlow 的御用书写格式。</p>
+<p>可以使用Markdown：</p>
+<blockquote>
+<ul>
+<li>整理知识，学习笔记</li>
+<li>发布日记，杂文，所见所想</li>
+<li>撰写发布技术文稿（代码支持）</li>
+<li>撰写发布学术论文（LaTeX 公式支持）</li>
+</ul>
+</blockquote>
+<p>它使用简单的符号标记不同的标题，分割不同的段落，<strong>粗体</strong> 或者 <em>斜体</em> 某些文字，更棒的是，它还可以</p>
 ]]>
     
     </summary>

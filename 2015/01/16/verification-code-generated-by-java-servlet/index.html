@@ -12,7 +12,13 @@
 申请账号的时候
 用户登录的时候…
 
-为什么要使用验证码呢？">
+为什么要使用验证码呢？
+因为计算机可以模拟人的行为对网站进行一系列的操作，如果不使用验证码，将会导致一些可怕的事情发生
+
+对特定用户不断登录破解密码
+对某个网站不断创建无效账户
+对某个网站提交垃圾数据
+对网站投票进行刷">
 <meta property="og:type" content="article">
 <meta property="og:title" content="漫谈验证码（一） 使用Servlet 生成验证码">
 <meta property="og:url" content="http://zhangyigong.github.com/2015/01/16/verification-code-generated-by-java-servlet/">
@@ -24,8 +30,13 @@
 申请账号的时候
 用户登录的时候…
 
-为什么要使用验证码呢？">
-<meta property="og:image" content="http://zhang1g.qiniudn.com/verification-code.png">
+为什么要使用验证码呢？
+因为计算机可以模拟人的行为对网站进行一系列的操作，如果不使用验证码，将会导致一些可怕的事情发生
+
+对特定用户不断登录破解密码
+对某个网站不断创建无效账户
+对某个网站提交垃圾数据
+对网站投票进行刷">
 <meta property="og:image" content="http://zhang1g.qiniudn.com/verification-code2.png">
 <meta property="og:image" content="http://zhang1g.qiniudn.com/verification-code3.png">
 <meta property="og:image" content="http://zhang1g.qiniudn.com/servlet-verifycode1.PNG">
@@ -39,7 +50,13 @@
 申请账号的时候
 用户登录的时候…
 
-为什么要使用验证码呢？">
+为什么要使用验证码呢？
+因为计算机可以模拟人的行为对网站进行一系列的操作，如果不使用验证码，将会导致一些可怕的事情发生
+
+对特定用户不断登录破解密码
+对某个网站不断创建无效账户
+对某个网站提交垃圾数据
+对网站投票进行刷">
 
   
     <link rel="alternative" href="/atom.xml" title="张一弓的Blog" type="application/atom+xml">
@@ -143,7 +160,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud">
-						<a href="/tags/blog/" style="font-size: 20.00px;">blog</a><a href="/tags/github/" style="font-size: 15.00px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/java/" style="font-size: 15.00px;">java</a><a href="/tags/linux/" style="font-size: 15.00px;">linux</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/mysql/" style="font-size: 10.00px;">mysql</a><a href="/tags/opensource/" style="font-size: 10.00px;">opensource</a><a href="/tags/sql/" style="font-size: 15.00px;">sql</a><a href="/tags/web/" style="font-size: 15.00px;">web</a><a href="/tags/感悟杂谈/" style="font-size: 10.00px;">感悟杂谈</a><a href="/tags/数据库/" style="font-size: 15.00px;">数据库</a><a href="/tags/设计模式/" style="font-size: 15.00px;">设计模式</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
+						<a href="/tags/blog/" style="font-size: 16.67px;">blog</a><a href="/tags/github/" style="font-size: 13.33px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/java/" style="font-size: 13.33px;">java</a><a href="/tags/linux/" style="font-size: 20.00px;">linux</a><a href="/tags/markdown/" style="font-size: 10.00px;">markdown</a><a href="/tags/mysql/" style="font-size: 10.00px;">mysql</a><a href="/tags/opensource/" style="font-size: 10.00px;">opensource</a><a href="/tags/sql/" style="font-size: 13.33px;">sql</a><a href="/tags/web/" style="font-size: 13.33px;">web</a><a href="/tags/感悟杂谈/" style="font-size: 10.00px;">感悟杂谈</a><a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a><a href="/tags/设计模式/" style="font-size: 13.33px;">设计模式</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
 					</div>
 				</section>
 				
@@ -256,8 +273,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://zhang1g.qiniudn.com/verification-code.png" alt="使用servlet 和开源组件生成验证码"></p>
-<h2 id="为什么要使用验证码">为什么要使用验证码</h2>
+        <h2 id="为什么要使用验证码">为什么要使用验证码</h2>
 <p>输入验证码是一个很麻烦的一个过程，很多用户都不喜欢，但是验证码却总是存在于各类的网站和Web 应用中，比如</p>
 <ul>
 <li>回复帖子的时候</li>
@@ -265,8 +281,6 @@
 <li>用户登录的时候<br>…</li>
 </ul>
 <p>为什么要使用验证码呢？</p>
-<a id="more"></a>
-
 <p>因为计算机可以模拟人的行为对网站进行一系列的操作，如果不使用验证码，将会导致一些可怕的事情发生</p>
 <ul>
 <li>对特定用户不断登录破解密码</li>
@@ -274,6 +288,8 @@
 <li>对某个网站提交垃圾数据</li>
 <li>对网站投票进行刷票<br>…</li>
 </ul>
+<a id="more"></a>
+
 <h2 id="什么是验证码">什么是验证码</h2>
 <p>有验证码的登录过程如下</p>
 <p><img src="http://zhang1g.qiniudn.com/verification-code2.png" alt="有验证码的登录过程"></p>
